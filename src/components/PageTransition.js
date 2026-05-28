@@ -77,10 +77,15 @@ function clearSafetyReset() {
   safetyTimer = null;
 }
 
-let running = false;
+let running  = false;
+let skipNext = false; /* set by ProjectTransition to bypass CSS veil */
 
 export const PageTransition = {
+  /* Called before navigate() when a WebGL transition is already running */
+  skip() { skipNext = true; },
+
   async out() {
+    if (skipNext) return; /* WebGL canvas handles the visual — skip CSS veil */
     if (running) return;
 
     running = true;
@@ -103,6 +108,11 @@ export const PageTransition = {
   },
 
   async in() {
+    if (skipNext) {
+      skipNext = false; /* consume — one skip per navigate pair */
+      return;
+    }
+
     const overlay = ensureOverlay();
 
     const { inMs } = getTransitionDurations();

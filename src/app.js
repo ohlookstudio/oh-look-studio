@@ -3,6 +3,7 @@ import { mountRouter } from "./router/router.js";
 import { initMobileMenu } from "./components/menu.js";
 import { mountBgParticles } from "./hero/bgParticles.js";
 import { mountFooterTextCanvas } from "./components/footerTextCanvas.js";
+import { initProjectTransitions } from "./components/ProjectTransition.js";
 
 export function initApp() {
   const app = document.getElementById("app");
@@ -20,6 +21,9 @@ export function initApp() {
   // ✅ footer pure-canvas text (una sola vez)
   mountFooterTextCanvas();
 
-  // ✅ router (tu versión nueva usa rootEl)
+  // ✅ WebGL project-link transitions (capture phase, antes que el router)
+  initProjectTransitions();
+
+  // ✅ router (usa rootEl)
   mountRouter({ rootEl: app });
 }

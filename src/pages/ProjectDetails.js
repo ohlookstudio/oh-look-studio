@@ -1,40 +1,80 @@
 import projectsData from "../data/projects.json";
+import { mountProjectShader } from "../hero/projectShader.js";
 
 export async function ProjectDetails({ slug } = {}) {
   const projects = projectsData.projects || [];
-  const project = projects.find((p) => p.slug === slug);
+  const project  = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return `
-      <section class="page page--dark">
+      <main class="page page--dark">
         <div class="page-inner">
           <h1 class="h1">Project not found</h1>
-          <p><a data-link href="/">← Back to Home</a></p>
+          <p><a class="nav__link" data-link href="/works">← Back to works</a></p>
         </div>
-      </section>
+      </main>
     `;
   }
 
   return `
-    <section class="page page--dark">
-      <div class="page-inner">
-        <p class="eyebrow">${project.year ?? ""}</p>
-        <h1 class="h1">${project.title}</h1>
-        <p class="lead">${project.description ?? ""}</p>
+    <main class="project-detail">
+      <div class="project-detail__layout">
 
-        <div class="meta-row">
-          ${project.tags?.length ? `<div><strong>Tags</strong><br/>${project.tags.join(" · ")}</div>` : ""}
-          ${project.services?.length ? `<div><strong>Services</strong><br/>${project.services.join(" · ")}</div>` : ""}
+        <!-- LEFT — scrolling title + body -->
+        <div class="project-detail__left">
+
+          <div class="project-detail__title-block">
+            <a class="project-detail__back" data-link href="/works">← Works</a>
+            <h1 class="project-detail__display">${project.title}</h1>
+
+            <div class="project-detail__meta-row">
+              <span class="project-detail__year kicker">${project.year ?? ""}</span>
+              ${project.tags?.length
+                ? `<span class="project-detail__tags kicker">${project.tags.join(" · ")}</span>`
+                : ""}
+            </div>
+
+            ${project.services?.length ? `
+              <div class="project-detail__services">
+                <span class="project-detail__label">Services</span>
+                <p class="muted">${project.services.join(" · ")}</p>
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="project-detail__divider"></div>
+
+          <div class="project-detail__body">
+            <p class="project-detail__lead">${project.description ?? ""}</p>
+
+            <p class="muted">
+              Case study coming soon — this is where the scroll narrative
+              lives: textures, editorial layout, motion references, the full story.
+            </p>
+          </div>
+
+          <div class="project-detail__footer">
+            <a class="btn btn--pill" data-link href="/works">← Back to works</a>
+          </div>
+
         </div>
 
-        <div class="divider"></div>
+        <!-- RIGHT — sticky cover with WebGL shader -->
+        <div class="project-detail__right">
+          <div class="project-detail__cover" id="projectCover"></div>
+        </div>
 
-        <p>
-          Aquí va tu scroll narrativo del case study (texturas, layout editorial, motion…).
-        </p>
-
-        <p style="margin-top:24px;"><a data-link href="/">← Back to Home</a></p>
       </div>
-    </section>
+    </main>
   `;
 }
+
+ProjectDetails.init = function ({ slug } = {}) {
+  const projects = projectsData.projects || [];
+  const project  = projects.find((p) => p.slug === slug);
+
+  const cover = document.getElementById("projectCover");
+  if (!cover || !project) return () => {};
+
+  return mountProjectShader(cover, project.coverImage ?? null);
+};

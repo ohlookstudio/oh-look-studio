@@ -1,20 +1,22 @@
 {
   "projects": [
     {
-      "slug": "xabi-cacao",
-      "title": "Xabi Cacao Tasting",
+      "slug": "norway-farm",
+      "title": "Norway Farm Brand",
       "year": 2024,
-      "description": "A tasting experience and brand system built around cacao culture.",
-      "tags": ["Branding", "Editorial", "Digital"],
-      "services": ["Brand identity", "Content", "Web direction"]
+      "description": "A branding identity rooted in slow agriculture and Nordic light.",
+      "tags": ["Branding", "Editorial", "Identity"],
+      "services": ["Brand identity", "Art direction", "Editorial design"],
+      "coverImage": "/assets/projects/farm/cover.jpg"
     },
     {
-      "slug": "braun-design-week",
-      "title": "Braun – Milan Design Week Microsite",
+      "slug": "braun-milan",
+      "title": "Braun – Milan Design Week",
       "year": 2025,
-      "description": "A promotional microsite exploring Braun’s design philosophy through motion and interaction.",
+      "description": "A promotional microsite exploring Braun's design philosophy through motion and interaction.",
       "tags": ["Web", "Motion", "Interaction"],
-      "services": ["Creative dev", "Motion system", "UI design"]
+      "services": ["Creative dev", "Motion system", "UI design"],
+      "coverImage": "/assets/projects/braun/cover.jpg"
     }
   ]
 }

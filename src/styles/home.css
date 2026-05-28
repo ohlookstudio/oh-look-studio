@@ -1,36 +1,35 @@
 /* ===================================================
-   HOME — layout only (no GSAP yet)
-   Uses global tokens + editorial width language
+   HOME — layout only
+   Tokens from global.css / token.css
 =================================================== */
 
-.home{
+.home {
   position: relative;
 }
 
-/* Shared inner width (home-only) */
 .home-featured__inner,
-.home-studio__inner{
-  width: min(1120px, 92vw);
+.home-studio__inner {
+  width: min(1160px, 92vw);
   margin: 0 auto;
 }
 
 /* ---------------------------------------------------
    FEATURED SECTION
 --------------------------------------------------- */
-.home-featured{
-  padding: 92px 0 110px;
-  border-top: 1px solid rgba(243,243,243,.08);
+.home-featured {
+  padding: 100px 0 0;
+  border-top: 1px solid rgba(243, 243, 243, 0.08);
 }
 
-.home-featured__head{
-  margin-bottom: 34px;
+.home-featured__head {
+  margin-bottom: 52px;
 }
 
-.home-featured__head .kicker{
+.home-featured__head .kicker {
   margin: 0 0 10px;
 }
 
-.h2{
+.h2 {
   margin: 0;
   font-family: var(--font-secondary);
   font-weight: 520;
@@ -39,106 +38,224 @@
   line-height: 1.06;
 }
 
-.home-featured__list{
-  display: grid;
-  gap: 66px;
-}
-
 /* ---------------------------------------------------
-   FEATURED PROJECT ITEM
+   OVERLAPPING STACK
+   Two images in the same visual space via CSS Grid
+   + negative margin on item 2.
+   Technique: 56/44 grid columns, item 2 uses
+   margin-left: -clamp(...)  to intrude into item 1.
 --------------------------------------------------- */
-.featured-project{
+.home-featured__stack {
   display: grid;
-  grid-template-columns: 1.35fr 0.9fr;
-  gap: 34px;
-  align-items: center;
+  grid-template-columns: 56% 44%;
+  align-items: start;
+  gap: 0;
+  /* overflow visible so project 2 can bleed below */
+  overflow: visible;
 }
 
-/* Alternate (right) */
-.featured-project--right{
-  grid-template-columns: 0.9fr 1.35fr;
+/* ------- ITEM BASE ------- */
+.fp-item {
+  position: relative; /* required for z-index to apply in grid */
 }
 
-.featured-project__link{
+.fp-item__link {
   display: block;
   text-decoration: none;
   color: inherit;
 }
 
-/* Media */
-.featured-project__media{
-  margin: 0;
-  border-radius: 22px;
+/* ------- PROJECT 01 — top-left, large ------- */
+.fp-item--1 {
+  z-index: 1;
+  /* slight right-side padding so item 2's overlap reads cleanly */
+  padding-right: 0;
+}
+
+.fp-item--1 .fp-item__frame {
+  height: clamp(340px, 42vw, 500px);
+  background: #1a1a1a;
+}
+
+/* ------- PROJECT 02 — offset right+down, smaller, on top ------- */
+.fp-item--2 {
+  z-index: 2;
+  /* Shift left to overlap item 1 — the key overlap line */
+  margin-left: clamp(-100px, -7vw, -56px);
+  /* Push down so it starts partway through item 1 */
+  margin-top: clamp(120px, 14vw, 180px);
+}
+
+.fp-item--2 .fp-item__frame {
+  height: clamp(260px, 32vw, 390px);
+  background: #111111;
+}
+
+/* ------- FRAME (the image box) ------- */
+.fp-item__frame {
+  position: relative;
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(243,243,243,.10);
-  background: rgba(243,243,243,.02);
-
-  /* gives a premium “card” feel without heavy shadows */
+  border: 1px solid rgba(243, 243, 243, 0.08);
   box-shadow:
-    0 10px 40px rgba(0,0,0,.25);
+    0 20px 60px rgba(0, 0, 0, 0.38),
+    0 2px 8px  rgba(0, 0, 0, 0.25);
+  transition:
+    box-shadow 0.4s ease,
+    border-color 0.3s ease;
 }
 
-.featured-project__media img{
+/* Subtle inner ambient glow — unique per project */
+.fp-item--1 .fp-item__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 25% 30%, rgba(160, 198, 175, 0.10), transparent 58%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fp-item--2 .fp-item__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 65%, rgba(203, 104, 104, 0.09), transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hover: lift shadow + border */
+.fp-item__link:hover .fp-item__frame {
+  border-color: rgba(243, 243, 243, 0.16);
+  box-shadow:
+    0 32px 88px rgba(0, 0, 0, 0.50),
+    0 4px 12px  rgba(0, 0, 0, 0.30);
+}
+
+/* Scale image on hover (when real <img> is present) */
+.fp-item__link:hover .fp-item__frame img {
+  transform: scale(1.03);
+}
+
+.fp-item__frame img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
-
-  /* keeps it calm; GSAP will animate later */
-  transform: translateZ(0);
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Meta */
-.featured-project__meta{
-  max-width: 44ch;
+/* ------- META OVERLAID at bottom of frame (Project 1) ------- */
+.fp-item__meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 56px 26px 24px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: background 0.3s ease;
 }
 
-.h3{
-  margin: 0 0 10px;
+.fp-item__link:hover .fp-item__meta {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.62) 50%,
+    transparent 100%
+  );
+}
+
+/* ------- FLOAT META above frame (Project 2) ------- */
+.fp-item__floatmeta {
+  padding: 0 6px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ------- TEXT ATOMS ------- */
+.fp-item__index {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  opacity: 0.45;
+}
+
+.fp-item__title {
+  margin: 0;
   font-family: var(--font-secondary);
   font-weight: 520;
+  font-size: clamp(16px, 1.7vw, 23px);
   letter-spacing: -0.01em;
-  font-size: clamp(18px, 2vw, 28px);
-  line-height: 1.15;
+  line-height: 1.18;
+  color: rgba(243, 243, 243, 0.95);
 }
 
-.muted{
+.fp-item__floatmeta .fp-item__title {
+  color: var(--fg);
+}
+
+.fp-item__desc {
   margin: 0;
-  color: var(--muted);
   font-family: var(--font-secondary);
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(243, 243, 243, 0.58);
 }
 
-/* Order swap so media stays on the “origin side” visually */
-.featured-project--right .featured-project__link{ order: 2; }
-.featured-project--right .featured-project__meta{ order: 1; text-align: right; justify-self: end; }
-
-/* Hover (subtle) */
-.featured-project__link:hover .featured-project__media{
-  border-color: rgba(243,243,243,.16);
+.fp-item__floatmeta .fp-item__desc {
+  color: var(--muted);
 }
-.featured-project__link:hover .featured-project__media img{
-  transform: scale(1.01);
-  transition: transform .35s ease;
+
+.fp-item__cta {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(243, 243, 243, 0.40);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.fp-item__link:hover .fp-item__cta {
+  color: rgba(243, 243, 243, 0.90);
+  transform: translateX(5px);
+}
+
+.fp-item__floatmeta .fp-item__cta {
+  color: rgba(243, 243, 243, 0.38);
 }
 
 /* ---------------------------------------------------
-   CTA (Works) — reuse your pill style
+   CTA (Works)
 --------------------------------------------------- */
-.home-cta{
-  margin-top: 54px;
+.home-cta {
+  /* margin-top accounts for item 2 overflowing below the stack */
+  margin-top: clamp(180px, 24vw, 280px);
   display: grid;
   gap: 14px;
   justify-items: center;
   text-align: center;
+  padding-bottom: 110px;
+  border-bottom: 1px solid rgba(243, 243, 243, 0.08);
 }
 
-.home-cta__text{
+.home-cta__text {
   max-width: 60ch;
 }
 
-/* Use nav pill look (no new button system) */
-.btn{
-  /* allow using existing look from .nav__link */
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -146,97 +263,131 @@
   white-space: nowrap;
 }
 
-.btn--pill{
-  /* mimic nav__link sizing but a bit more “cta” */
+.btn--pill {
   height: 54px;
   padding: 0 28px;
   border-radius: 999px;
-
   font-family: var(--font-secondary);
   font-weight: 560;
   font-size: 15px;
-  letter-spacing: .07em;
-
-  color: rgba(243,243,243,.98);
+  letter-spacing: 0.07em;
+  color: rgba(243, 243, 243, 0.98);
   background: var(--nav-pill-bg);
   border: 1px solid var(--nav-pill-border);
-
   box-shadow:
-    0 0 22px rgba(160,198,175,.20),
-    0 0 56px rgba(160,198,175,.08);
-
+    0 0 22px rgba(160, 198, 175, 0.20),
+    0 0 56px rgba(160, 198, 175, 0.08);
   backdrop-filter: blur(var(--nav-pill-blur));
   -webkit-backdrop-filter: blur(var(--nav-pill-blur));
-
-  transition: transform .18s ease, filter .18s ease, border-color .25s ease, box-shadow .25s ease;
+  transition: transform 0.18s ease, filter 0.18s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.btn--pill:hover{
+.btn--pill:hover {
   transform: translateY(-1px);
   filter: brightness(1.05);
-  border-color: rgba(160,198,175,.52);
+  border-color: rgba(160, 198, 175, 0.52);
   box-shadow:
-    0 0 30px rgba(160,198,175,.22),
-    0 0 72px rgba(160,198,175,.10);
+    0 0 30px rgba(160, 198, 175, 0.22),
+    0 0 72px rgba(160, 198, 175, 0.10);
 }
 
 /* ---------------------------------------------------
-   FINAL CTA (Studio)
+   STUDIO CTA
 --------------------------------------------------- */
-.home-studio{
+.home-studio {
   padding: 96px 0 130px;
-  border-top: 1px solid rgba(243,243,243,.08);
+  text-align: center;
 }
 
-.home-studio .kicker{
+.home-studio .kicker {
   margin: 0 0 10px;
 }
 
-.home-studio .h2{
+.home-studio .h2 {
   margin-bottom: 14px;
 }
 
-.home-studio .muted{
+.home-studio .muted {
   margin: 0 auto 22px;
   max-width: 62ch;
-  text-align: center;
 }
 
 /* ---------------------------------------------------
    RESPONSIVE
 --------------------------------------------------- */
-@media (max-width: 980px){
-  .home-featured{
-    padding: 78px 0 96px;
+
+/* Tablet — reduce overlap */
+@media (max-width: 860px) {
+  .home-featured__stack {
+    grid-template-columns: 58% 42%;
   }
 
-  .featured-project,
-  .featured-project--right{
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .fp-item--2 {
+    margin-left: clamp(-60px, -5vw, -32px);
+    margin-top: clamp(80px, 10vw, 120px);
   }
 
-  .featured-project--right .featured-project__link,
-  .featured-project--right .featured-project__meta{
-    order: initial;
-    text-align: left;
-    justify-self: start;
+  .fp-item--1 .fp-item__frame {
+    height: clamp(280px, 46vw, 400px);
   }
 
-  .home-cta{
-    margin-top: 38px;
+  .fp-item--2 .fp-item__frame {
+    height: clamp(220px, 34vw, 320px);
+  }
+
+  .home-cta {
+    margin-top: clamp(120px, 18vw, 200px);
   }
 }
 
-@media (max-width: 420px){
-  .home-featured__inner,
-  .home-studio__inner{
-    width: min(980px, 92vw);
+/* Mobile — stack vertically, no overlap */
+@media (max-width: 600px) {
+  .home-featured {
+    padding-top: 72px;
   }
 
-  .btn--pill{
+  .home-featured__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .fp-item--2 {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+
+  .fp-item--1 .fp-item__frame,
+  .fp-item--2 .fp-item__frame {
+    height: 72vw;
+    max-height: 360px;
+  }
+
+  .home-cta {
+    margin-top: 64px;
+    padding-bottom: 80px;
+  }
+
+  .btn--pill {
     height: 56px;
     padding: 0 26px;
     font-size: 14px;
   }
+}
+
+/* Utility: muted used site-wide, defined once here */
+.muted {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+}
+
+.h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-secondary);
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.15;
 }

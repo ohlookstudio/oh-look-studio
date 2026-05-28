@@ -1,17 +1,33 @@
 export async function Contact() {
   return `
-    <section class="page page--dark">
-      <div class="page-inner">
-        <h1 class="h1">Contact</h1>
-        <p class="lead">Let’s build something that feels alive.</p>
+    <main class="contact-page">
 
-        <div class="contact">
-          <p><strong>Email</strong>: <a href="mailto:hello@ohlook.studio">hello@ohlook.studio</a></p>
-          <p><strong>Location</strong>: Barcelona / Remote</p>
+      <div class="contact-header">
+        <div class="contact-header__inner">
+          <p class="kicker">Hello</p>
+          <h1 class="contact-display">
+            Let's build something<br>that feels alive.
+          </h1>
+        </div>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <div class="contact-body">
+        <div class="contact-info">
+          <a class="contact-email" href="mailto:hello@ohlook.studio">
+            hello@ohlook.studio
+          </a>
+          <span class="contact-location muted">Barcelona / Remote</span>
         </div>
 
-        <p><a data-link href="/">← Back to Home</a></p>
+        <div class="contact-social">
+          <a class="social-link" href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="social-link" href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="social-link" href="https://behance.net/" target="_blank" rel="noreferrer">Behance</a>
+        </div>
       </div>
-    </section>
+
+    </main>
   `;
 }

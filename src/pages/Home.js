@@ -7,7 +7,7 @@ export function Home() {
       ${Hero()}
 
       <!-- ---------------------------------------------------
-           FEATURED PROJECTS
+           FEATURED PROJECTS — physically overlapping composition
       --------------------------------------------------- -->
       <section class="home-featured" aria-label="Featured projects">
         <div class="home-featured__inner">
@@ -17,48 +17,51 @@ export function Home() {
             <h2 class="h2">Two perspectives, selected.</h2>
           </header>
 
-          <div class="home-featured__list">
+          <!-- Stack: two images physically overlapping via CSS Grid + negative margin -->
+          <div class="home-featured__stack">
 
-            <!-- Project 01 (nace izquierda) -->
-            <article class="featured-project featured-project--left" data-featured-project>
-              <a class="featured-project__link" href="/works/xabi-cacao" data-link aria-label="Open project: Xabi Cacao Tasting">
-                <figure class="featured-project__media">
-                  <!-- Placeholder: cambia src cuando tengas la imagen -->
-                  <img
-                    src="/assets/projects/xabi/cover.jpg"
-                    alt="Xabi Cacao Tasting — cover"
-                    loading="lazy"
-                  />
-                </figure>
+            <!-- Project 01 — large, anchored top-left, text overlaid at bottom -->
+            <article class="fp-item fp-item--1" data-featured-project>
+              <a class="fp-item__link"
+                 href="/projects/norway-farm"
+                 data-link
+                 data-project-link
+                 aria-label="Open project: Norway Farm Brand">
+                <div class="fp-item__frame">
+                  <!-- placeholder: #1a1a1a — swap for <img src="/src/assets/img/norway-placeholder.jpg"> -->
+                  <div class="fp-item__meta">
+                    <p class="fp-item__index kicker">01</p>
+                    <h3 class="fp-item__title">Norway Farm Brand</h3>
+                    <p class="fp-item__desc">A quiet luxury story carved in nature.</p>
+                    <span class="fp-item__cta">View project →</span>
+                  </div>
+                </div>
               </a>
-
-              <div class="featured-project__meta">
-                <h3 class="h3">Xabi Cacao Tasting</h3>
-                <p class="muted">Reframing taste through ritual and material.</p>
-              </div>
             </article>
 
-            <!-- Project 02 (nace derecha) -->
-            <article class="featured-project featured-project--right" data-featured-project>
-              <a class="featured-project__link" href="/works/norway-farm" data-link aria-label="Open project: Norway Farm Brand">
-                <figure class="featured-project__media">
-                  <img
-                    src="/assets/projects/farm/cover.jpg"
-                    alt="Norway Farm — cover"
-                    loading="lazy"
-                  />
-                </figure>
+            <!-- Project 02 — smaller, offset right+down, overlaps project 1 -->
+            <!-- Text floats ABOVE the frame in negative space -->
+            <article class="fp-item fp-item--2" data-featured-project>
+              <a class="fp-item__link"
+                 href="/projects/braun-milan"
+                 data-link
+                 data-project-link
+                 aria-label="Open project: Braun – Milan Design Week">
+                <div class="fp-item__floatmeta">
+                  <p class="fp-item__index kicker">02</p>
+                  <h3 class="fp-item__title">Braun – Milan Design Week</h3>
+                  <p class="fp-item__desc">Motion as material, restraint as expression.</p>
+                  <span class="fp-item__cta">View project →</span>
+                </div>
+                <div class="fp-item__frame">
+                  <!-- placeholder: #111111 — swap for <img src="/src/assets/img/braun-placeholder.jpg"> -->
+                </div>
               </a>
-
-              <div class="featured-project__meta">
-                <h3 class="h3">Norway Farm Brand</h3>
-                <p class="muted">A quiet luxury story carved in nature.</p>
-              </div>
             </article>
 
           </div>
 
-          <!-- CTA -> Works (justo después de destacados) -->
+          <!-- CTA -> Works -->
           <div class="home-cta home-cta--works">
             <p class="home-cta__text muted">Want the full archive of perspectives?</p>
             <a class="btn btn--pill" href="/works" data-link aria-label="Go to Oh, works">
@@ -79,8 +82,7 @@ export function Home() {
           <p class="muted">
             Not a manifesto. Just the method, the taste, and the reasons.
           </p>
-
-          <a class="btn btn--pill" href="/studio" data-link aria-label="Enter Oh, studio">
+          <a class="btn btn--pill" href="/about" data-link aria-label="Enter Oh, studio">
             → Enter Oh, studio!
           </a>
         </div>
