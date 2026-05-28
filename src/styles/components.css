@@ -1,0 +1,196 @@
+
+
+/* -----------------------------
+   Footer (Oh, løøk! Studio)
+----------------------------- */
+
+.site-footer{
+  position: relative;
+  padding: 56px 0 72px;
+  margin-top: 80px;
+  isolation: isolate; /* para blur y capas */
+}
+
+.site-footer__inner{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+/* Social pills centradas */
+.site-footer__social{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pills (reutiliza tu estilo si ya existe; esto es “safe defaults”) */
+.pill{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  min-width: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(243,243,243,.18);
+  color: rgba(243,243,243,.85);
+  background: rgba(11,11,11,.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-decoration: none;
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+  font-family: var(--font-secondary);
+  letter-spacing: .06em;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.pill--icon{
+  width: 34px;
+  padding: 0;
+}
+
+.pill:hover{
+  transform: translateY(-1px);
+  border-color: rgba(243,243,243,.32);
+  background: rgba(243,243,243,.06);
+}
+
+.pill:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(160,198,175,.25);
+}
+
+/* Copy */
+.site-footer__copy{
+  display: grid;
+  gap: 10px;
+}
+
+.site-footer__line{
+  margin: 0;
+  color: rgba(243,243,243,.82);
+}
+
+/* frase principal: más “display”, pero sin gritar */
+.site-footer__line--hero{
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 3.3vw, 44px);
+  letter-spacing: .01em;
+  color: rgba(243,243,243,.92);
+}
+
+/* CTA minimal editorial */
+.site-footer__cta{
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  letter-spacing: .02em;
+  color: rgba(243,243,243,.78);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(243,243,243,.14);
+  background: rgba(11,11,11,.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+}
+
+.site-footer__cta:hover{
+  transform: translateY(-1px);
+  border-color: rgba(243,243,243,.28);
+  background: rgba(243,243,243,.05);
+}
+
+.site-footer__cta:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(203,104,104,.22);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .pill, .site-footer__cta{
+    transition: none;
+  }
+  .pill:hover, .site-footer__cta:hover{
+    transform: none;
+  }
+}
+
+
+/* HERO */
+.hero{
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+#hero-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  background: var(--bg);
+}
+.final-claim{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-content:center;
+  text-align:center;
+  pointer-events:none;
+  z-index: 2;
+  opacity: 0;
+}
+.final-claim p{
+  margin:0;
+  line-height: 1.12;
+  font-weight: 300;
+  font-size: clamp(18px, 3.2vw, 42px);
+  letter-spacing: 0.01em;
+}
+.scroll-hint{
+  position:absolute;
+  left:50%;
+  bottom:24px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  z-index: 3;
+}
+
+/* Footer socials: usar look de mobile socials */
+.site-footer .pill{
+  height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  border:1px solid rgba(243,243,243,.12);
+  background: rgba(243,243,243,.03);
+  color: rgba(243,243,243,.78);
+  text-decoration:none;
+  font-family: var(--font-secondary);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.site-footer .pill:hover{
+  transform: translateY(-1px);
+  background: rgba(243,243,243,.06);
+  border-color: rgba(243,243,243,.18);
+  color: rgba(243,243,243,.95);
+}

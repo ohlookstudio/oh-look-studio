@@ -1,0 +1,20 @@
+{
+  "projects": [
+    {
+      "slug": "xabi-cacao",
+      "title": "Xabi Cacao Tasting",
+      "year": 2024,
+      "description": "A tasting experience and brand system built around cacao culture.",
+      "tags": ["Branding", "Editorial", "Digital"],
+      "services": ["Brand identity", "Content", "Web direction"]
+    },
+    {
+      "slug": "braun-design-week",
+      "title": "Braun – Milan Design Week Microsite",
+      "year": 2025,
+      "description": "A promotional microsite exploring Braun’s design philosophy through motion and interaction.",
+      "tags": ["Web", "Motion", "Interaction"],
+      "services": ["Creative dev", "Motion system", "UI design"]
+    }
+  ]
+}

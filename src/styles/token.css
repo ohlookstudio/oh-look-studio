@@ -1,0 +1,8 @@
+:root{
+  --bg:#0B0B0B;
+  --fg:#F3F3F3;
+  --muted: rgba(243,243,243,0.72);
+  --accent:#CB6868;
+  --line: rgba(243,243,243,0.14);
+  --radius: 16px;
+}
