@@ -13,7 +13,7 @@ export function mountBgParticles() {
   const DPR_CAP = 2;
 
   // Densidad base (partículas por pixel)
-  const BASE_DENSITY = 0.00007;
+  const BASE_DENSITY = 0.00018;
 
   // Qué rápido “alcanza” el target (llenado)
   const SPAWN_RATE = 0.9;
@@ -25,8 +25,8 @@ export function mountBgParticles() {
 
   // Vida
   const TWINKLE = 0.35; // 0..1
-  const SIZE_MIN = 0.7;
-  const SIZE_MAX = 2.2;
+  const SIZE_MIN = 0.8;
+  const SIZE_MAX = 2.6;
 
   // ✅ Doble spawn (hero/top baja + footer sube)
   const TOP_SPAWN_MIX = 0.50; // 0..1 porcentaje que nace arriba (en steady state)

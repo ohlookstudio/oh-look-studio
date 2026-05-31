@@ -662,6 +662,10 @@ export function initScrollHero({ hero, canvas, copy }) {
     tl.add(() => setAllSoft(), 0.98);
   }
 
+  // Canvas dissolve: fade the hero canvas out during the last 18% of scroll
+  // so bgParticles beneath blends in seamlessly instead of snapping in.
+  tl.to(canvas, { opacity: 0, duration: 0.18, ease: 'power2.inOut' }, 0.82);
+
   // -------------------------
   // Sync UI on refresh
   // -------------------------
@@ -711,6 +715,7 @@ export function initScrollHero({ hero, canvas, copy }) {
     if (rafId) cancelAnimationFrame(rafId);
     ScrollTrigger.removeEventListener("refresh", syncUI);
     tl.kill();
+    gsap.set(canvas, { clearProps: "opacity" });
     ScrollTrigger.getAll().forEach((st) => {
       if (st?.vars?.trigger === hero) st.kill();
     });
