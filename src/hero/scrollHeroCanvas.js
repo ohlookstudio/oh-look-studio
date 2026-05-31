@@ -664,7 +664,7 @@ export function initScrollHero({ hero, canvas, copy }) {
 
   // Canvas dissolve: fade the hero canvas out during the last 18% of scroll
   // so bgParticles beneath blends in seamlessly instead of snapping in.
-  tl.to(canvas, { opacity: 0, duration: 0.18, ease: 'power2.inOut' }, 0.82);
+  tl.to(canvas, { opacity: 0, duration: 0.30, ease: 'power2.in' }, 0.70);
 
   // -------------------------
   // Sync UI on refresh

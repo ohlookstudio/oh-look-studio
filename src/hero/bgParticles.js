@@ -13,9 +13,9 @@ export function mountBgParticles() {
   const DPR_CAP = 2;
 
   // Densidad base (partículas por pixel)
-  const BASE_DENSITY = 0.00018;
+  const BASE_DENSITY = 0.00030;
 
-  // Qué rápido “alcanza” el target (llenado)
+  // Qué rápido "alcanza" el target (llenado)
   const SPAWN_RATE = 0.9;
 
   // Movimiento
@@ -31,12 +31,15 @@ export function mountBgParticles() {
   // ✅ Doble spawn (hero/top baja + footer sube)
   const TOP_SPAWN_MIX = 0.50; // 0..1 porcentaje que nace arriba (en steady state)
 
-  // ✅ Boost inicial para “llenar” rápido
+  // ✅ Boost inicial para "llenar" rápido
   const FILL_BOOST = 2.2;
   const BOOST_SECS = 1.2;
 
   // ✅ NUEVO: durante el boost, forzamos más nacimientos desde abajo
   const BOOST_TOP_MIX = 0.18; // arriba durante boost (más bajo = más desde footer al inicio)
+
+  // Porcentaje de partículas que al salir del viewport renacen en zona central
+  const CENTER_RESPAWN = 0.22;
 
   // Color: blanco sutil
   const COLOR = "rgba(243,243,243,";
@@ -79,7 +82,7 @@ export function mountBgParticles() {
     const rect = footer.getBoundingClientRect();
     const y = rect.top + rect.height * 0.75;
 
-    // ✅ Si el footer está cerca/visible, nace “desde el footer real”
+    // ✅ Si el footer está cerca/visible, nace "desde el footer real"
     if (y > -200 && y < h + 300) return y;
 
     // ✅ Si no, nace justo debajo del viewport (para que se vea subir ya)
@@ -94,8 +97,10 @@ export function mountBgParticles() {
     const rect = hero.getBoundingClientRect();
     const y = rect.top + rect.height * 0.25;
 
-    // Si el hero está “por ahí” (aunque no visible), nace cerca; si no, offscreen arriba
-    return y < h + 200 ? y : -rand(6, 26);
+    // Solo usar posición del hero si está cerca del viewport.
+    // Si está muy por encima (scrolled past), spawn desde borde superior.
+    if (y > -60 && y < h + 200) return y;
+    return -rand(6, 26);
   }
 
   /**
@@ -138,7 +143,7 @@ export function mountBgParticles() {
 
     const n = Math.min(births, Math.ceil((dt * 60) * SPAWN_RATE * boost));
 
-    // ✅ durante boost: más desde abajo (footer) para que “nazca desde footer” de verdad
+    // ✅ durante boost: más desde abajo (footer) para que "nazca desde footer" de verdad
     const mix = isBoost ? BOOST_TOP_MIX : TOP_SPAWN_MIX;
 
     for (let i = 0; i < n; i++) {
@@ -172,13 +177,23 @@ export function mountBgParticles() {
 
       // wrap vertical según dirección
       if (p.dir === -1 && p.y < -40) {
-        // sube -> renace abajo
-        p.y = footerSpawnY() + rand(10, 40);
+        // sube -> renace abajo o en zona central
+        if (Math.random() < CENTER_RESPAWN) {
+          p.y = rand(h * 0.15, h * 0.85);
+          p.dir = Math.random() < 0.5 ? 1 : -1;
+        } else {
+          p.y = footerSpawnY() + rand(10, 40);
+        }
         p.x = rand(0, w);
         retune(p);
       } else if (p.dir === 1 && p.y > h + 40) {
-        // baja -> renace arriba
-        p.y = heroSpawnY() + rand(-40, -10);
+        // baja -> renace arriba o en zona central
+        if (Math.random() < CENTER_RESPAWN) {
+          p.y = rand(h * 0.15, h * 0.85);
+          p.dir = Math.random() < 0.5 ? 1 : -1;
+        } else {
+          p.y = heroSpawnY() + rand(-40, -10);
+        }
         p.x = rand(0, w);
         retune(p);
       }
