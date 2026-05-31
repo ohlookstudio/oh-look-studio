@@ -7,56 +7,53 @@
   position: relative;
 }
 
-.home-featured__inner,
-.home-studio__inner {
-  width: min(1160px, 92vw);
-  margin: 0 auto;
-}
-
 /* ---------------------------------------------------
-   FEATURED SECTION
+   FEATURED — full-height pinned horizontal section
 --------------------------------------------------- */
 .home-featured {
-  padding: 100px 0 0;
-  border-top: 1px solid rgba(243, 243, 243, 0.08);
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
 }
 
-.home-featured__head {
-  margin-bottom: 52px;
+/* Ghost title lines: stay fixed, images scroll in front of them */
+.home-featured__ghost {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-primary);
+  font-size: clamp(80px, 12vw, 180px);
+  color: var(--fg);
+  opacity: 0.06;
+  line-height: 0.9;
+  white-space: nowrap;
 }
 
-.home-featured__head .kicker {
-  margin: 0 0 10px;
+.home-featured__ghost--l1 {
+  top: 14%;
+  left: 6vw;
 }
 
-.h2 {
-  margin: 0;
-  font-family: var(--font-secondary);
-  font-weight: 520;
-  letter-spacing: -0.01em;
-  font-size: clamp(28px, 3vw, 52px);
-  line-height: 1.06;
+.home-featured__ghost--l2 {
+  bottom: 10%;
+  right: 6vw;
+}
+
+/* Horizontal track: 150vw → 50vw of scroll distance */
+.home-featured__track {
+  position: relative;
+  z-index: 1;
+  width: 150vw;
+  height: 100%;
+  will-change: transform;
 }
 
 /* ---------------------------------------------------
-   OVERLAPPING STACK
-   Two images in the same visual space via CSS Grid
-   + negative margin on item 2.
-   Technique: 56/44 grid columns, item 2 uses
-   margin-left: -clamp(...)  to intrude into item 1.
+   PROJECT ITEMS — absolutely positioned in the track
 --------------------------------------------------- */
-.home-featured__stack {
-  display: grid;
-  grid-template-columns: 56% 44%;
-  align-items: start;
-  gap: 0;
-  /* overflow visible so project 2 can bleed below */
-  overflow: visible;
-}
-
-/* ------- ITEM BASE ------- */
 .fp-item {
-  position: relative; /* required for z-index to apply in grid */
+  position: absolute;
 }
 
 .fp-item__link {
@@ -65,194 +62,104 @@
   color: inherit;
 }
 
-/* ------- PROJECT 01 — top-left, large ------- */
-.fp-item--1 {
-  z-index: 1;
-  /* slight right-side padding so item 2's overlap reads cleanly */
-  padding-right: 0;
-}
-
-.fp-item--1 .fp-item__frame {
-  height: clamp(340px, 42vw, 500px);
-  background: #1a1a1a;
-}
-
-/* ------- PROJECT 02 — offset right+down, smaller, on top ------- */
-.fp-item--2 {
-  z-index: 2;
-  /* Shift left to overlap item 1 — the key overlap line */
-  margin-left: clamp(-100px, -7vw, -56px);
-  /* Push down so it starts partway through item 1 */
-  margin-top: clamp(120px, 14vw, 180px);
-}
-
-.fp-item--2 .fp-item__frame {
-  height: clamp(260px, 32vw, 390px);
-  background: #111111;
-}
-
-/* ------- FRAME (the image box) ------- */
-.fp-item__frame {
-  position: relative;
-  border-radius: 20px;
+/* Invisible overflow wrapper: enables hover scale without styled card */
+.fp-item__img-wrap {
   overflow: hidden;
-  border: 1px solid rgba(243, 243, 243, 0.08);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.38),
-    0 2px 8px  rgba(0, 0, 0, 0.25);
-  transition:
-    box-shadow 0.4s ease,
-    border-color 0.3s ease;
 }
 
-/* Subtle inner ambient glow — unique per project */
-.fp-item--1 .fp-item__frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 25% 30%, rgba(160, 198, 175, 0.10), transparent 58%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.fp-item--2 .fp-item__frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 70% 65%, rgba(203, 104, 104, 0.09), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Hover: lift shadow + border */
-.fp-item__link:hover .fp-item__frame {
-  border-color: rgba(243, 243, 243, 0.16);
-  box-shadow:
-    0 32px 88px rgba(0, 0, 0, 0.50),
-    0 4px 12px  rgba(0, 0, 0, 0.30);
-}
-
-/* Scale image on hover (when real <img> is present) */
-.fp-item__link:hover .fp-item__frame img {
-  transform: scale(1.03);
-}
-
-.fp-item__frame img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Portrait image — no border-radius, no container styling */
+.fp-item__img {
   display: block;
+  aspect-ratio: 3 / 4;
+  width: auto;
+  object-fit: cover;
   transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* ------- META OVERLAID at bottom of frame (Project 1) ------- */
-.fp-item__meta {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.fp-item__link:hover .fp-item__img {
+  transform: scale(1.04);
+}
+
+/* --- Project 01: large, vertically centered, enters first on scroll --- */
+.fp-item--1 {
+  left: 60vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.fp-item--1 .fp-item__img {
+  height: clamp(300px, 62vh, 520px);
+}
+
+/* --- Project 02: smaller, shifted upper-right, overlaps P1 --- */
+.fp-item--2 {
+  left: 84vw;
+  top: 8vh;
   z-index: 2;
-  padding: 56px 26px 24px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.55) 45%,
-    transparent 100%
-  );
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  transition: background 0.3s ease;
 }
 
-.fp-item__link:hover .fp-item__meta {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(0, 0, 0, 0.62) 50%,
-    transparent 100%
-  );
+.fp-item--2 .fp-item__img {
+  height: clamp(220px, 46vh, 390px);
 }
 
-/* ------- FLOAT META above frame (Project 2) ------- */
-.fp-item__floatmeta {
-  padding: 0 6px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+/* --- Captions --- */
+.fp-item__caption {
+  margin-top: 18px;
+  padding: 0 2px;
 }
 
-/* ------- TEXT ATOMS ------- */
+/* Caption above the image (used on Project 02) */
+.fp-item__caption--above {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
 .fp-item__index {
-  margin: 0;
+  margin: 0 0 6px;
   font-size: 11px;
   letter-spacing: 0.2em;
-  opacity: 0.45;
+  opacity: 0.40;
 }
 
 .fp-item__title {
   margin: 0;
-  font-family: var(--font-secondary);
-  font-weight: 520;
-  font-size: clamp(16px, 1.7vw, 23px);
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.05;
   letter-spacing: -0.01em;
-  line-height: 1.18;
-  color: rgba(243, 243, 243, 0.95);
-}
-
-.fp-item__floatmeta .fp-item__title {
   color: var(--fg);
 }
 
-.fp-item__desc {
-  margin: 0;
-  font-family: var(--font-secondary);
-  font-size: 13px;
-  line-height: 1.55;
-  color: rgba(243, 243, 243, 0.58);
-}
-
-.fp-item__floatmeta .fp-item__desc {
-  color: var(--muted);
-}
-
-.fp-item__cta {
-  display: inline-block;
-  margin-top: 8px;
-  font-family: var(--font-secondary);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: rgba(243, 243, 243, 0.40);
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.fp-item__link:hover .fp-item__cta {
-  color: rgba(243, 243, 243, 0.90);
-  transform: translateX(5px);
-}
-
-.fp-item__floatmeta .fp-item__cta {
-  color: rgba(243, 243, 243, 0.38);
-}
-
 /* ---------------------------------------------------
-   CTA (Works)
+   CTA (Works) — lives after the pinned section
 --------------------------------------------------- */
 .home-cta {
-  /* margin-top accounts for item 2 overflowing below the stack */
-  margin-top: clamp(180px, 24vw, 280px);
   display: grid;
   gap: 14px;
   justify-items: center;
   text-align: center;
-  padding-bottom: 110px;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.08);
+  padding: 80px 0 120px;
 }
 
-.home-cta__text {
-  max-width: 60ch;
+.home-cta__title {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+  color: rgba(243, 243, 243, 0.95);
+}
+
+.home-cta__sub {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
 }
 
 .btn {
@@ -292,80 +199,58 @@
 }
 
 /* ---------------------------------------------------
-   STUDIO CTA
---------------------------------------------------- */
-.home-studio {
-  padding: 96px 0 130px;
-  text-align: center;
-}
-
-.home-studio .kicker {
-  margin: 0 0 10px;
-}
-
-.home-studio .h2 {
-  margin-bottom: 14px;
-}
-
-.home-studio .muted {
-  margin: 0 auto 22px;
-  max-width: 62ch;
-}
-
-/* ---------------------------------------------------
    RESPONSIVE
 --------------------------------------------------- */
 
-/* Tablet — reduce overlap */
-@media (max-width: 860px) {
-  .home-featured__stack {
-    grid-template-columns: 58% 42%;
-  }
-
-  .fp-item--2 {
-    margin-left: clamp(-60px, -5vw, -32px);
-    margin-top: clamp(80px, 10vw, 120px);
-  }
-
-  .fp-item--1 .fp-item__frame {
-    height: clamp(280px, 46vw, 400px);
-  }
-
-  .fp-item--2 .fp-item__frame {
-    height: clamp(220px, 34vw, 320px);
-  }
-
-  .home-cta {
-    margin-top: clamp(120px, 18vw, 200px);
-  }
-}
-
-/* Mobile — stack vertically, no overlap */
-@media (max-width: 600px) {
+/* Mobile: disable horizontal scroll, stack vertically */
+@media (max-width: 767px) {
   .home-featured {
-    padding-top: 72px;
+    height: auto;
+    overflow: visible;
+    padding: 72px 0 60px;
   }
 
-  .home-featured__stack {
+  .home-featured__ghost {
+    display: none;
+  }
+
+  .home-featured__track {
+    position: static;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 52px;
+    padding: 0 6vw;
+  }
+
+  /* Reset absolute positioning */
+  .fp-item {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+
+  .fp-item--1 {
+    transform: none;
   }
 
   .fp-item--2 {
-    margin-left: 0;
-    margin-top: 40px;
+    align-self: flex-end;
   }
 
-  .fp-item--1 .fp-item__frame,
-  .fp-item--2 .fp-item__frame {
-    height: 72vw;
-    max-height: 360px;
+  .fp-item--1 .fp-item__img {
+    height: auto;
+    width: 72vw;
+  }
+
+  .fp-item--2 .fp-item__img {
+    height: auto;
+    width: 58vw;
   }
 
   .home-cta {
-    margin-top: 64px;
-    padding-bottom: 80px;
+    padding: 60px 0 80px;
   }
 
   .btn--pill {
@@ -375,12 +260,16 @@
   }
 }
 
-/* Utility: muted used site-wide, defined once here */
-.muted {
+/* ---------------------------------------------------
+   TYPOGRAPHY UTILITIES (used across pages)
+--------------------------------------------------- */
+.h2 {
   margin: 0;
-  color: var(--muted);
   font-family: var(--font-secondary);
-  line-height: 1.6;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  font-size: clamp(28px, 3vw, 52px);
+  line-height: 1.06;
 }
 
 .h3 {
@@ -390,4 +279,11 @@
   letter-spacing: -0.01em;
   font-size: clamp(18px, 2vw, 28px);
   line-height: 1.15;
+}
+
+.muted {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
 }
