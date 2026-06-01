@@ -1,33 +1,5 @@
 
 
-/* -----------------------------
-   Footer (Oh, løøk! Studio)
------------------------------ */
-
-.site-footer{
-  position: relative;
-  padding: 56px 0 72px;
-  margin-top: 80px;
-  isolation: isolate; /* para blur y capas */
-}
-
-.site-footer__inner{
-  width: min(980px, 92vw);
-  margin: 0 auto;
-  display: grid;
-  gap: 22px;
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-}
-
-/* Social pills centradas */
-.site-footer__social{
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Pills (reutiliza tu estilo si ya existe; esto es “safe defaults”) */
 .pill{

@@ -4,32 +4,34 @@ export function Footer() {
     <footer class="site-footer" aria-label="Site footer">
       <div class="site-footer__inner">
 
-        <!-- Canvas principal (visual) -->
-        <div class="site-footer__canvas" aria-hidden="true">
-          <canvas id="footerTextCanvas"></canvas>
-        </div>
+        <div class="site-footer__body">
 
-        <!-- CTA Block -->
-        <div class="site-footer__ctaBlock">
-          
-
-          <div class="site-footer__ctaRow">
-            <a class="nav__link nav__link--cta" href="/contact" data-link>Let’s talk.</a>
+          <!-- Canvas: "Let's talk." en partículas (decorativo) -->
+          <div class="site-footer__canvas" aria-hidden="true">
+            <canvas id="footerTextCanvas"></canvas>
           </div>
+
+          <!-- Bloque de contacto (derecha) -->
+          <div class="site-footer__contact">
+            <div class="site-footer__contactInfo">
+              <p>Between Sitges & Talairan</p>
+              <p>Working worldwide</p>
+              <a href="mailto:hello@ohlook.studio">hello@ohlook.studio</a>
+            </div>
+            <div class="site-footer__socials">
+              <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://behance.net/" target="_blank" rel="noreferrer">Behance</a>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Social -->
-        <div class="site-footer__social" aria-label="Social links">
-          <a class="social-link" href="#" aria-label="Instagram">IG</a>
-          <a class="social-link" href="#" aria-label="LinkedIn">IN</a>
-          <a class="social-link" href="#" aria-label="Behance">BE</a>
-        </div>
+        <hr class="site-footer__rule" aria-hidden="true">
 
-        <!-- Meta -->
-        <div class="site-footer__meta" aria-label="Legal">
-          <span class="site-footer__metaText">© 2026 Oh, løøk! Studio</span>
-          <span class="site-footer__metaDot" aria-hidden="true">·</span>
-          <a class="site-footer__metaLink" href="/privacy" data-link>Privacy</a>
+        <div class="site-footer__bottom">
+          <span class="site-footer__copyright">© 2026 Oh, løøk! Studio</span>
+          <a class="site-footer__privacy" href="/privacy" data-link>Privacy</a>
         </div>
 
       </div>

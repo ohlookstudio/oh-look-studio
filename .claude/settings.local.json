@@ -7,7 +7,13 @@
       "Bash(npm run *)",
       "Bash(npx --yes playwright@latest screenshot --browser chromium \"http://localhost:5199\" /tmp/home-featured-initial.png --viewport-size \"1440,900\")",
       "Bash(npx playwright *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(xargs ls)",
+      "Bash(npx *)",
+      "Bash(pkill -f \"vite --port\")",
+      "Bash(rm -rf \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/node_modules/.vite\")",
+      "Bash(curl -s http://localhost:5179/)",
+      "Bash(chromium-cli screenshot *)"
     ]
   }
 }

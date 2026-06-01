@@ -15,21 +15,19 @@ export function mountFooterTextCanvas() {
   // -------------------------
   const DPR_CAP = 2;
 
-  // ✅ text stays single-line, but always fits width on mobile
-  const TEXT = "Still løøking? Good.";
+  const TEXT = "Let’s talk.";
   const FONT_FAMILY = `"Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif`;
   const FONT_WEIGHT = 520;
 
-  // ✅ wider range + safer min on small screens
-  const BASE_FONT = 120;
-  const MIN_FONT = 40;
+  // 180px at 1440px frame → 12.5% of viewport width
+  const FONT_RATIO = 180 / 1440;
+  const MIN_FONT = 60;
 
-  // ✅ slightly lower so it has more room above CTA on mobile
-  const Y_RATIO_DESKTOP = 0.36;
-  const Y_RATIO_MOBILE = 0.30;
+  const Y_RATIO_DESKTOP = 0.52;
+  const Y_RATIO_MOBILE = 0.47;
 
-  const PARTICLES_MIN = 2400;
-  const PARTICLES_MAX = 5200;
+  const PARTICLES_MIN = 1800;
+  const PARTICLES_MAX = 4200;
 
   const STEP_DESKTOP = 2;
   const STEP_MOBILE = 2;
@@ -107,9 +105,8 @@ export function mountFooterTextCanvas() {
   }
 
   function getDesiredFont() {
-    const vw = window.innerWidth || 1200;
-    const t = clamp01((vw - 360) / 920);
-    return Math.round(lerp(MIN_FONT, BASE_FONT, t));
+    const vw = window.innerWidth || 1440;
+    return Math.max(MIN_FONT, Math.round(vw * FONT_RATIO));
   }
 
   function measureInnerRect() {
@@ -119,10 +116,9 @@ export function mountFooterTextCanvas() {
     return r;
   }
 
-  // ✅ robust fitting: always fit within width (with padding)
   function fitFontSizeToWidth(fontSize) {
-    const pad = isMobile() ? 18 : 32;
-    const maxW = Math.max(1, w - pad * 2);
+    const pad = isMobile() ? 12 : 16;
+    const maxW = Math.max(1, w - pad);
 
     sctx.save();
     sctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
@@ -178,12 +174,12 @@ export function mountFooterTextCanvas() {
     let fontSize = getDesiredFont();
     fontSize = fitFontSizeToWidth(fontSize);
 
-    const x = w * 0.5;
+    const x = 0;
     const y = h * getYRatio();
 
     // sample mask
     sctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
-    sctx.textAlign = "center";
+    sctx.textAlign = "left";
     sctx.textBaseline = "middle";
     sctx.fillStyle = "rgba(255,255,255,1)";
     sctx.fillText(TEXT, x, y);
@@ -217,7 +213,7 @@ export function mountFooterTextCanvas() {
     gctx.clearRect(0, 0, w, h);
     gctx.save();
     gctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
-    gctx.textAlign = "center";
+    gctx.textAlign = "left";
     gctx.textBaseline = "middle";
 
     gctx.globalCompositeOperation = "source-over";
