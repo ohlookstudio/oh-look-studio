@@ -15,6 +15,7 @@ const FRAG = /* glsl */ `
   uniform sampler2D uTexture;
   uniform float     uProgress;
   uniform bool      uHasTexture;
+  uniform vec2      uUvScale;   /* cover-mode UV scale — corrects aspect ratio */
   varying vec2      vUv;
 
   float hash(vec2 p) {
@@ -33,7 +34,11 @@ const FRAG = /* glsl */ `
   }
 
   void main() {
-    vec2  uv = vUv;
+    /* Cover-mode UV: divide by scale so the image fills the plane
+       without stretching (equivalent to object-fit: cover).
+       uUvScale > 1 in a dimension = that axis is cropped. */
+    vec2 uv = (vUv - 0.5) / uUvScale + 0.5;
+
     float s  = pow(max(0.0, 1.0 - uProgress), 2.2);
 
     float n1 = noise(uv * 4.5 + vec2(uProgress * 1.8, 0.0));
@@ -51,11 +56,10 @@ const FRAG = /* glsl */ `
       gl_FragColor = vec4(r, g, b, 1.0);
     } else {
       /* placeholder: subtle animated dark with grain */
-      float grain  = noise(uv * 85.0 + vec2(uProgress * 6.0)) * 0.045 * s;
-      float vignette = 1.0 - smoothstep(0.3, 1.0, length((uv - 0.5) * 1.6));
-      float base   = 0.072 + grain;
-      float accent = 0.04 * s;
-      gl_FragColor = vec4(base + accent * 0.25, base + accent * 0.35, base + accent * 0.10, 1.0);
+      float grain   = noise(uv * 85.0 + vec2(uProgress * 6.0)) * 0.045 * s;
+      float base    = 0.072 + grain;
+      float accent  = 0.04 * s;
+      gl_FragColor  = vec4(base + accent * 0.25, base + accent * 0.35, base + accent * 0.10, 1.0);
     }
   }
 `;
@@ -86,6 +90,7 @@ export function mountProjectShader(container, imageUrl) {
     uTexture:    { value: null },
     uProgress:   { value: 0   },
     uHasTexture: { value: false },
+    uUvScale:    { value: new THREE.Vector2(1.0, 1.0) },
   };
 
   const material = new THREE.ShaderMaterial({
@@ -96,8 +101,21 @@ export function mountProjectShader(container, imageUrl) {
 
   scene.add(new THREE.Mesh(geo, material));
 
-  let tween = null;
+  let tween         = null;
   let loadedTexture = null;
+
+  /* Compute cover-mode UV scale based on container vs image aspect ratio */
+  function computeUvScale(imgW, imgH, cW, cH) {
+    const imgAspect = imgW / imgH;
+    const cAspect   = cW  / cH;
+    if (cAspect > imgAspect) {
+      /* Container wider → crop top/bottom */
+      uniforms.uUvScale.value.set(1.0, cAspect / imgAspect);
+    } else {
+      /* Container taller → crop left/right */
+      uniforms.uUvScale.value.set(imgAspect / cAspect, 1.0);
+    }
+  }
 
   /* Resize */
   function onResize() {
@@ -105,6 +123,10 @@ export function mountProjectShader(container, imageUrl) {
     const nh = container.offsetHeight;
     if (!nw || !nh) return;
     renderer.setSize(nw, nh);
+    if (loadedTexture) {
+      const img = loadedTexture.image;
+      computeUvScale(img.naturalWidth || img.width, img.naturalHeight || img.height, nw, nh);
+    }
   }
   window.addEventListener("resize", onResize);
 
@@ -122,7 +144,7 @@ export function mountProjectShader(container, imageUrl) {
         renderer.render(scene, camera);
       },
       onComplete() {
-        /* Fade out canvas then remove it */
+        /* Fade out canvas, then remove — the <img> beneath is revealed */
         el.style.transition = "opacity 0.5s ease";
         el.style.opacity    = "0";
         setTimeout(teardown, 560);
@@ -136,12 +158,18 @@ export function mountProjectShader(container, imageUrl) {
       imageUrl,
       (tex) => {
         loadedTexture = tex;
+        const img = tex.image;
+        computeUvScale(
+          img.naturalWidth  || img.width,
+          img.naturalHeight || img.height,
+          w, h
+        );
         uniforms.uTexture.value    = tex;
         uniforms.uHasTexture.value = true;
         runAnimation();
       },
       undefined,
-      () => runAnimation()   /* image 404 → still run shader as placeholder */
+      () => runAnimation()  /* 404 → run placeholder shader */
     );
   } else {
     runAnimation();

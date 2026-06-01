@@ -61,7 +61,14 @@ export async function ProjectDetails({ slug } = {}) {
 
         <!-- RIGHT — sticky cover with WebGL shader -->
         <div class="project-detail__right">
-          <div class="project-detail__cover" id="projectCover"></div>
+          <div class="project-detail__cover" id="projectCover">
+            ${project.coverImage
+              ? `<img class="project-detail__cover-img"
+                      src="${project.coverImage}"
+                      alt="${project.title}"
+                      loading="eager">`
+              : ''}
+          </div>
         </div>
 
       </div>

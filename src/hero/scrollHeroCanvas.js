@@ -587,7 +587,7 @@ export function initScrollHero({ hero, canvas, copy }) {
     scrollTrigger: {
       trigger: hero,
       start: "top top",
-      end: () => "+=" + window.innerHeight * 2.1,
+      end: () => "+=" + window.innerHeight * 1.6,
       scrub: true,
       pin: true,
       pinSpacing: true,

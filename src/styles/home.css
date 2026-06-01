@@ -13,154 +13,153 @@
 .home-featured {
   position: relative;
   height: 100svh;
+  min-height: 800px;
   overflow: hidden;
 }
 
-/* Ghost title lines: stay fixed, images scroll in front of them */
-.home-featured__ghost {
+/* Ghost texts: static in section, track scrolls in front */
+.hf-ghost {
   position: absolute;
   z-index: 0;
   pointer-events: none;
   user-select: none;
-  font-family: var(--font-primary);
-  font-size: clamp(80px, 12vw, 180px);
+  font-family: var(--font-secondary);
+  font-weight: 300;
   color: var(--fg);
   opacity: 0.06;
-  line-height: 0.9;
   white-space: nowrap;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 
-.home-featured__ghost--l1 {
-  top: 14%;
-  left: 6vw;
+.hf-ghost--l1 {
+  left: 60px;
+  top: 20px;
+  font-size: clamp(80px, 11.8vw, 170px);
 }
 
-.home-featured__ghost--l2 {
-  bottom: 10%;
-  right: 6vw;
+.hf-ghost--l2 {
+  left: 66px;
+  top: 174px;
+  font-size: clamp(36px, 4.9vw, 70px);
 }
 
-/* Horizontal track: 150vw → 50vw of scroll distance */
-.home-featured__track {
+/* Track: translates horizontally via GSAP.
+   Width = card4-left(153.75vw) + card-width(24.375vw) + right-pad(10vw) = 188vw */
+.hf-track {
   position: relative;
   z-index: 1;
-  width: 150vw;
+  width: 188vw;
   height: 100%;
   will-change: transform;
 }
 
 /* ---------------------------------------------------
-   PROJECT ITEMS — absolutely positioned in the track
+   PROJECT CARDS
 --------------------------------------------------- */
-.fp-item {
+/* All 4 cards identical — Figma: 351×478px at 1440px → proportional */
+.hf-card {
   position: absolute;
+  width: 24.375vw;  /* 351 / 1440 */
+  height: 33.2vw;  /* 478 / 1440 */
 }
 
-.fp-item__link {
+/* Positions from Figma 1440px frame → vw. Odd=lower, even=upper.
+   At load: cards 1+2 fully visible, card 3 just off-screen right. */
+.hf-card--1 { left: 17.71vw;  top: 18.06vw; }  /* 255 / 1440, 260 / 1440 */
+.hf-card--2 { left: 62.92vw;  top:  8.40vw; }  /* 906 / 1440, 121 / 1440 */
+.hf-card--3 { left: 108.33vw; top: 18.06vw; }  /* 1560 / 1440, 260 / 1440 */
+.hf-card--4 { left: 153.75vw; top:  8.40vw; }  /* 2214 / 1440, 121 / 1440 */
+
+.hf-card__link {
   display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
 
-/* Invisible overflow wrapper: enables hover scale without styled card */
-.fp-item__img-wrap {
+/* Image */
+.hf-card__img-wrap {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
-/* Portrait image — no border-radius, no container styling */
-.fp-item__img {
+.hf-card__img {
   display: block;
-  aspect-ratio: 3 / 4;
-  width: auto;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.fp-item__link:hover .fp-item__img {
+.hf-card__link:hover .hf-card__img {
   transform: scale(1.04);
 }
 
-/* --- Project 01: large, vertically centered, enters first on scroll --- */
-.fp-item--1 {
-  left: 60vw;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
+/* Label: left of image, bottom-anchored
+   Anchoring math (all values from Figma):
+   - "See more" at 60px from card bottom (60px above image base)
+   - title bottom at 72px from card bottom
+   - label cta gap = 4px (see-more → line within cta)
+   - label gap = 12px (title → cta) */
+.hf-card__label {
+  position: absolute;
+  right: calc(100% + 0.56vw);  /* 8px / 1440 */
+  top: 0;
+  bottom: 0;
+  width: max(110px, 12.85vw);  /* 185px / 1440 */
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: max(28px, 2.92vw);  /* 42px / 1440 */
+  gap: 12px;
 }
 
-.fp-item--1 .fp-item__img {
-  height: clamp(300px, 62vh, 520px);
-}
-
-/* --- Project 02: smaller, shifted upper-right, overlaps P1 --- */
-.fp-item--2 {
-  left: 84vw;
-  top: 8vh;
-  z-index: 2;
-}
-
-.fp-item--2 .fp-item__img {
-  height: clamp(220px, 46vh, 390px);
-}
-
-/* --- Captions --- */
-.fp-item__caption {
-  margin-top: 18px;
-  padding: 0 2px;
-}
-
-/* Caption above the image (used on Project 02) */
-.fp-item__caption--above {
-  margin-top: 0;
-  margin-bottom: 18px;
-}
-
-.fp-item__index {
-  margin: 0 0 6px;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  opacity: 0.40;
-}
-
-.fp-item__title {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: clamp(20px, 2.5vw, 36px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--fg);
-}
-
-/* ---------------------------------------------------
-   CTA (Works) — lives after the pinned section
---------------------------------------------------- */
-.home-cta {
-  display: grid;
-  gap: 14px;
-  justify-items: center;
-  text-align: center;
-  padding: 80px 0 120px;
-}
-
-.home-cta__title {
-  margin: 0;
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-size: clamp(40px, 5vw, 64px);
-  letter-spacing: -0.02em;
-  line-height: 1.0;
-  color: rgba(243, 243, 243, 0.95);
-}
-
-.home-cta__sub {
+.hf-card__title {
   margin: 0;
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-  color: var(--muted);
+  font-size: clamp(22px, 2.78vw, 44px);  /* 40px / 1440 */
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: rgba(250, 250, 250, 1);
 }
+
+.hf-card__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.hf-card__see-more {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: rgba(242, 242, 242, 0.85);
+  transition: color 0.2s ease;
+}
+
+.hf-card__link:hover .hf-card__see-more {
+  color: rgba(242, 242, 242, 1);
+}
+
+.hf-card__line {
+  width: 44px;
+  height: 1px;
+  background: rgba(242, 242, 242, 0.6);
+  transition: width 0.3s ease;
+}
+
+.hf-card__link:hover .hf-card__line {
+  width: 56px;
+}
+
 
 .btn {
   display: inline-flex;
@@ -206,15 +205,16 @@
 @media (max-width: 767px) {
   .home-featured {
     height: auto;
+    min-height: auto;
     overflow: visible;
-    padding: 72px 0 60px;
+    padding: 60px 0 48px;
   }
 
-  .home-featured__ghost {
+  .hf-ghost {
     display: none;
   }
 
-  .home-featured__track {
+  .hf-track {
     position: static;
     width: 100%;
     height: auto;
@@ -225,35 +225,75 @@
   }
 
   /* Reset absolute positioning */
-  .fp-item {
+  .hf-card {
     position: relative;
     left: auto;
     top: auto;
+    width: auto;
+    height: auto;
   }
 
-  .fp-item--1 {
-    transform: none;
+  .hf-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 72vw;
+    height: auto;
+    position: static;
   }
 
-  .fp-item--2 {
+  .hf-card--2 .hf-card__link,
+  .hf-card--4 .hf-card__link {
+    width: 62vw;
     align-self: flex-end;
   }
 
-  .fp-item--1 .fp-item__img {
+  .hf-card__img-wrap {
+    position: relative;
+    inset: auto;
+    width: 100%;
     height: auto;
-    width: 72vw;
+    aspect-ratio: 351 / 478;
   }
 
-  .fp-item--2 .fp-item__img {
-    height: auto;
-    width: 58vw;
+  .hf-card__img {
+    width: 100%;
+    height: 100%;
   }
 
-  .home-cta {
-    padding: 60px 0 80px;
+  .hf-card__label {
+    position: relative;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    text-align: left;
+    padding-bottom: 0;
+    gap: 8px;
+    justify-content: flex-start;
+    pointer-events: auto;
   }
 
-  .btn--pill {
+  .hf-card--2 .hf-card__label,
+  .hf-card--4 .hf-card__label {
+    text-align: right;
+  }
+
+  .hf-card__title {
+    font-size: 28px;
+  }
+
+  .hf-card__cta {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .hf-card--2 .hf-card__cta,
+  .hf-card--4 .hf-card__cta {
+    align-items: flex-end;
+  }
+
+.btn--pill {
     height: 56px;
     padding: 0 26px;
     font-size: 14px;

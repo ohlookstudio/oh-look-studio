@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Figma__get_design_context",
+      "Read(//private/tmp/**)",
+      "Bash(node -e ' *)",
+      "Bash(npm run *)",
+      "Bash(npx --yes playwright@latest screenshot --browser chromium \"http://localhost:5199\" /tmp/home-featured-initial.png --viewport-size \"1440,900\")",
+      "Bash(npx playwright *)",
+      "Bash(node *)"
+    ]
+  }
+}

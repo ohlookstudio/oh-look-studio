@@ -12,66 +12,105 @@ export function Home() {
       --------------------------------------------------- -->
       <section class="home-featured" id="homeFeatured" aria-label="Featured projects">
 
-        <!-- Ghost title: static backdrop, images scroll in front -->
-        <span class="home-featured__ghost home-featured__ghost--l1" aria-hidden="true">Two perspectives,</span>
-        <span class="home-featured__ghost home-featured__ghost--l2" aria-hidden="true">selected.</span>
+        <span class="hf-ghost hf-ghost--l1" aria-hidden="true">Løøk closer.</span>
+        <span class="hf-ghost hf-ghost--l2" aria-hidden="true">Some perspectives, still evolving</span>
 
-        <!-- Track: translates horizontally on scroll -->
-        <div class="home-featured__track" id="featuredTrack">
+        <div class="hf-track" id="featuredTrack">
 
-          <!-- Project 01 — large, caption below -->
-          <article class="fp-item fp-item--1">
-            <a class="fp-item__link"
-               href="/projects/norway-farm"
+          <!-- Project 01 — Pål's Gård (lower) -->
+          <article class="hf-card hf-card--1">
+            <a class="hf-card__link"
+               href="/projects/pals-gard"
                data-link
                data-project-link
-               aria-label="Open project: Norway Farm Brand">
-              <div class="fp-item__img-wrap">
-                <img class="fp-item__img"
-                     src="/src/assets/img/projects/norway-farm-cover.jpg"
-                     alt="Norway Farm Brand"
+               aria-label="Open project: Pål's Gård">
+              <div class="hf-card__img-wrap fp-item__frame">
+                <img class="hf-card__img"
+                     src="/src/assets/img/projects/pals-gard-cover.jpg"
+                     alt="Pål's Gård"
                      loading="lazy">
               </div>
-              <div class="fp-item__caption">
-                <p class="fp-item__index kicker">01</p>
-                <h3 class="fp-item__title">Norway Farm Brand</h3>
+              <div class="hf-card__label">
+                <h3 class="hf-card__title">Pål's Gård</h3>
+                <div class="hf-card__cta">
+                  <span class="hf-card__see-more">See more</span>
+                  <div class="hf-card__line"></div>
+                </div>
               </div>
             </a>
           </article>
 
-          <!-- Project 02 — smaller, shifted up, caption above, overlaps P1 -->
-          <article class="fp-item fp-item--2">
-            <a class="fp-item__link"
+          <!-- Project 02 — Braun (upper) -->
+          <article class="hf-card hf-card--2">
+            <a class="hf-card__link"
                href="/projects/braun-milan"
                data-link
                data-project-link
                aria-label="Open project: Braun – Milan Design Week">
-              <div class="fp-item__caption fp-item__caption--above">
-                <p class="fp-item__index kicker">02</p>
-                <h3 class="fp-item__title">Braun — Milan Design Week</h3>
-              </div>
-              <div class="fp-item__img-wrap">
-                <img class="fp-item__img"
+              <div class="hf-card__img-wrap fp-item__frame">
+                <img class="hf-card__img"
                      src="/src/assets/img/projects/braun-milan-cover.jpg"
                      alt="Braun – Milan Design Week"
                      loading="lazy">
+              </div>
+              <div class="hf-card__label">
+                <h3 class="hf-card__title">Braun</h3>
+                <div class="hf-card__cta">
+                  <span class="hf-card__see-more">See more</span>
+                  <div class="hf-card__line"></div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Project 03 — Staccio (lower) -->
+          <article class="hf-card hf-card--3">
+            <a class="hf-card__link"
+               href="/projects/staccio"
+               data-link
+               data-project-link
+               aria-label="Open project: Staccio">
+              <div class="hf-card__img-wrap fp-item__frame">
+                <img class="hf-card__img"
+                     src="/src/assets/img/projects/staccio-cover.jpg"
+                     alt="Staccio"
+                     loading="lazy">
+              </div>
+              <div class="hf-card__label">
+                <h3 class="hf-card__title">Staccio</h3>
+                <div class="hf-card__cta">
+                  <span class="hf-card__see-more">See more</span>
+                  <div class="hf-card__line"></div>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Project 04 — Xabi Cacao Tasting (upper, 2-line title) -->
+          <article class="hf-card hf-card--4">
+            <a class="hf-card__link"
+               href="/projects/xabi-cacao"
+               data-link
+               data-project-link
+               aria-label="Open project: Xabi Cacao Tasting">
+              <div class="hf-card__img-wrap fp-item__frame">
+                <img class="hf-card__img"
+                     src="/src/assets/img/projects/xabi-cacao-cover.jpg"
+                     alt="Xabi Cacao Tasting"
+                     loading="lazy">
+              </div>
+              <div class="hf-card__label">
+                <h3 class="hf-card__title">Xabi Cacao<br>Tasting</h3>
+                <div class="hf-card__cta">
+                  <span class="hf-card__see-more">See more</span>
+                  <div class="hf-card__line"></div>
+                </div>
               </div>
             </a>
           </article>
 
         </div>
       </section>
-
-      <!-- ---------------------------------------------------
-           CTA → Works
-      --------------------------------------------------- -->
-      <div class="home-cta home-cta--works">
-        <h2 class="home-cta__title">Keep løøking.</h2>
-        <p class="home-cta__sub">The full archive awaits.</p>
-        <a class="btn btn--pill" href="/works" data-link aria-label="Go to Oh, works">
-          → Oh, works!
-        </a>
-      </div>
 
     </main>
   `;

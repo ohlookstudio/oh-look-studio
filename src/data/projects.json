@@ -1,22 +1,40 @@
 {
   "projects": [
     {
-      "slug": "norway-farm",
-      "title": "Norway Farm Brand",
-      "year": 2024,
-      "description": "A branding identity rooted in slow agriculture and Nordic light.",
-      "tags": ["Branding", "Editorial", "Identity"],
-      "services": ["Brand identity", "Art direction", "Editorial design"],
-      "coverImage": "/assets/projects/farm/cover.jpg"
+      "slug": "pals-gard",
+      "title": "Pål's Gård",
+      "year": 2025,
+      "description": "A quiet luxury story carved in nature.",
+      "tags": ["Branding", "Editorial"],
+      "services": ["Brand identity", "Art direction"],
+      "coverImage": "/src/assets/img/projects/pals-gard-cover.jpg"
     },
     {
       "slug": "braun-milan",
       "title": "Braun – Milan Design Week",
       "year": 2025,
-      "description": "A promotional microsite exploring Braun's design philosophy through motion and interaction.",
+      "description": "Motion as material, restraint as expression.",
       "tags": ["Web", "Motion", "Interaction"],
       "services": ["Creative dev", "Motion system", "UI design"],
-      "coverImage": "/assets/projects/braun/cover.jpg"
+      "coverImage": "/src/assets/img/projects/braun-milan-cover.jpg"
+    },
+    {
+      "slug": "staccio",
+      "title": "Staccio",
+      "year": 2024,
+      "description": "The sieve. What remains after refinement.",
+      "tags": ["Branding", "Identity"],
+      "services": ["Brand identity", "Visual system"],
+      "coverImage": "/src/assets/img/projects/staccio-cover.jpg"
+    },
+    {
+      "slug": "xabi-cacao",
+      "title": "Xabi Cacao Tasting",
+      "year": 2024,
+      "description": "Reframing taste through ritual and material.",
+      "tags": ["Branding", "Packaging"],
+      "services": ["Brand identity", "Packaging design"],
+      "coverImage": "/src/assets/img/projects/xabi-cacao-cover.jpg"
     }
   ]
 }
