@@ -3,7 +3,8 @@ import { mountRouter } from "./router/router.js";
 import { initMobileMenu } from "./components/menu.js";
 import { mountBgParticles } from "./hero/bgParticles.js";
 import { mountFooterTextCanvas } from "./components/footerTextCanvas.js";
-import { initProjectTransitions } from "./components/ProjectTransition.js";
+import { initFlipTransitions } from "./components/flipTransition.js";
+// initProjectTransitions (WebGL) intentionally disconnected — kept in ProjectTransition.js
 
 export function initApp() {
   const app = document.getElementById("app");
@@ -21,8 +22,8 @@ export function initApp() {
   // ✅ footer pure-canvas text (una sola vez)
   mountFooterTextCanvas();
 
-  // ✅ WebGL project-link transitions (capture phase, antes que el router)
-  initProjectTransitions();
+  // ✅ FLIP project-link transitions (capture phase, antes que el router)
+  initFlipTransitions();
 
   // ✅ router (usa rootEl)
   mountRouter({ rootEl: app });
