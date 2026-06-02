@@ -1,5 +1,5 @@
 /* ===================================================
-   PAGES — layout styles for all inner pages
+   PAGES â€” layout styles for all inner pages
    Works, ProjectDetails, Studio, Lab, Contact
    Tokens always from global.css / token.css
 =================================================== */
@@ -50,7 +50,7 @@
 }
 
 /* ---------------------------------------------------
-   OH, WORKS! — editorial grid
+   OH, WORKS! â€” editorial grid
 --------------------------------------------------- */
 .works-page {
   padding-top: var(--header-h);
@@ -88,7 +88,6 @@
   gap: 0;
 }
 
-/* Each card: covers (placeholder) + meta, staggered */
 .works-card {
   display: grid;
   gap: 40px;
@@ -200,7 +199,7 @@
 }
 
 /* ---------------------------------------------------
-   PROJECT DETAIL — two-column sticky layout
+   PROJECT DETAIL â€” two-column sticky layout
 --------------------------------------------------- */
 .project-detail {
   /* no padding-top: right column starts from top, left offsets itself */
@@ -212,7 +211,6 @@
   min-height: 100vh;
 }
 
-/* LEFT — scrolling */
 .project-detail__left {
   padding: calc(var(--header-h) + 72px) 56px 120px 56px;
   display: flex;
@@ -298,7 +296,6 @@
   margin-top: 40px;
 }
 
-/* RIGHT — sticky cover */
 .project-detail__right {
   position: sticky;
   top: 0;
@@ -316,7 +313,6 @@
   overflow: hidden;
 }
 
-/* Stable cover image — always present, revealed when WebGL canvas fades out */
 .project-detail__cover-img {
   position: absolute;
   inset: 0;
@@ -329,7 +325,6 @@
   z-index: 0;
 }
 
-/* WebGL canvas injected by projectShader.js — overlays the img */
 .project-detail__canvas {
   position: absolute;
   inset: 0;
@@ -341,126 +336,279 @@
 }
 
 /* ---------------------------------------------------
-   OH, STUDIO! — editorial two-column
+   OH, STUDIO! — layout matching Figma (1440px base)
+   Positions scale with: calc(X / 1440 * 100vw)
 --------------------------------------------------- */
 .studio-page {
   padding-top: var(--header-h);
 }
 
-.studio-header {
-  padding: 72px 0 80px;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.08);
+/* ── Narrative: two-speed two-column section ── */
+.studio-narrative {
+  display: grid;
+  grid-template-columns: calc(560 / 1440 * 100vw) calc(600 / 1440 * 100vw);
+  column-gap: calc(120 / 1440 * 100vw);
+  padding: 72px calc(80 / 1440 * 100vw) 0;
+  box-sizing: border-box;
 }
 
-.studio-header__inner {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
+.studio-narrative__right {
+  /* offset right col down to align first flash at ~y=520 */
+  padding-top: calc(368 / 1440 * 100vw);
 }
 
-.studio-display {
-  margin: 12px 0 28px;
+.studio-eyebrow {
+  display: block;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(243,243,243,.34);
+  margin: 0 0 18px;
+}
+
+.studio-title {
   font-family: var(--font-primary);
-  font-size: clamp(52px, 8vw, 120px);
-  line-height: 0.88;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-size: clamp(58px, 8vw, 92px);
+  line-height: .88;
+  letter-spacing: -.02em;
   color: var(--fg);
+  margin: 0 0 28px;
 }
 
 .studio-tagline {
   font-family: var(--font-secondary);
-  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 300;
+  font-size: 14px;
   line-height: 1.55;
-  color: var(--muted);
-  max-width: 60ch;
-  margin: 0;
+  color: rgba(243,243,243,.55);
+  margin: 0 0 64px;
 }
 
-.studio-divider {
-  /* decorative — handled by section border-bottom on header */
-}
-
-.studio-content {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
-  padding: 72px 0 100px;
-}
-
-.studio-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-
-.studio-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 52px;
-}
-
-.studio-section:last-child {
-  margin-bottom: 0;
-}
-
-.studio-label {
+.studio-prose {
   font-family: var(--font-secondary);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(243, 243, 243, 0.4);
-  margin: 0;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(243,243,243,.72);
+  margin: 0 0 48px;
 }
 
-.studio-body {
+/* Flash phrases — right column */
+.studio-flash {
   font-family: var(--font-secondary);
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.7;
-  color: var(--muted);
   margin: 0;
+  line-height: 1.08;
+  letter-spacing: -.018em;
 }
 
-.studio-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.studio-flash--lg {
+  font-size: clamp(32px, calc(56 / 1440 * 100vw), 56px);
+  font-weight: 500;
+  color: rgba(243,243,243,.92);
 }
 
-.studio-list li {
-  font-family: var(--font-secondary);
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.5;
-  color: rgba(243, 243, 243, 0.82);
-  padding-left: 16px;
+.studio-flash--md {
+  font-size: clamp(24px, calc(44 / 1440 * 100vw), 44px);
+  font-weight: 300;
+  color: rgba(243,243,243,.55);
+}
+
+.studio-flash--sm {
+  font-size: clamp(18px, calc(28 / 1440 * 100vw), 28px);
+  font-weight: 300;
+  color: rgba(243,243,243,.6);
+}
+
+/* Vertical spacing derived from Figma y-deltas */
+.studio-narrative__right .studio-flash:nth-child(1) { margin-bottom: calc(119 / 1440 * 100vw); }
+.studio-narrative__right .studio-flash:nth-child(2) { margin-bottom: calc(165 / 1440 * 100vw); }
+.studio-narrative__right .studio-flash:nth-child(3) { margin-bottom: calc(99 / 1440 * 100vw); }
+
+/* Talairan photo — left column (rock, portrait) */
+.studio-photo {
+  overflow: hidden;
+}
+
+.studio-photo img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+.studio-photo--talairan {
+  width: 100%;
+  margin-top: 0;
+}
+
+.studio-photo--talairan img {
+  aspect-ratio: 520 / 680;
+}
+
+/* ── Convergence section: all three at same y=1744 ── */
+.studio-convergence {
   position: relative;
+  width: 100%;
+  /* height = image height scaled */
+  height: calc(680 / 1440 * 100vw);
+  margin-top: calc(80 / 1440 * 100vw);
+  overflow: visible;
 }
 
-.studio-list li::before {
-  content: "—";
+.studio-conv-sitges,
+.studio-conv-talairan {
   position: absolute;
-  left: 0;
-  color: rgba(243, 243, 243, 0.25);
+  top: 0;
+  font-family: var(--font-secondary);
+  font-size: clamp(48px, calc(96 / 1440 * 100vw), 96px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  margin: 0;
+  white-space: nowrap;
+  z-index: 1;
 }
 
-.studio-refs {
+.studio-conv-sitges {
+  left: calc(80 / 1440 * 100vw);
+  font-weight: 500;
+  color: rgba(243,243,243,.92);
+}
+
+.studio-conv-talairan {
+  left: calc(680 / 1440 * 100vw);
+  font-weight: 300;
+  color: rgba(243,243,243,.28);
+}
+
+.studio-conv-photo {
+  position: absolute;
+  top: 0;
+  left: calc(840 / 1440 * 100vw);
+  width: calc(520 / 1440 * 100vw);
+  overflow: hidden;
+  z-index: 0;
+}
+
+.studio-conv-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 520 / 680;
+  object-fit: cover;
+}
+
+/* Text below convergence */
+.studio-conv-text {
   font-family: var(--font-secondary);
-  font-size: clamp(14px, 1.2vw, 17px);
-  line-height: 1.6;
-  color: rgba(243, 243, 243, 0.55);
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.65;
+  color: rgba(243,243,243,.55);
+  margin: calc(156 / 1440 * 100vw) 0 0 calc(80 / 1440 * 100vw);
+  max-width: calc(700 / 1440 * 100vw);
+}
+
+/* ── Manifesto ── */
+.studio-manifesto {
+  padding: calc(220 / 1440 * 100vw) 0 0 calc(80 / 1440 * 100vw);
+}
+
+.studio-manifesto__title {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(28px, calc(48 / 1440 * 100vw), 48px);
+  line-height: 1.18;
+  letter-spacing: -.018em;
+  color: rgba(243,243,243,.92);
+  max-width: min(900px, calc(900 / 1440 * 100vw));
+  margin: 0 0 40px;
+}
+
+.studio-manifesto__body {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(243,243,243,.6);
+  max-width: min(760px, calc(760 / 1440 * 100vw));
+  margin: 0 0 80px;
+}
+
+.studio-manifesto__highlight {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.3;
+  color: rgba(243,243,243,.88);
+  max-width: min(760px, calc(760 / 1440 * 100vw));
+  margin: 0 0 40px;
+}
+
+.studio-manifesto__closing {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(243,243,243,.5);
+  max-width: min(700px, calc(700 / 1440 * 100vw));
+  margin: 0 0 0;
+}
+
+/* ── Services: JS-driven hover accordion ── */
+.studio-services {
+  padding: 76px calc(80 / 1440 * 100vw) 120px;
+}
+
+.studio-service-list {
+  margin-top: 32px;
+  border-top: 1px solid rgba(243,243,243,.14);
+}
+
+.studio-service-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 320px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(243,243,243,.08);
+  cursor: default;
+  transition: opacity 0.3s ease;
+}
+
+.studio-service-num {
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.3;
+  padding-top: 8px;
+  letter-spacing: 0.08em;
+}
+
+.studio-service-title {
+  font-family: var(--font-secondary);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: var(--fg);
+  opacity: 0.92;
   margin: 0;
 }
 
-.studio-cta-row {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
-  padding: 0 0 120px;
+.studio-service-desc {
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  font-weight: 300;
+  opacity: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  padding-top: 8px;
+  transition: opacity 0.3s ease;
 }
 
 /* ---------------------------------------------------
-   OH, LAB! — coming soon with personality
+   OH, LAB! â€” coming soon with personality
 --------------------------------------------------- */
 .lab-page {
   padding-top: var(--header-h);
@@ -493,7 +641,7 @@
 }
 
 /* ---------------------------------------------------
-   OH, HELLO! — contact
+   OH, HELLO! â€” contact
 --------------------------------------------------- */
 .contact-page {
   padding-top: var(--header-h);
@@ -572,10 +720,9 @@
 }
 
 /* ---------------------------------------------------
-   RESPONSIVE — PAGES
+   RESPONSIVE â€” PAGES
 --------------------------------------------------- */
 @media (max-width: 980px) {
-  /* Works */
   .works-card--a,
   .works-card--b {
     grid-template-columns: 1fr;
@@ -589,13 +736,6 @@
     align-items: flex-start;
   }
 
-  /* Studio */
-  .studio-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  /* Project detail */
   .project-detail__layout {
     grid-template-columns: 1fr;
   }
@@ -616,19 +756,87 @@
   }
 }
 
+@media (max-width: 860px) {
+  .studio-narrative {
+    grid-template-columns: 1fr;
+    padding: 56px 24px 0;
+  }
+
+  .studio-narrative__right {
+    padding-top: 48px;
+  }
+
+  .studio-convergence {
+    height: auto;
+    min-height: calc(520 / 860 * 100vw);
+    margin-top: 48px;
+  }
+
+  .studio-conv-photo {
+    width: min(320px, 60vw);
+    left: auto;
+    right: 24px;
+  }
+
+  .studio-conv-sitges {
+    left: 24px;
+  }
+
+  .studio-conv-talairan {
+    left: 24px;
+    top: calc(100 / 860 * 100vw);
+  }
+
+  .studio-conv-text {
+    margin-left: 24px;
+    max-width: 88vw;
+  }
+
+  .studio-manifesto {
+    padding-left: 24px;
+  }
+
+  .studio-services {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .studio-service-item {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .studio-service-desc {
+    grid-column: 2;
+  }
+}
+
 @media (max-width: 680px) {
   .works-header { padding: 52px 0 56px; }
   .works-grid { padding: 52px 0 100px; }
   .works-card { padding: 48px 0; }
 
-  .studio-header { padding: 52px 0 60px; }
-  .studio-content { padding: 52px 0 80px; }
-  .studio-cta-row { padding: 0 0 80px; }
-
   .contact-header { padding: 52px 0 60px; }
   .contact-body { padding: 52px 0 80px; }
 
   .lab-claim { font-size: clamp(36px, 10vw, 64px); }
+}
+
+@media (max-width: 520px) {
+  .studio-title {
+    font-size: clamp(56px, 18vw, 82px);
+  }
+
+  .studio-flash--lg {
+    font-size: clamp(28px, 7vw, 40px);
+  }
+
+  .studio-flash--md {
+    font-size: clamp(22px, 5.5vw, 32px);
+  }
+
+  .studio-service-title {
+    font-size: clamp(32px, 8vw, 52px);
+  }
 }
 
 @media (max-width: 420px) {
@@ -638,386 +846,6 @@
 
   .project-detail__display {
     font-size: clamp(36px, 8vw, 56px);
-  }
-}
-
-/* ===================================================
-   OH, STUDIO! — About page  (studio-* classes)
-   Figma mW6uiKUhvq3kBM1B8ZkMt8 · node 73:2 · 1440px frame
-   All colour & font tokens from global.css
-=================================================== */
-
-.studio-page {
-  padding-top: var(--header-h);
-}
-
-/* ---------------------------------------------------
-   HERO
---------------------------------------------------- */
-.studio-hero {
-  padding: 100px 80px 60px;
-}
-
-.studio-eyebrow {
-  display: block;
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(243,243,243,0.35);
-  margin: 0 0 24px;
-}
-
-.studio-title {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: clamp(64px, 8vw, 120px);
-  line-height: 0.92;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-  margin: 0 0 clamp(28px, 3vw, 48px);
-}
-
-.studio-tagline {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 22px;
-  line-height: 1.5;
-  color: rgba(243,243,243,0.6);
-  margin: 0;
-}
-
-/* ---------------------------------------------------
-   NARRATIVE — two-column prose + staggered phrases
-   560fr : 600fr proportion, gap 120px fixed at 1440px
---------------------------------------------------- */
-.studio-narrative {
-  padding: 80px 80px 0;
-  display: grid;
-  grid-template-columns: 560fr 600fr;
-  gap: 0 120px;
-  max-width: 1440px;
-}
-
-.studio-narrative__left {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-}
-
-.studio-prose {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.75;
-  color: var(--muted);
-  margin: 0;
-}
-
-.studio-photo {
-  overflow: hidden;
-  /* clip-path animated by GSAP */
-}
-
-.studio-photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 520 / 680;
-  object-fit: cover;
-}
-
-.studio-narrative__right {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Flash phrases */
-.studio-flash {
-  font-family: var(--font-secondary);
-  margin: 0;
-}
-
-.studio-flash--lg {
-  font-size: clamp(40px, 4vw, 56px);
-  font-weight: 500;
-  color: var(--fg);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-}
-
-.studio-flash--md {
-  font-size: clamp(30px, 3.2vw, 44px);
-  font-weight: 300;
-  color: rgba(243,243,243,0.55);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-
-.studio-flash--sm {
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 300;
-  color: rgba(243,243,243,0.6);
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-}
-
-/* Vertical offsets between phrases */
-.studio-narrative__right > .studio-flash:nth-child(1) { margin-bottom: 15vw; }
-.studio-narrative__right > .studio-flash:nth-child(2) { margin-bottom: 15vw; }
-.studio-narrative__right > .studio-flash:nth-child(3) { margin-bottom: 10vw; }
-
-/* ---------------------------------------------------
-   CONVERGENCE — Sitges & Talairan
-   3-col grid: [auto Sitges] [auto & Talairan.] [1fr photo]
-   photo spans rows 1–2; place-text spans cols 1–2 row 2
---------------------------------------------------- */
-.studio-convergence {
-  margin-top: clamp(80px, 8vw, 140px);
-  padding: 0 80px;
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: start;
-  gap: 0 clamp(40px, 4vw, 80px);
-}
-
-.studio-place {
-  font-family: var(--font-secondary);
-  font-size: clamp(60px, 7vw, 96px);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  white-space: nowrap;
-  margin: 0;
-  /* opacity & x animated by GSAP */
-}
-
-.studio-place--sitges  { font-weight: 500; color: rgba(243,243,243,0.92); }
-.studio-place--talairan { font-weight: 300; color: rgba(243,243,243,0.28); }
-
-.studio-photo--sitges {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-}
-
-.studio-photo--sitges img {
-  max-height: 60vh;
-  width: auto;
-  object-fit: cover;
-  aspect-ratio: unset;
-}
-
-.studio-place-text {
-  grid-column: 1 / span 2;
-  grid-row: 2;
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1.75;
-  color: rgba(243,243,243,0.55);
-  margin: clamp(20px, 2vw, 40px) 0 0;
-  max-width: 700px;
-}
-
-/* ---------------------------------------------------
-   MANIFESTO
---------------------------------------------------- */
-.studio-manifesto {
-  padding: clamp(80px, 8vw, 140px) 80px 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(40px, 4vw, 80px);
-}
-
-.studio-manifesto__title {
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-size: clamp(34px, 3.8vw, 52px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-  max-width: 900px;
-  margin: 0;
-}
-
-.studio-manifesto__body {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.75;
-  color: rgba(243,243,243,0.6);
-  max-width: 760px;
-  margin: 0;
-}
-
-.studio-manifesto__highlight {
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-size: clamp(20px, 2.2vw, 28px);
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  color: rgba(243,243,243,0.88);
-  max-width: 760px;
-  margin: 0;
-}
-
-.studio-manifesto__closing {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.75;
-  color: rgba(243,243,243,0.5);
-  max-width: 700px;
-  margin: 0;
-}
-
-/* ---------------------------------------------------
-   SERVICES — snp-* classes (structure unchanged)
---------------------------------------------------- */
-.snp-services {
-  padding: clamp(80px, 8vw, 140px) 80px clamp(80px, 10vw, 140px);
-}
-
-.snp-eyebrow {
-  display: block;
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(243,243,243,0.35);
-  margin: 0 0 clamp(16px, 2.5vw, 32px);
-}
-
-.snp-svc {
-  cursor: default;
-}
-
-.snp-svc__line {
-  border: none;
-  border-top: 1px solid rgba(243,243,243,0.08);
-  margin: 0;
-}
-
-.snp-svc__line--first {
-  border-color: rgba(243,243,243,0.12);
-}
-
-.snp-svc__body {
-  display: grid;
-  grid-template-columns: clamp(32px, 5.56vw, 80px) 1fr;
-  gap: 0;
-  padding: clamp(18px, 2.5vw, 28px) 0;
-}
-
-.snp-svc__num {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: rgba(243,243,243,0.3);
-  padding-top: clamp(4px, 0.6vw, 8px);
-}
-
-.snp-svc__main {
-  display: flex;
-  flex-direction: column;
-}
-
-.snp-svc__title {
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-size: clamp(32px, 5vw, 72px);
-  letter-spacing: -0.015em;
-  line-height: 1;
-  color: rgba(243,243,243,0.92);
-  display: block;
-}
-
-.snp-svc__desc {
-  font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(243,243,243,0.45);
-  margin: 0;
-  /* height, opacity, marginTop, overflow: set by GSAP on hover devices */
-}
-
-/* ---------------------------------------------------
-   RESPONSIVE
---------------------------------------------------- */
-@media (max-width: 900px) {
-  .studio-hero {
-    padding: 72px 32px 48px;
-  }
-
-  .studio-narrative {
-    grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 60px 32px 0;
-  }
-
-  .studio-narrative__right > .studio-flash:nth-child(n) {
-    margin-bottom: 40px;
-  }
-  .studio-narrative__right > .studio-flash:last-child {
-    margin-bottom: 0;
-  }
-
-  .studio-convergence {
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    padding: 0 32px;
-  }
-
-  .studio-photo--sitges {
-    grid-column: 1;
-    grid-row: auto;
-    max-width: 480px;
-  }
-
-  .studio-place-text {
-    grid-column: 1;
-    grid-row: auto;
-    margin-top: 24px;
-  }
-
-  .studio-manifesto {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  .snp-services {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
-@media (max-width: 540px) {
-  .studio-hero {
-    padding: 52px 24px 40px;
-  }
-
-  .studio-narrative {
-    padding: 48px 24px 0;
-  }
-
-  .studio-convergence {
-    padding: 0 24px;
-  }
-
-  .studio-manifesto {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .snp-services {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .snp-svc__body {
-    grid-template-columns: 36px 1fr;
   }
 }
 

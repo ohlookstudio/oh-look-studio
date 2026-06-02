@@ -33,7 +33,8 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/studio-full.png --window-size=1440,5000 --hide-scrollbars http://localhost:5200/about)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/studio-conv.png --window-size=1440,1000 --hide-scrollbars --virtual-time-budget=2000 file:///tmp/crop-conv.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/safari-fix-hero.png --window-size=1440,900 --hide-scrollbars http://localhost:5300/about)",
-      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/safari-fix-full.png --window-size=1440,4000 --hide-scrollbars http://localhost:5300/about)"
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/safari-fix-full.png --window-size=1440,4000 --hide-scrollbars http://localhost:5300/about)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
