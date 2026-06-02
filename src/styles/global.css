@@ -993,6 +993,35 @@ main{
 }
 
 /* ---------------------------------------------------
+   VIEW TRANSITIONS API
+--------------------------------------------------- */
+
+/* project-cover morph — at root so the media query never blocks it
+   (JS already skips VTA when prefers-reduced-motion is set) */
+::view-transition-group(project-cover),
+::view-transition-old(project-cover),
+::view-transition-new(project-cover) {
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media not (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.55s;
+    animation-timing-function: ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 1ms !important;
+  }
+}
+
+/* ---------------------------------------------------
    ANIMS
 --------------------------------------------------- */
 @keyframes menu-dust-drift{

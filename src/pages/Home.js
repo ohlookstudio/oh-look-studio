@@ -1,9 +1,6 @@
 import { Hero, mountHero } from "../hero/hero.js";
 import { mountFeaturedScroll } from "../animations/featuredScroll.js";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function Home() {
   return `
@@ -121,102 +118,49 @@ export function Home() {
 }
 
 export function afterRenderHome() {
-  /* ── Read and consume return state ─────────────────────────────────────── */
-  const flipReturn  = window.__flipReturn;
-  window.__flipReturn = null;
+  /* ── Consume return state ───────────────────────────────────────────────── */
+  const savedScrollY  = window.__flipScrollY;
+  window.__flipScrollY = null;
+
+  const vtaMode    = window.__vtaActive;
+  window.__vtaActive = null;
+  const returnSlug = window.__flipReturnSlug;
+  window.__flipReturnSlug = null;
 
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const supportsVT   = typeof document.startViewTransition === "function";
 
   /* ── Mount hero + horizontal scroll ────────────────────────────────────── */
   const cleanupHero     = mountHero();
   const cleanupFeatured = mountFeaturedScroll();
 
-  const tweens = [];
-  let returnClone = null;
-
-  /* ── Reverse FLIP (detail cover → home card) ────────────────────────────── */
-  if (flipReturn && !reduceMotion) {
-    const { rect: first, src, slug } = flipReturn;
-
-    /* Scroll to #homeFeatured so the cards are in-viewport.
-       forceScrollTop() in the router registered a rAF that will scroll back
-       to 0, so we register our own rAF *after* it to re-apply our target.
-       All rAFs fire in registration order before the first paint — the user
-       never sees the intermediate scroll=0 state. */
-    const section = document.getElementById("homeFeatured");
-    let sectionTop = 0;
-    if (section) {
-      // At scrollY=0, getBoundingClientRect().top IS the distance to scroll
-      sectionTop = section.getBoundingClientRect().top;
-      window.scrollTo(0, sectionTop);
-      ScrollTrigger.refresh(); // pin the section at new scroll position
-    }
-
-    /* Find the target card image by slug */
-    const cardLink = document.querySelector(`a[href="/projects/${slug}"]`);
-    const cardImg  = cardLink?.querySelector(".hf-card__img");
-    const last     = cardImg?.getBoundingClientRect();
-
-    if (last && last.width > 0 && last.height > 0) {
-      /* Create clone at "First" (detail cover position) */
-      returnClone = document.createElement("img");
-      returnClone.src = src;
-      returnClone.setAttribute("aria-hidden", "true");
-      Object.assign(returnClone.style, {
-        position:       "fixed",
-        top:            `${first.top}px`,
-        left:           `${first.left}px`,
-        width:          `${first.width}px`,
-        height:         `${first.height}px`,
-        objectFit:      "cover",
-        objectPosition: "center",
-        zIndex:         "9998",
-        pointerEvents:  "none",
-        margin:         "0",
-        display:        "block",
-        willChange:     "transform",
-      });
-      document.body.appendChild(returnClone);
-
-      /* Hide the real card image while clone animates */
-      gsap.set(cardImg, { autoAlpha: 0 });
-
-      /* Animate clone: First → Last (detail cover → card) */
-      const dx     = last.left - first.left;
-      const dy     = last.top  - first.top;
-      const scaleX = last.width  / first.width;
-      const scaleY = last.height / first.height;
-
-      const t = gsap.to(returnClone, {
-        x:             dx,
-        y:             dy,
-        scaleX,
-        scaleY,
-        transformOrigin: "top left",
-        duration:      0.72,
-        ease:          "power2.inOut",
-        onComplete() {
-          if (returnClone?.parentNode) returnClone.remove();
-          returnClone = null;
-          gsap.to(cardImg, { autoAlpha: 1, duration: 0.22, ease: "power1.in" });
-        },
-      });
-      tweens.push(t);
-    }
-
-    /* Re-apply scroll after router's forceScrollTop rAF fires.
-       rAFs execute in registration order before paint — registering here
-       ensures ours fires last, locking the final scroll at sectionTop. */
+  /* ── Restore horizontal scroll position ────────────────────────────────── */
+  // Two rAFs: ours fires after forceScrollTop's rAF (which would scroll back to 0)
+  if (savedScrollY != null) {
+    window.scrollTo(0, savedScrollY);
+    ScrollTrigger.refresh();
     requestAnimationFrame(() => {
-      window.scrollTo(0, sectionTop);
+      window.scrollTo(0, savedScrollY);
       ScrollTrigger.refresh();
     });
+  }
+
+  /* ── VTA backward: mark the return card so the browser can morph back ───── */
+  if (vtaMode === "backward" && returnSlug && supportsVT && !reduceMotion) {
+    const cardLink = document.querySelector(`a[href="/projects/${returnSlug}"]`);
+    const cardImg  = cardLink?.querySelector("img");
+    if (cardImg) {
+      cardImg.style.viewTransitionName = "project-cover";
+    }
   }
 
   return () => {
     if (typeof cleanupHero     === "function") cleanupHero();
     if (typeof cleanupFeatured === "function") cleanupFeatured();
-    tweens.forEach((t) => t?.kill());
-    if (returnClone?.parentNode) returnClone.remove();
+    // Clear any lingering view-transition-name on cleanup
+    if (returnSlug) {
+      const card = document.querySelector(`a[href="/projects/${returnSlug}"] img`);
+      if (card) card.style.viewTransitionName = "";
+    }
   };
 }

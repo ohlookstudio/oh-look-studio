@@ -83,86 +83,45 @@ ProjectDetails.init = function ({ slug } = {}) {
   const coverImg = document.querySelector(".project-detail__cover-img");
   const left     = document.querySelector(".project-detail__left");
 
-  const flipOrigin  = window.__flipOrigin;
-  window.__flipOrigin = null;
+  const vtaMode    = window.__vtaActive;
+  window.__vtaActive = null;
 
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const supportsVT   = typeof document.startViewTransition === "function";
 
   const tweens = [];
-  let flipClone = null;
 
-  if (flipOrigin && !reduceMotion && coverImg) {
-    const { rect: first, src } = flipOrigin;
+  if (vtaMode === "forward" && supportsVT && !reduceMotion && coverImg) {
+    // VTA handles the spatial animation — just make the cover visible and name it
+    // so the browser's "after" snapshot captures the real image, not an opacity:0 ghost
+    coverImg.style.opacity    = "";
+    coverImg.style.visibility = "";
+    coverImg.style.viewTransitionName = "project-cover";
+  } else {
+    // Fallback: GSAP fade (no VTA or reduced motion)
+    if (coverImg) {
+      const dur = reduceMotion ? 0.3 : 0.6;
+      tweens.push(
+        gsap.to(coverImg, { autoAlpha: 1, duration: dur, ease: "power2.out" })
+      );
+    }
+  }
 
-    // ── Create fixed clone at "First" position ───────────────────────────────
-    flipClone = document.createElement("img");
-    flipClone.src = src;
-    flipClone.setAttribute("aria-hidden", "true");
-    Object.assign(flipClone.style, {
-      position:       "fixed",
-      top:            `${first.top}px`,
-      left:           `${first.left}px`,
-      width:          `${first.width}px`,
-      height:         `${first.height}px`,
-      objectFit:      "cover",
-      objectPosition: "center",
-      zIndex:         "9998",
-      pointerEvents:  "none",
-      margin:         "0",
-      display:        "block",
-      willChange:     "transform",
-    });
-    document.body.appendChild(flipClone);
-
-    // ── "Last" position (forces synchronous layout) ──────────────────────────
-    const last = coverImg.getBoundingClientRect();
-
-    const dx     = last.left - first.left;
-    const dy     = last.top  - first.top;
-    const scaleX = last.width  / first.width;
-    const scaleY = last.height / first.height;
-
-    // ── Animate clone: First → Last; reveal real img on complete ────────────
-    const t1 = gsap.to(flipClone, {
-      x:             dx,
-      y:             dy,
-      scaleX,
-      scaleY,
-      transformOrigin: "top left",
-      duration:      0.72,
-      ease:          "power2.inOut",
-      onComplete() {
-        if (flipClone?.parentNode) flipClone.remove();
-        flipClone = null;
-        // autoAlpha: opacity 0→1 + visibility hidden→visible
-        gsap.to(coverImg, { autoAlpha: 1, duration: 0.22, ease: "power1.in" });
-      },
-    });
-    tweens.push(t1);
-
-    // ── Fade-in left column with slight delay ────────────────────────────────
-    if (left) {
-      gsap.set(left, { opacity: 0, y: 14 });
-      const t2 = gsap.to(left, {
+  // Left column entrance — always plays regardless of VTA
+  if (left) {
+    gsap.set(left, { opacity: 0, y: 14 });
+    tweens.push(
+      gsap.to(left, {
         opacity:  1,
         y:        0,
         duration: 0.52,
         delay:    0.18,
         ease:     "power2.out",
-      });
-      tweens.push(t2);
-    }
-  } else {
-    // Fallback: reveal image via autoAlpha (PageTransition handles page veil)
-    if (coverImg) {
-      tweens.push(
-        gsap.to(coverImg, { autoAlpha: 1, duration: 0.6, ease: "power2.out" })
-      );
-    }
+      })
+    );
   }
 
   return () => {
     tweens.forEach((t) => t?.kill());
-    if (flipClone?.parentNode) flipClone.remove();
   };
 };
