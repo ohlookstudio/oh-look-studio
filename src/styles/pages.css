@@ -640,3 +640,400 @@
     font-size: clamp(36px, 8vw, 56px);
   }
 }
+
+/* ===================================================
+   OH, STUDIO! — About page  (studio-* classes)
+   Figma mW6uiKUhvq3kBM1B8ZkMt8 · node 73:2 · 1440px frame
+   All colour & font tokens from global.css
+=================================================== */
+
+.studio-page {
+  padding-top: var(--header-h);
+}
+
+/* ---------------------------------------------------
+   HERO
+--------------------------------------------------- */
+.studio-hero {
+  padding: 100px 80px 60px;
+}
+
+.studio-eyebrow {
+  display: block;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,243,243,0.35);
+  margin: 0 0 24px;
+}
+
+.studio-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(64px, 8vw, 120px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin: 0 0 clamp(28px, 3vw, 48px);
+}
+
+.studio-tagline {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.5;
+  color: rgba(243,243,243,0.6);
+  margin: 0;
+}
+
+/* ---------------------------------------------------
+   NARRATIVE — two-column prose + staggered phrases
+   560fr : 600fr proportion, gap 120px fixed at 1440px
+--------------------------------------------------- */
+.studio-narrative {
+  padding: 80px 80px 0;
+  display: grid;
+  grid-template-columns: 560fr 600fr;
+  gap: 0 120px;
+  max-width: 1440px;
+}
+
+.studio-narrative__left {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.studio-prose {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 0;
+}
+
+.studio-photo {
+  overflow: hidden;
+  /* clip-path animated by GSAP */
+}
+
+.studio-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 520 / 680;
+  object-fit: cover;
+}
+
+.studio-narrative__right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flash phrases */
+.studio-flash {
+  font-family: var(--font-secondary);
+  margin: 0;
+}
+
+.studio-flash--lg {
+  font-size: clamp(40px, 4vw, 56px);
+  font-weight: 500;
+  color: var(--fg);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.studio-flash--md {
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 300;
+  color: rgba(243,243,243,0.55);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.studio-flash--sm {
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 300;
+  color: rgba(243,243,243,0.6);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+}
+
+/* Vertical offsets between phrases */
+.studio-narrative__right > .studio-flash:nth-child(1) { margin-bottom: 15vw; }
+.studio-narrative__right > .studio-flash:nth-child(2) { margin-bottom: 15vw; }
+.studio-narrative__right > .studio-flash:nth-child(3) { margin-bottom: 10vw; }
+
+/* ---------------------------------------------------
+   CONVERGENCE — Sitges & Talairan
+   3-col grid: [auto Sitges] [auto & Talairan.] [1fr photo]
+   photo spans rows 1–2; place-text spans cols 1–2 row 2
+--------------------------------------------------- */
+.studio-convergence {
+  margin-top: clamp(80px, 8vw, 140px);
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: start;
+  gap: 0 clamp(40px, 4vw, 80px);
+}
+
+.studio-place {
+  font-family: var(--font-secondary);
+  font-size: clamp(60px, 7vw, 96px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  margin: 0;
+  /* opacity & x animated by GSAP */
+}
+
+.studio-place--sitges  { font-weight: 500; color: rgba(243,243,243,0.92); }
+.studio-place--talairan { font-weight: 300; color: rgba(243,243,243,0.28); }
+
+.studio-photo--sitges {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+
+.studio-photo--sitges img {
+  max-height: 60vh;
+  width: auto;
+  object-fit: cover;
+  aspect-ratio: unset;
+}
+
+.studio-place-text {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.75;
+  color: rgba(243,243,243,0.55);
+  margin: clamp(20px, 2vw, 40px) 0 0;
+  max-width: 700px;
+}
+
+/* ---------------------------------------------------
+   MANIFESTO
+--------------------------------------------------- */
+.studio-manifesto {
+  padding: clamp(80px, 8vw, 140px) 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 4vw, 80px);
+}
+
+.studio-manifesto__title {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 900px;
+  margin: 0;
+}
+
+.studio-manifesto__body {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(243,243,243,0.6);
+  max-width: 760px;
+  margin: 0;
+}
+
+.studio-manifesto__highlight {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: rgba(243,243,243,0.88);
+  max-width: 760px;
+  margin: 0;
+}
+
+.studio-manifesto__closing {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(243,243,243,0.5);
+  max-width: 700px;
+  margin: 0;
+}
+
+/* ---------------------------------------------------
+   SERVICES — snp-* classes (structure unchanged)
+--------------------------------------------------- */
+.snp-services {
+  padding: clamp(80px, 8vw, 140px) 80px clamp(80px, 10vw, 140px);
+}
+
+.snp-eyebrow {
+  display: block;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,243,243,0.35);
+  margin: 0 0 clamp(16px, 2.5vw, 32px);
+}
+
+.snp-svc {
+  cursor: default;
+}
+
+.snp-svc__line {
+  border: none;
+  border-top: 1px solid rgba(243,243,243,0.08);
+  margin: 0;
+}
+
+.snp-svc__line--first {
+  border-color: rgba(243,243,243,0.12);
+}
+
+.snp-svc__body {
+  display: grid;
+  grid-template-columns: clamp(32px, 5.56vw, 80px) 1fr;
+  gap: 0;
+  padding: clamp(18px, 2.5vw, 28px) 0;
+}
+
+.snp-svc__num {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(243,243,243,0.3);
+  padding-top: clamp(4px, 0.6vw, 8px);
+}
+
+.snp-svc__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.snp-svc__title {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(32px, 5vw, 72px);
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: rgba(243,243,243,0.92);
+  display: block;
+}
+
+.snp-svc__desc {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(243,243,243,0.45);
+  margin: 0;
+  /* height, opacity, marginTop, overflow: set by GSAP on hover devices */
+}
+
+/* ---------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------- */
+@media (max-width: 900px) {
+  .studio-hero {
+    padding: 72px 32px 48px;
+  }
+
+  .studio-narrative {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 60px 32px 0;
+  }
+
+  .studio-narrative__right > .studio-flash:nth-child(n) {
+    margin-bottom: 40px;
+  }
+  .studio-narrative__right > .studio-flash:last-child {
+    margin-bottom: 0;
+  }
+
+  .studio-convergence {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    padding: 0 32px;
+  }
+
+  .studio-photo--sitges {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: 480px;
+  }
+
+  .studio-place-text {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 24px;
+  }
+
+  .studio-manifesto {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .snp-services {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 540px) {
+  .studio-hero {
+    padding: 52px 24px 40px;
+  }
+
+  .studio-narrative {
+    padding: 48px 24px 0;
+  }
+
+  .studio-convergence {
+    padding: 0 24px;
+  }
+
+  .studio-manifesto {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .snp-services {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .snp-svc__body {
+    grid-template-columns: 36px 1fr;
+  }
+}
+
+/* ---------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .studio-page .js-phrase,
+  .studio-page .js-fade,
+  .studio-page .js-conv-a,
+  .studio-page .js-conv-b {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .studio-page .js-reveal {
+    clip-path: none !important;
+  }
+}

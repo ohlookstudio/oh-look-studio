@@ -20,7 +20,20 @@
       "Bash(npm install *)",
       "Bash(curl -s http://localhost:5174/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-hero.png --window-size=1440,900 --hide-scrollbars http://localhost:5182/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-two-speeds.png --window-size=1440,900 --hide-scrollbars 'http://localhost:5182/about#two-speeds')",
+      "Bash(python3 -)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-phrases.png --window-size=1440,900 --hide-scrollbars --virtual-time-budget=2000 file:///tmp/scroll-about.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-full.png --window-size=1440,4000 --hide-scrollbars http://localhost:5182/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-top.png --window-size=1440,2000 --hide-scrollbars http://localhost:5182/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/about-conv.png --window-size=1440,2000 --hide-scrollbars --virtual-time-budget=3000 file:///tmp/scroll-conv.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/studio-hero.png --window-size=1440,900 --hide-scrollbars http://localhost:5200/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/studio-full.png --window-size=1440,5000 --hide-scrollbars http://localhost:5200/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/studio-conv.png --window-size=1440,1000 --hide-scrollbars --virtual-time-budget=2000 file:///tmp/crop-conv.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/safari-fix-hero.png --window-size=1440,900 --hide-scrollbars http://localhost:5300/about)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/safari-fix-full.png --window-size=1440,4000 --hide-scrollbars http://localhost:5300/about)"
     ]
   }
 }
