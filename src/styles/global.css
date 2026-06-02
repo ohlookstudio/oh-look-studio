@@ -1001,7 +1001,7 @@ main{
 ::view-transition-group(project-cover),
 ::view-transition-old(project-cover),
 ::view-transition-new(project-cover) {
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
