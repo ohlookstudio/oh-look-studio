@@ -1,9 +1,27 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Oh, løøk! Studio</title>
+
+    <meta name="description" content="Oh, løøk! Studio — A graphic design studio based between Sitges &amp; Talairan. Branding, identity and editorial design.">
+    <meta name="author" content="Oh, løøk! Studio">
+    <link rel="canonical" href="https://ohlook.studio">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Oh, løøk! Studio">
+    <meta property="og:title" content="Oh, løøk! Studio">
+    <meta property="og:description" content="A graphic design studio based between Sitges &amp; Talairan.">
+    <meta property="og:url" content="https://ohlook.studio">
+    <meta property="og:image" content="/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oh, løøk! Studio">
+    <meta name="twitter:description" content="A graphic design studio based between Sitges &amp; Talairan.">
+    <meta name="twitter:image" content="/og-image.jpg">
 
     <!-- Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +33,57 @@
 
     <!-- Adobe Fonts (Softie, etc.) -->
     <link rel="stylesheet" href="https://use.typekit.net/ssr7kbu.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Oh, løøk! Studio",
+      "description": "A graphic design studio based between Sitges & Talairan. Branding, identity and editorial design.",
+      "url": "https://ohlook.studio",
+      "email": "hello@ohlook.studio",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sitges",
+        "addressRegion": "Catalonia",
+        "addressCountry": "ES"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Marc Loni"
+      },
+      "knowsAbout": ["Branding", "Graphic Design", "Editorial Design", "Identity Design"],
+      "areaServed": [
+        { "@type": "City", "name": "Sitges" },
+        { "@type": "City", "name": "Vilanova i la Geltrú" },
+        { "@type": "AdministrativeArea", "name": "Garraf" },
+        { "@type": "City", "name": "Barcelona" },
+        { "@type": "City", "name": "Carcassonne" },
+        { "@type": "AdministrativeArea", "name": "Aude" },
+        { "@type": "City", "name": "Talairan" },
+        { "@type": "City", "name": "Montpellier" },
+        { "@type": "City", "name": "Narbonne" },
+        { "@type": "City", "name": "Perpignan" }
+      ],
+      "serviceType": [
+        "Graphic Design",
+        "Brand Identity",
+        "Editorial Design",
+        "Branding",
+        "Logo Design"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Graphic Design Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand Identity Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Editorial Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Graphic Design" } }
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -1,4 +1,7 @@
+import { setMeta } from "../utils/seo.js";
+
 export async function About() {
+  setMeta({ title: "Oh, studio!", url: "/studio" });
   return `
     <main class="studio-page">
 

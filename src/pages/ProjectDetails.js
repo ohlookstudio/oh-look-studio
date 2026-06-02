@@ -1,5 +1,6 @@
 import projectsData from "../data/projects.json";
 import gsap from "gsap";
+import { setMeta } from "../utils/seo.js";
 
 // mountProjectShader intentionally disconnected — kept in src/hero/projectShader.js
 
@@ -8,6 +9,7 @@ export async function ProjectDetails({ slug } = {}) {
   const project  = projects.find((p) => p.slug === slug);
 
   if (!project) {
+    setMeta({ title: "Project not found", url: `/projects/${slug}` });
     return `
       <main class="page page--dark">
         <div class="page-inner">
@@ -17,6 +19,13 @@ export async function ProjectDetails({ slug } = {}) {
       </main>
     `;
   }
+
+  setMeta({
+    title:       project.title,
+    description: project.description,
+    url:         `/projects/${project.slug}`,
+    image:       project.coverImage,
+  });
 
   return `
     <main class="project-detail">

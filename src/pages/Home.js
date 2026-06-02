@@ -1,8 +1,10 @@
 import { Hero, mountHero } from "../hero/hero.js";
 import { mountFeaturedScroll } from "../animations/featuredScroll.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setMeta } from "../utils/seo.js";
 
 export function Home() {
+  setMeta({ url: "/" });
   return `
     <main class="home">
 

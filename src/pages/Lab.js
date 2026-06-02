@@ -1,4 +1,7 @@
+import { setMeta } from "../utils/seo.js";
+
 export function Lab() {
+  setMeta({ title: "Oh, lab!", url: "/lab" });
   return `
     <main class="lab-page">
       <div class="lab-inner">

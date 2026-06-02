@@ -1,6 +1,8 @@
 import projectsData from "../data/projects.json";
+import { setMeta } from "../utils/seo.js";
 
 export function Works() {
+  setMeta({ title: "Oh, works!", url: "/works" });
   const projects = projectsData.projects || [];
 
   return `

@@ -1,4 +1,7 @@
+import { setMeta } from "../utils/seo.js";
+
 export async function Contact() {
+  setMeta({ title: "Oh, hello!", url: "/hello" });
   return `
     <main class="contact-page">
 
