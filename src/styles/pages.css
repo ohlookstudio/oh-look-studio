@@ -1,5 +1,5 @@
 /* ===================================================
-   PAGES â€” layout styles for all inner pages
+   PAGES â€“ layout styles for all inner pages
    Works, ProjectDetails, Studio, Lab, Contact
    Tokens always from global.css / token.css
 =================================================== */
@@ -18,9 +18,7 @@
   padding: 64px 0 120px;
 }
 
-.page--dark {
-  background: var(--bg);
-}
+.page--dark { background: var(--bg); }
 
 .h1 {
   margin: 0 0 24px;
@@ -50,15 +48,13 @@
 }
 
 /* ---------------------------------------------------
-   OH, WORKS! â€” editorial grid
+   OH, WORKS! â€“ editorial grid
 --------------------------------------------------- */
-.works-page {
-  padding-top: var(--header-h);
-}
+.works-page { padding-top: var(--header-h); }
 
 .works-header {
   padding: 64px 0 72px;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.08);
+  border-bottom: 1px solid rgba(243,243,243,.08);
 }
 
 .works-header__inner {
@@ -75,9 +71,7 @@
   color: var(--fg);
 }
 
-.works-subtitle {
-  max-width: 52ch;
-}
+.works-subtitle { max-width: 52ch; }
 
 .works-grid {
   width: min(1120px, 92vw);
@@ -93,17 +87,11 @@
   gap: 40px;
   align-items: center;
   padding: 64px 0;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.06);
+  border-bottom: 1px solid rgba(243,243,243,.06);
 }
 
-.works-card--a {
-  grid-template-columns: 58% 42%;
-}
-
-.works-card--b {
-  grid-template-columns: 42% 58%;
-}
-
+.works-card--a { grid-template-columns: 58% 42%; }
+.works-card--b { grid-template-columns: 42% 58%; }
 .works-card--b .works-card__link { order: 2; }
 .works-card--b .works-card__meta { order: 1; }
 
@@ -116,12 +104,12 @@
 .works-card__cover {
   aspect-ratio: 4 / 3;
   border-radius: 18px;
-  background: rgba(243, 243, 243, 0.04);
-  border: 1px solid rgba(243, 243, 243, 0.08);
+  background: rgba(243,243,243,.04);
+  border: 1px solid rgba(243,243,243,.08);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+  transition: border-color .3s ease, box-shadow .3s ease;
+  box-shadow: 0 12px 48px rgba(0,0,0,.25);
 }
 
 .works-card__cover::before {
@@ -129,14 +117,14 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 25% 30%, rgba(160, 198, 175, 0.06), transparent 55%),
-    radial-gradient(circle at 78% 75%, rgba(203, 104, 104, 0.05), transparent 50%);
+    radial-gradient(circle at 25% 30%, rgba(160,198,175,.06), transparent 55%),
+    radial-gradient(circle at 78% 75%, rgba(203,104,104,.05), transparent 50%);
   pointer-events: none;
 }
 
 .works-card__link:hover .works-card__cover {
-  border-color: rgba(243, 243, 243, 0.14);
-  box-shadow: 0 18px 64px rgba(0, 0, 0, 0.34);
+  border-color: rgba(243,243,243,.14);
+  box-shadow: 0 18px 64px rgba(0,0,0,.34);
 }
 
 .works-card__num {
@@ -159,9 +147,7 @@
   align-items: flex-end;
 }
 
-.works-card__tags {
-  opacity: 0.5;
-}
+.works-card__tags { opacity: 0.5; }
 
 .works-card__title {
   margin: 0;
@@ -175,36 +161,30 @@
 .works-card__title a {
   color: var(--fg);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color .2s ease;
 }
 
-.works-card__title a:hover {
-  color: rgba(243, 243, 243, 0.72);
-}
+.works-card__title a:hover { color: rgba(243,243,243,.72); }
 
 .works-card__cta {
   display: inline-block;
   font-family: var(--font-secondary);
   font-size: 13px;
-  letter-spacing: 0.08em;
-  color: rgba(243, 243, 243, 0.45);
+  letter-spacing: .08em;
+  color: rgba(243,243,243,.45);
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color .2s ease, transform .2s ease;
   margin-top: 4px;
 }
 
 .works-card__cta:hover {
-  color: rgba(243, 243, 243, 0.88);
+  color: rgba(243,243,243,.88);
   transform: translateX(4px);
 }
 
 /* ---------------------------------------------------
-   PROJECT DETAIL â€” two-column sticky layout
+   PROJECT DETAIL â€“ two-column sticky layout
 --------------------------------------------------- */
-.project-detail {
-  /* no padding-top: right column starts from top, left offsets itself */
-}
-
 .project-detail__layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -222,16 +202,14 @@
   display: inline-block;
   font-family: var(--font-secondary);
   font-size: 13px;
-  letter-spacing: 0.08em;
-  color: rgba(243, 243, 243, 0.45);
+  letter-spacing: .08em;
+  color: rgba(243,243,243,.45);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color .2s ease;
   margin-bottom: 8px;
 }
 
-.project-detail__back:hover {
-  color: rgba(243, 243, 243, 0.88);
-}
+.project-detail__back:hover { color: rgba(243,243,243,.88); }
 
 .project-detail__display {
   margin: 0 0 28px;
@@ -249,13 +227,8 @@
   flex-wrap: wrap;
 }
 
-.project-detail__year {
-  opacity: 0.45;
-}
-
-.project-detail__tags {
-  opacity: 0.55;
-}
+.project-detail__year  { opacity: .45; }
+.project-detail__tags  { opacity: .55; }
 
 .project-detail__services {
   margin-top: 8px;
@@ -267,14 +240,14 @@
 .project-detail__label {
   font-family: var(--font-secondary);
   font-size: 11px;
-  letter-spacing: 0.2em;
+  letter-spacing: .2em;
   text-transform: uppercase;
-  opacity: 0.45;
+  opacity: .45;
 }
 
 .project-detail__divider {
   height: 1px;
-  background: rgba(243, 243, 243, 0.08);
+  background: rgba(243,243,243,.08);
   width: 100%;
 }
 
@@ -288,13 +261,11 @@
   font-family: var(--font-secondary);
   font-size: clamp(17px, 1.5vw, 21px);
   line-height: 1.55;
-  color: rgba(243, 243, 243, 0.9);
+  color: rgba(243,243,243,.9);
   margin: 0;
 }
 
-.project-detail__footer {
-  margin-top: 40px;
-}
+.project-detail__footer { margin-top: 40px; }
 
 .project-detail__right {
   position: sticky;
@@ -306,9 +277,6 @@
 .project-detail__cover {
   width: 100%;
   height: 100%;
-  background: transparent;
-  background-color: transparent;
-  border: none;
   position: relative;
   overflow: hidden;
 }
@@ -321,7 +289,6 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  background: transparent;
   z-index: 0;
 }
 
@@ -335,241 +302,288 @@
   z-index: 1;
 }
 
-/* ---------------------------------------------------
-   OH, STUDIO! — layout matching Figma (1440px base)
-   Positions scale with: calc(X / 1440 * 100vw)
---------------------------------------------------- */
+/* ===================================================
+   OH, STUDIO! — full-width editorial layout
+   12-col grid, padding 80px via clamp, todas las
+   medidas fluidas. Fuente de verdad: Figma node 73:2.
+   HTML:
+     .studio-page
+       .studio-hero          eyebrow + h1 + tagline
+       .studio-narrative     grid 5fr|6fr: prose+foto / frases
+       .studio-convergence   grid 3fr|2fr: Sitges/Talairan/foto/texto
+       .studio-manifesto     texto editorial
+       .studio-services      acordeón hover
+=================================================== */
+
+/* Padding horizontal: 80px exacto a 1440px (Figma) */
 .studio-page {
   padding-top: var(--header-h);
+  --px: clamp(32px, 5.6vw, 80px);
 }
 
-/* ── Narrative: two-speed two-column section ── */
-.studio-narrative {
-  display: grid;
-  grid-template-columns: calc(560 / 1440 * 100vw) calc(600 / 1440 * 100vw);
-  column-gap: calc(120 / 1440 * 100vw);
-  padding: 72px calc(80 / 1440 * 100vw) 0;
-  box-sizing: border-box;
-}
-
-.studio-narrative__right {
-  /* offset right col down to align first flash at ~y=520 */
-  padding-top: calc(368 / 1440 * 100vw);
+/* ① HERO ------------------------------------------ */
+.studio-hero {
+  padding: clamp(3rem, 6vw, 7rem) var(--px) clamp(2rem, 3vw, 4rem);
 }
 
 .studio-eyebrow {
   display: block;
   font-family: var(--font-secondary);
-  font-weight: 300;
-  font-size: 9px;
+  font-weight: 400;
+  font-size: 11px;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(243,243,243,.34);
-  margin: 0 0 18px;
+  color: var(--fg);
+  opacity: .4;
+  margin: 0 0 16px;
 }
 
 .studio-title {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: clamp(58px, 8vw, 92px);
-  line-height: .88;
+  font-size: clamp(4rem, 8.3vw, 7.5rem); /* 7.5rem = 120px */
+  line-height: .92;
   letter-spacing: -.02em;
   color: var(--fg);
-  margin: 0 0 28px;
+  margin: 0;
 }
 
 .studio-tagline {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 14px;
-  line-height: 1.55;
-  color: rgba(243,243,243,.55);
-  margin: 0 0 64px;
+  font-size: clamp(1rem, 1.5vw, 1.375rem); /* 22px */
+  line-height: 1.5;
+  color: var(--fg);
+  opacity: .6;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0;
 }
+
+/* ② NARRATIVE --------------------------------------
+   Col izq 5fr: prose + foto Talairan
+   Col der 6fr: 4 frases escalonadas via margin-bottom
+   La col derecha arranca al mismo top que la prosa.
+---------------------------------------------------- */
+.studio-narrative {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(2rem, 4vw, 5rem);
+  align-items: start;
+  padding: clamp(3rem, 5vw, 6rem) var(--px) clamp(5rem, 8vw, 10rem);
+}
+
+.studio-narrative__left  { width: 100%; }
+.studio-narrative__right { padding-top: 0; }
 
 .studio-prose {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 17px;
+  font-size: clamp(13px, 1.2vw, 17px);
   line-height: 1.75;
-  color: rgba(243,243,243,.72);
-  margin: 0 0 48px;
+  color: var(--fg);
+  opacity: .72;
+  margin: 0 0 clamp(2rem, 4vw, 5rem);
 }
 
-/* Flash phrases — right column */
-.studio-flash {
-  font-family: var(--font-secondary);
-  margin: 0;
-  line-height: 1.08;
-  letter-spacing: -.018em;
-}
-
-.studio-flash--lg {
-  font-size: clamp(32px, calc(56 / 1440 * 100vw), 56px);
-  font-weight: 500;
-  color: rgba(243,243,243,.92);
-}
-
-.studio-flash--md {
-  font-size: clamp(24px, calc(44 / 1440 * 100vw), 44px);
-  font-weight: 300;
-  color: rgba(243,243,243,.55);
-}
-
-.studio-flash--sm {
-  font-size: clamp(18px, calc(28 / 1440 * 100vw), 28px);
-  font-weight: 300;
-  color: rgba(243,243,243,.6);
-}
-
-/* Vertical spacing derived from Figma y-deltas */
-.studio-narrative__right .studio-flash:nth-child(1) { margin-bottom: calc(119 / 1440 * 100vw); }
-.studio-narrative__right .studio-flash:nth-child(2) { margin-bottom: calc(165 / 1440 * 100vw); }
-.studio-narrative__right .studio-flash:nth-child(3) { margin-bottom: calc(99 / 1440 * 100vw); }
-
-/* Talairan photo — left column (rock, portrait) */
-.studio-photo {
-  overflow: hidden;
-}
-
-.studio-photo img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-}
+/* Foto Talairan — portrait, borde sutil */
+.studio-photo { overflow: hidden; }
 
 .studio-photo--talairan {
   width: 100%;
-  margin-top: 0;
+  max-width: 520px;
+  aspect-ratio: 520 / 680;
+  border: 1px solid rgba(243,243,243,.08);
 }
 
 .studio-photo--talairan img {
-  aspect-ratio: 520 / 680;
-}
-
-/* ── Convergence section: all three at same y=1744 ── */
-.studio-convergence {
-  position: relative;
   width: 100%;
-  /* height = image height scaled */
-  height: calc(680 / 1440 * 100vw);
-  margin-top: calc(80 / 1440 * 100vw);
-  overflow: visible;
-}
-
-.studio-conv-sitges,
-.studio-conv-talairan {
-  position: absolute;
-  top: 0;
-  font-family: var(--font-secondary);
-  font-size: clamp(48px, calc(96 / 1440 * 100vw), 96px);
-  line-height: 1;
-  letter-spacing: -.03em;
-  margin: 0;
-  white-space: nowrap;
-  z-index: 1;
-}
-
-.studio-conv-sitges {
-  left: calc(80 / 1440 * 100vw);
-  font-weight: 500;
-  color: rgba(243,243,243,.92);
-}
-
-.studio-conv-talairan {
-  left: calc(680 / 1440 * 100vw);
-  font-weight: 300;
-  color: rgba(243,243,243,.28);
-}
-
-.studio-conv-photo {
-  position: absolute;
-  top: 0;
-  left: calc(840 / 1440 * 100vw);
-  width: calc(520 / 1440 * 100vw);
-  overflow: hidden;
-  z-index: 0;
-}
-
-.studio-conv-photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 520 / 680;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
-/* Text below convergence */
-.studio-conv-text {
+/* Frases columna derecha — tamaños exactos del Figma (56/44/56/28px) */
+.studio-flash {
+  font-family: var(--font-secondary);
+  margin: 0;
+  display: block;
+}
+
+.studio-flash--lg {
+  font-size: clamp(1.75rem, 3.9vw, 3.5rem); /* 56px */
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  opacity: .92;
+}
+
+.studio-flash--md {
+  font-size: clamp(1.35rem, 3.1vw, 2.75rem); /* 44px */
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  opacity: .55;
+}
+
+.studio-flash--sm {
+  font-size: clamp(1rem, 1.9vw, 1.75rem); /* 28px */
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  opacity: .6;
+}
+
+/* Gaps calibrados contra Figma (122/115/102px @1440px) */
+.studio-narrative__right .studio-flash:nth-child(1) { margin-bottom: clamp(3rem, 8.5vw, 8rem); }
+.studio-narrative__right .studio-flash:nth-child(2) { margin-bottom: clamp(3rem, 8vw, 7.5rem); }
+.studio-narrative__right .studio-flash:nth-child(3) { margin-bottom: clamp(2.5rem, 7vw, 7rem); }
+
+/* ③ CONVERGENCE ------------------------------------
+   Grid 3fr|2fr replica split 760/520px del Figma.
+   4 hijos directos en orden HTML:
+     h2.studio-place--sitges   → col 1, fila 1
+     h2.studio-place--talairan → col 2, fila 1 (bottom-aligned)
+     div.studio-photo--sitges  → col 2, fila 2
+     p.studio-place-text       → col 1, fila 2
+---------------------------------------------------- */
+.studio-convergence {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto auto;
+  column-gap: clamp(2rem, 4vw, 5rem);
+  row-gap: clamp(2rem, 3vw, 4rem);
+  align-items: end;
+  padding: clamp(4rem, 8vw, 10rem) var(--px) clamp(3rem, 4vw, 5rem);
+}
+
+.studio-place--sitges {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(3rem, 6.6vw, 6rem); /* 96px */
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--fg);
+  opacity: .92;
+  margin: 0;
+}
+
+.studio-place--talairan {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: clamp(3rem, 6.6vw, 6rem); /* misma escala, fg @0.28 */
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--fg);
+  opacity: .28;
+  margin: 0;
+  text-align: right;
+  align-self: end;
+}
+
+.studio-photo--sitges {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  aspect-ratio: 520 / 680;
+  overflow: hidden;
+  align-self: start;
+}
+
+.studio-photo--sitges img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.studio-place-text {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 20px;
-  line-height: 1.65;
-  color: rgba(243,243,243,.55);
-  margin: calc(156 / 1440 * 100vw) 0 0 calc(80 / 1440 * 100vw);
-  max-width: calc(700 / 1440 * 100vw);
+  font-size: clamp(14px, 1.4vw, 20px); /* 20px del Figma */
+  line-height: 1.75;
+  color: var(--fg);
+  opacity: .55;
+  margin: 0;
 }
 
-/* ── Manifesto ── */
+/* ④ MANIFESTO --------------------------------------- */
 .studio-manifesto {
-  padding: calc(220 / 1440 * 100vw) 0 0 calc(80 / 1440 * 100vw);
+  padding: clamp(4rem, 6vw, 8rem) var(--px) clamp(6rem, 10vw, 12rem);
 }
 
 .studio-manifesto__title {
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: clamp(28px, calc(48 / 1440 * 100vw), 48px);
+  font-size: clamp(1.75rem, 3.3vw, 3rem); /* 48px */
   line-height: 1.18;
-  letter-spacing: -.018em;
-  color: rgba(243,243,243,.92);
-  max-width: min(900px, calc(900 / 1440 * 100vw));
-  margin: 0 0 40px;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  opacity: .92;
+  margin: 0 0 clamp(2rem, 3.5vw, 4rem);
+  max-width: 22ch;
 }
 
 .studio-manifesto__body {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 18px;
+  font-size: clamp(13px, 1.25vw, 18px); /* 18px */
   line-height: 1.75;
-  color: rgba(243,243,243,.6);
-  max-width: min(760px, calc(760 / 1440 * 100vw));
-  margin: 0 0 80px;
+  color: var(--fg);
+  opacity: .6;
+  margin: 0 0 clamp(2rem, 3.5vw, 4rem);
+  max-width: 54ch;
 }
 
 .studio-manifesto__highlight {
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: 28px;
-  line-height: 1.3;
-  color: rgba(243,243,243,.88);
-  max-width: min(760px, calc(760 / 1440 * 100vw));
-  margin: 0 0 40px;
+  font-size: clamp(1rem, 1.9vw, 1.75rem); /* 28px */
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  color: var(--fg);
+  opacity: .88;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 3rem);
+  max-width: 44ch;
 }
 
 .studio-manifesto__closing {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: 18px;
+  font-size: clamp(13px, 1.25vw, 18px);
   line-height: 1.75;
-  color: rgba(243,243,243,.5);
-  max-width: min(700px, calc(700 / 1440 * 100vw));
-  margin: 0 0 0;
+  color: var(--fg);
+  opacity: .5;
+  margin: 0;
+  max-width: 44ch;
 }
 
-/* ── Services: JS-driven hover accordion ── */
+/* ⑤ SERVICES ---------------------------------------- */
 .studio-services {
-  padding: 76px calc(80 / 1440 * 100vw) 120px;
+  width: 100%;
+  padding: clamp(4rem, 7vw, 8rem) var(--px) clamp(6rem, 10vw, 12rem);
 }
 
 .studio-service-list {
   margin-top: 32px;
-  border-top: 1px solid rgba(243,243,243,.14);
+  border-top: 1px solid rgba(243,243,243,.12);
 }
 
 .studio-service-item {
   display: grid;
   grid-template-columns: 80px 1fr 320px;
   align-items: start;
-  padding: 24px 0;
+  padding: 20px 0;
   border-bottom: 1px solid rgba(243,243,243,.08);
   cursor: default;
   transition: opacity 0.3s ease;
@@ -579,19 +593,20 @@
   font-family: var(--font-secondary);
   font-size: 12px;
   font-weight: 300;
-  opacity: 0.3;
-  padding-top: 8px;
+  color: var(--fg);
+  opacity: .3;
+  padding-top: 12px;
   letter-spacing: 0.08em;
 }
 
 .studio-service-title {
   font-family: var(--font-secondary);
-  font-size: clamp(40px, 5vw, 72px);
+  font-size: clamp(36px, 5vw, 72px); /* 72px del Figma */
   font-weight: 500;
-  letter-spacing: -0.015em;
+  letter-spacing: -.015em;
   line-height: 1;
   color: var(--fg);
-  opacity: 0.92;
+  opacity: .92;
   margin: 0;
 }
 
@@ -600,15 +615,77 @@
   font-size: 16px;
   font-weight: 300;
   opacity: 0;
-  color: var(--muted);
+  color: var(--fg);
   line-height: 1.65;
   margin: 0;
-  padding-top: 8px;
+  padding-top: 12px;
   transition: opacity 0.3s ease;
 }
 
+/* Touch: descripciones visibles sin hover */
+@media (hover: none) {
+  .studio-service-desc { opacity: .45; }
+}
+
+/* ===================================================
+   OH, STUDIO! — sticky scroll layout (v3)
+   Mirroring project-detail layout.
+=================================================== */
+.about-page {
+  --px: clamp(24px, 5vw, 80px);
+}
+
+.about-page .project-detail__left {
+  gap: 0; /* sections handle their own spacing */
+}
+
+.about-hero {
+  padding-bottom: 64px;
+}
+
+.about-section {
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-section:last-of-type {
+  padding-bottom: 120px;
+}
+
+.about-cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--bg);
+}
+
+.about-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+}
+
+.about-cover__img:first-child {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .about-page .project-detail__right {
+    position: relative;
+    height: 70vh;
+    order: -1;
+  }
+}
+
+
 /* ---------------------------------------------------
-   OH, LAB! â€” coming soon with personality
+   OH, LAB! â€” coming soon
 --------------------------------------------------- */
 .lab-page {
   padding-top: var(--header-h);
@@ -641,7 +718,7 @@
 }
 
 /* ---------------------------------------------------
-   OH, HELLO! â€” contact
+   OH, HELLO! â€“ contact
 --------------------------------------------------- */
 .contact-page {
   padding-top: var(--header-h);
@@ -652,7 +729,7 @@
 
 .contact-header {
   padding: 72px 0 80px;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.08);
+  border-bottom: 1px solid rgba(243,243,243,.08);
 }
 
 .contact-header__inner {
@@ -667,10 +744,6 @@
   line-height: 0.9;
   letter-spacing: -0.03em;
   color: var(--fg);
-}
-
-.contact-divider {
-  /* handled by header border-bottom */
 }
 
 .contact-body {
@@ -696,20 +769,20 @@
   letter-spacing: -0.01em;
   color: var(--fg);
   text-decoration: none;
-  border-bottom: 1px solid rgba(243, 243, 243, 0.18);
+  border-bottom: 1px solid rgba(243,243,243,.18);
   padding-bottom: 4px;
   width: fit-content;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color .2s ease, color .2s ease;
 }
 
 .contact-email:hover {
-  color: rgba(243, 243, 243, 0.88);
-  border-color: rgba(243, 243, 243, 0.45);
+  color: rgba(243,243,243,.88);
+  border-color: rgba(243,243,243,.45);
 }
 
 .contact-location {
   font-size: 14px;
-  letter-spacing: 0.04em;
+  letter-spacing: .04em;
 }
 
 .contact-social {
@@ -720,7 +793,7 @@
 }
 
 /* ---------------------------------------------------
-   RESPONSIVE â€” PAGES
+   RESPONSIVE
 --------------------------------------------------- */
 @media (max-width: 980px) {
   .works-card--a,
@@ -736,19 +809,12 @@
     align-items: flex-start;
   }
 
-  .project-detail__layout {
-    grid-template-columns: 1fr;
-  }
+  .project-detail__layout { grid-template-columns: 1fr; }
 
   .project-detail__right {
     position: relative;
     height: 56vw;
     min-height: 280px;
-  }
-
-  .project-detail__cover {
-    border-left: none;
-    border-top: 1px solid rgba(243, 243, 243, 0.06);
   }
 
   .project-detail__left {
@@ -757,48 +823,53 @@
 }
 
 @media (max-width: 860px) {
+  .studio-page { --px: 24px; }
+
   .studio-narrative {
     grid-template-columns: 1fr;
-    padding: 56px 24px 0;
+    gap: 3rem;
+    padding: 3rem 24px 5rem;
   }
 
-  .studio-narrative__right {
-    padding-top: 48px;
-  }
+  .studio-narrative__right { padding-top: 2rem; }
 
   .studio-convergence {
-    height: auto;
-    min-height: calc(520 / 860 * 100vw);
-    margin-top: 48px;
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+    padding: 3rem 24px;
   }
 
-  .studio-conv-photo {
-    width: min(320px, 60vw);
-    left: auto;
-    right: 24px;
+  .studio-place--sitges {
+    font-size: clamp(3rem, 14vw, 5.5rem);
   }
 
-  .studio-conv-sitges {
-    left: 24px;
+  .studio-place--talairan {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: left;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    align-self: auto;
   }
 
-  .studio-conv-talairan {
-    left: 24px;
-    top: calc(100 / 860 * 100vw);
+  .studio-photo--sitges {
+    grid-column: 1;
+    grid-row: 3;
   }
 
-  .studio-conv-text {
-    margin-left: 24px;
-    max-width: 88vw;
+  .studio-photo--sitges img {
+    height: clamp(240px, 60vw, 420px);
   }
 
-  .studio-manifesto {
-    padding-left: 24px;
+  .studio-place-text {
+    grid-column: 1;
+    grid-row: 4;
   }
 
-  .studio-services {
-    padding-left: 24px;
-    padding-right: 24px;
+  .studio-manifesto__title,
+  .studio-manifesto__body,
+  .studio-manifesto__highlight,
+  .studio-manifesto__closing {
+    max-width: 100%;
   }
 
   .studio-service-item {
@@ -807,43 +878,30 @@
 
   .studio-service-desc {
     grid-column: 2;
+    opacity: 0;
   }
 }
 
 @media (max-width: 680px) {
   .works-header { padding: 52px 0 56px; }
-  .works-grid { padding: 52px 0 100px; }
-  .works-card { padding: 48px 0; }
-
+  .works-grid   { padding: 52px 0 100px; }
+  .works-card   { padding: 48px 0; }
   .contact-header { padding: 52px 0 60px; }
-  .contact-body { padding: 52px 0 80px; }
-
+  .contact-body   { padding: 52px 0 80px; }
   .lab-claim { font-size: clamp(36px, 10vw, 64px); }
 }
 
 @media (max-width: 520px) {
-  .studio-title {
-    font-size: clamp(56px, 18vw, 82px);
-  }
-
-  .studio-flash--lg {
-    font-size: clamp(28px, 7vw, 40px);
-  }
-
-  .studio-flash--md {
-    font-size: clamp(22px, 5.5vw, 32px);
-  }
-
-  .studio-service-title {
-    font-size: clamp(32px, 8vw, 52px);
-  }
+  .studio-title  { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .studio-flash--lg { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+  .studio-flash--md { font-size: clamp(1.2rem, 5.5vw, 2rem); }
+  .studio-flash--sm { font-size: clamp(0.95rem, 4.5vw, 1.4rem); }
 }
 
 @media (max-width: 420px) {
   .project-detail__left {
     padding: calc(var(--header-h) + 32px) 20px 64px;
   }
-
   .project-detail__display {
     font-size: clamp(36px, 8vw, 56px);
   }
@@ -863,5 +921,44 @@
 
   .studio-page .js-reveal {
     clip-path: none !important;
+  }
+
+  /* studio-about v2: images fully visible, no crossfade */
+  .studio-scroll__right img {
+    opacity: 1 !important;
+  }
+}
+
+/* ---------------------------------------------------
+   STUDIO-ABOUT RESPONSIVE
+--------------------------------------------------- */
+@media (max-width: 900px) {
+  .studio-scroll {
+    flex-direction: column;
+    gap: clamp(40px, 6vw, 80px);
+    padding-top: clamp(32px, 5vw, 64px);
+  }
+
+  .studio-scroll__left {
+    position: static;
+    flex: none;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .studio-scroll__right {
+    flex: none;
+    width: 100%;
+    gap: clamp(40px, 8vw, 100px);
+    padding-bottom: clamp(48px, 8vh, 100px);
+  }
+
+  .ss-img-wrap {
+    max-width: 100%;
+  }
+
+  .ss-manifesto-lead {
+    font-size: clamp(22px, 4vw, 28px);
   }
 }
