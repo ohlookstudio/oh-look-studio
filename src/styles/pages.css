@@ -1,5 +1,5 @@
 /* ===================================================
-   PAGES â€“ layout styles for all inner pages
+   PAGES – layout styles for all inner pages
    Works, ProjectDetails, Studio, Lab, Contact
    Tokens always from global.css / token.css
 =================================================== */
@@ -48,13 +48,14 @@
 }
 
 /* ---------------------------------------------------
-   OH, WORKS! â€“ editorial grid
+   OH, WORKS! — editorial list with floating hover
 --------------------------------------------------- */
-.works-page { padding-top: var(--header-h); }
+.works-page { 
+  padding-top: var(--header-h); 
+}
 
 .works-header {
-  padding: 64px 0 72px;
-  border-bottom: 1px solid rgba(243,243,243,.08);
+  padding: clamp(64px, 10vw, 120px) 0 48px;
 }
 
 .works-header__inner {
@@ -63,127 +64,186 @@
 }
 
 .works-display {
-  margin: 10px 0 16px;
+  margin: 12px 0 16px;
   font-family: var(--font-primary);
-  font-size: clamp(42px, 6vw, 88px);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
+  font-size: clamp(48px, 8vw, 108px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   color: var(--fg);
 }
 
-.works-subtitle { max-width: 52ch; }
+.works-subtitle { 
+  max-width: 52ch; 
+  font-family: var(--font-secondary);
+  font-size: clamp(15px, 1.4vw, 18px);
+}
 
-.works-grid {
+/* THE LIST */
+.works-list {
   width: min(1120px, 92vw);
   margin: 0 auto;
-  padding: 80px 0 140px;
+  padding: 40px 0 140px;
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
-.works-card {
+.works-row {
   display: grid;
-  gap: 40px;
-  align-items: center;
-  padding: 64px 0;
-  border-bottom: 1px solid rgba(243,243,243,.06);
-}
-
-.works-card--a { grid-template-columns: 58% 42%; }
-.works-card--b { grid-template-columns: 42% 58%; }
-.works-card--b .works-card__link { order: 2; }
-.works-card--b .works-card__meta { order: 1; }
-
-.works-card__link {
-  display: block;
+  grid-template-columns: 60px 1fr auto auto;
+  align-items: baseline;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(243,243,243,0.08);
   text-decoration: none;
-  color: inherit;
-}
-
-.works-card__cover {
-  aspect-ratio: 4 / 3;
-  border-radius: 18px;
-  background: rgba(243,243,243,.04);
-  border: 1px solid rgba(243,243,243,.08);
-  position: relative;
-  overflow: hidden;
-  transition: border-color .3s ease, box-shadow .3s ease;
-  box-shadow: 0 12px 48px rgba(0,0,0,.25);
-}
-
-.works-card__cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 25% 30%, rgba(160,198,175,.06), transparent 55%),
-    radial-gradient(circle at 78% 75%, rgba(203,104,104,.05), transparent 50%);
-  pointer-events: none;
-}
-
-.works-card__link:hover .works-card__cover {
-  border-color: rgba(243,243,243,.14);
-  box-shadow: 0 18px 64px rgba(0,0,0,.34);
-}
-
-.works-card__num {
-  position: absolute;
-  top: 20px;
-  left: 22px;
-  opacity: 0.35;
-}
-
-.works-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 40ch;
-}
-
-.works-card--b .works-card__meta {
-  padding-left: 0;
-  text-align: right;
-  align-items: flex-end;
-}
-
-.works-card__tags { opacity: 0.5; }
-
-.works-card__title {
-  margin: 0;
-  font-family: var(--font-secondary);
-  font-weight: 520;
-  font-size: clamp(20px, 2.2vw, 32px);
-  letter-spacing: -0.01em;
-  line-height: 1.12;
-}
-
-.works-card__title a {
   color: var(--fg);
-  text-decoration: none;
-  transition: color .2s ease;
+  transition: opacity 0.4s ease;
+  position: relative;
+  cursor: pointer;
 }
 
-.works-card__title a:hover { color: rgba(243,243,243,.72); }
-
-.works-card__cta {
-  display: inline-block;
+.works-row__num {
   font-family: var(--font-secondary);
   font-size: 13px;
-  letter-spacing: .08em;
-  color: rgba(243,243,243,.45);
-  text-decoration: none;
-  transition: color .2s ease, transform .2s ease;
-  margin-top: 4px;
+  opacity: 0.35;
+  letter-spacing: 0.05em;
 }
 
-.works-card__cta:hover {
-  color: rgba(243,243,243,.88);
-  transform: translateX(4px);
+.works-row__title {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
 }
+
+.works-row__tags {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  opacity: 0.45;
+  text-align: right;
+  min-width: 140px;
+}
+
+.works-row__year {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  opacity: 0.45;
+  min-width: 48px;
+  text-align: right;
+}
+
+/* Meta wrapper: transparent on desktop (grid sees spans directly) */
+.works-row__meta {
+  display: contents;
+}
+
+/* Mobile image: hidden on desktop, shown as card on mobile */
+.works-row__mobile-img {
+  display: none;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .works-list {
+    width: 100%;
+    padding: 32px 6vw 100px;
+    gap: 48px;
+  }
+
+  .works-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .works-row__num {
+    order: -2;
+    margin-bottom: 10px;
+  }
+
+  .works-row__mobile-img {
+    display: block;
+    margin-bottom: 14px;
+    order: -1;
+  }
+
+  .works-row__title {
+    margin: 0 0 6px;
+    font-size: clamp(22px, 6vw, 28px);
+    text-align: left;
+  }
+
+  .works-row__meta {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .works-row__tags {
+    text-align: left;
+    min-width: unset;
+    font-size: 13px;
+  }
+
+  .works-row__year {
+    text-align: left;
+    min-width: unset;
+    font-size: 13px;
+  }
+}
+
+/* FLOATING IMAGE */
+.works-float {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 380px;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bg-soft);
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform;
+}
+
+.works-float__inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.works-float__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  display: none;
+}
+
+.works-float__img.is-active {
+  display: block;
+}
+
+@media (hover: none) {
+  .works-float { display: none !important; }
+}
+
 
 /* ---------------------------------------------------
-   PROJECT DETAIL â€“ two-column sticky layout
+   PROJECT DETAIL – two-column sticky layout
 --------------------------------------------------- */
 .project-detail__layout {
   display: grid;
@@ -267,6 +327,12 @@
 
 .project-detail__footer { margin-top: 40px; }
 
+/* Footer as direct grid child (ProjectDetails) — needs its own side padding */
+.project-detail__layout > .project-detail__footer {
+  margin-top: 0;
+  padding: 0 56px 80px;
+}
+
 .project-detail__right {
   position: sticky;
   top: 0;
@@ -304,24 +370,13 @@
 
 /* ===================================================
    OH, STUDIO! — full-width editorial layout
-   12-col grid, padding 80px via clamp, todas las
-   medidas fluidas. Fuente de verdad: Figma node 73:2.
-   HTML:
-     .studio-page
-       .studio-hero          eyebrow + h1 + tagline
-       .studio-narrative     grid 5fr|6fr: prose+foto / frases
-       .studio-convergence   grid 3fr|2fr: Sitges/Talairan/foto/texto
-       .studio-manifesto     texto editorial
-       .studio-services      acordeón hover
 =================================================== */
 
-/* Padding horizontal: 80px exacto a 1440px (Figma) */
 .studio-page {
   padding-top: var(--header-h);
   --px: clamp(32px, 5.6vw, 80px);
 }
 
-/* ① HERO ------------------------------------------ */
 .studio-hero {
   padding: clamp(3rem, 6vw, 7rem) var(--px) clamp(2rem, 3vw, 4rem);
 }
@@ -341,7 +396,7 @@
 .studio-title {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: clamp(4rem, 8.3vw, 7.5rem); /* 7.5rem = 120px */
+  font-size: clamp(4rem, 8.3vw, 7.5rem);
   line-height: .92;
   letter-spacing: -.02em;
   color: var(--fg);
@@ -351,18 +406,13 @@
 .studio-tagline {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: clamp(1rem, 1.5vw, 1.375rem); /* 22px */
+  font-size: clamp(1rem, 1.5vw, 1.375rem);
   line-height: 1.5;
   color: var(--fg);
   opacity: .6;
   margin: clamp(1rem, 2vw, 1.5rem) 0 0;
 }
 
-/* ② NARRATIVE --------------------------------------
-   Col izq 5fr: prose + foto Talairan
-   Col der 6fr: 4 frases escalonadas via margin-bottom
-   La col derecha arranca al mismo top que la prosa.
----------------------------------------------------- */
 .studio-narrative {
   display: grid;
   grid-template-columns: 5fr 6fr;
@@ -377,14 +427,13 @@
 .studio-prose {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: clamp(13px, 1.2vw, 17px);
+  font-size: clamp(16px, 1.2vw, 18px);
   line-height: 1.75;
   color: var(--fg);
   opacity: .72;
   margin: 0 0 clamp(2rem, 4vw, 5rem);
 }
 
-/* Foto Talairan — portrait, borde sutil */
 .studio-photo { overflow: hidden; }
 
 .studio-photo--talairan {
@@ -402,7 +451,6 @@
   display: block;
 }
 
-/* Frases columna derecha — tamaños exactos del Figma (56/44/56/28px) */
 .studio-flash {
   font-family: var(--font-secondary);
   margin: 0;
@@ -410,7 +458,7 @@
 }
 
 .studio-flash--lg {
-  font-size: clamp(1.75rem, 3.9vw, 3.5rem); /* 56px */
+  font-size: clamp(1.75rem, 3.9vw, 3.5rem);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -.01em;
@@ -419,7 +467,7 @@
 }
 
 .studio-flash--md {
-  font-size: clamp(1.35rem, 3.1vw, 2.75rem); /* 44px */
+  font-size: clamp(1.35rem, 3.1vw, 2.75rem);
   font-weight: 300;
   line-height: 1.1;
   letter-spacing: -.01em;
@@ -428,7 +476,7 @@
 }
 
 .studio-flash--sm {
-  font-size: clamp(1rem, 1.9vw, 1.75rem); /* 28px */
+  font-size: clamp(1rem, 1.9vw, 1.75rem);
   font-weight: 300;
   line-height: 1.45;
   letter-spacing: -.01em;
@@ -436,19 +484,10 @@
   opacity: .6;
 }
 
-/* Gaps calibrados contra Figma (122/115/102px @1440px) */
 .studio-narrative__right .studio-flash:nth-child(1) { margin-bottom: clamp(3rem, 8.5vw, 8rem); }
 .studio-narrative__right .studio-flash:nth-child(2) { margin-bottom: clamp(3rem, 8vw, 7.5rem); }
 .studio-narrative__right .studio-flash:nth-child(3) { margin-bottom: clamp(2.5rem, 7vw, 7rem); }
 
-/* ③ CONVERGENCE ------------------------------------
-   Grid 3fr|2fr replica split 760/520px del Figma.
-   4 hijos directos en orden HTML:
-     h2.studio-place--sitges   → col 1, fila 1
-     h2.studio-place--talairan → col 2, fila 1 (bottom-aligned)
-     div.studio-photo--sitges  → col 2, fila 2
-     p.studio-place-text       → col 1, fila 2
----------------------------------------------------- */
 .studio-convergence {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -464,7 +503,7 @@
   grid-row: 1;
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: clamp(3rem, 6.6vw, 6rem); /* 96px */
+  font-size: clamp(3rem, 6.6vw, 6rem);
   line-height: 1;
   letter-spacing: -.02em;
   color: var(--fg);
@@ -477,7 +516,7 @@
   grid-row: 1;
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: clamp(3rem, 6.6vw, 6rem); /* misma escala, fg @0.28 */
+  font-size: clamp(3rem, 6.6vw, 6rem);
   line-height: 1;
   letter-spacing: -.02em;
   color: var(--fg);
@@ -510,14 +549,13 @@
   align-self: start;
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: clamp(14px, 1.4vw, 20px); /* 20px del Figma */
+  font-size: clamp(14px, 1.4vw, 20px);
   line-height: 1.75;
   color: var(--fg);
   opacity: .55;
   margin: 0;
 }
 
-/* ④ MANIFESTO --------------------------------------- */
 .studio-manifesto {
   padding: clamp(4rem, 6vw, 8rem) var(--px) clamp(6rem, 10vw, 12rem);
 }
@@ -525,7 +563,7 @@
 .studio-manifesto__title {
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: clamp(1.75rem, 3.3vw, 3rem); /* 48px */
+  font-size: clamp(1.75rem, 3.3vw, 3rem);
   line-height: 1.18;
   letter-spacing: -.01em;
   color: var(--fg);
@@ -537,7 +575,7 @@
 .studio-manifesto__body {
   font-family: var(--font-secondary);
   font-weight: 300;
-  font-size: clamp(13px, 1.25vw, 18px); /* 18px */
+  font-size: clamp(13px, 1.25vw, 18px);
   line-height: 1.75;
   color: var(--fg);
   opacity: .6;
@@ -548,7 +586,7 @@
 .studio-manifesto__highlight {
   font-family: var(--font-secondary);
   font-weight: 500;
-  font-size: clamp(1rem, 1.9vw, 1.75rem); /* 28px */
+  font-size: clamp(1rem, 1.9vw, 1.75rem);
   line-height: 1.45;
   letter-spacing: -.01em;
   color: var(--fg);
@@ -568,7 +606,6 @@
   max-width: 44ch;
 }
 
-/* ⑤ SERVICES ---------------------------------------- */
 .studio-services {
   width: 100%;
   padding: clamp(4rem, 7vw, 8rem) var(--px) clamp(6rem, 10vw, 12rem);
@@ -601,7 +638,7 @@
 
 .studio-service-title {
   font-family: var(--font-secondary);
-  font-size: clamp(36px, 5vw, 72px); /* 72px del Figma */
+  font-size: clamp(36px, 5vw, 72px);
   font-weight: 500;
   letter-spacing: -.015em;
   line-height: 1;
@@ -622,38 +659,127 @@
   transition: opacity 0.3s ease;
 }
 
-/* Touch: descripciones visibles sin hover */
 @media (hover: none) {
   .studio-service-desc { opacity: .45; }
 }
 
 /* ===================================================
    OH, STUDIO! — sticky scroll layout (v3)
-   Mirroring project-detail layout.
 =================================================== */
+
 .about-page {
   --px: clamp(24px, 5vw, 80px);
 }
 
 .about-page .project-detail__left {
-  gap: 0; /* sections handle their own spacing */
+  padding-top: calc(var(--header-h) + 48px);
+  gap: 0;
 }
 
 .about-hero {
-  padding-bottom: 64px;
+  padding-bottom: clamp(40px, 6vw, 64px);
 }
 
 .about-section {
-  padding: 80px 0;
+  padding: clamp(20px, 2vw, 40px) 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 10px;
+}
+
+.about-section:first-of-type {
+  padding-top: 0;
 }
 
 .about-section:last-of-type {
-  padding-bottom: 120px;
+  padding-bottom: clamp(64px, 10vw, 120px);
 }
 
+.about-section--phrases {
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.about-section--places {
+  padding-top: clamp(48px, 6vw, 80px);
+}
+
+.about-section--manifesto {
+  padding-top: clamp(28px, 3vw, 44px);
+  padding-bottom: clamp(28px, 3vw, 44px);
+  gap: clamp(14px, 1.4vw, 22px);
+}
+
+.about-page .studio-services {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: clamp(64px, 10vw, 120px);
+  padding-bottom: clamp(80px, 12vw, 160px);
+}
+
+.about-page .project-detail__divider {
+  margin: clamp(24px, 4vw, 40px) 0;
+  opacity: 0.6;
+}
+
+/* Typography Refinement */
+.about-prose,
+.about-caption {
+  font-family: var(--font-secondary);
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.65;
+  font-weight: 300;
+  max-width: 48ch;
+  color: var(--fg);
+}
+
+.about-caption {
+  opacity: 0.55;
+}
+
+/* Editorial Phrases */
+.about-phrase {
+  font-family: var(--font-secondary) !important;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-size: clamp(42px, 4.8vw, 92px);
+  color: var(--fg);
+  margin: 0;
+}
+
+.about-phrase--muted {
+  font-weight: 300;
+  opacity: .45;
+}
+
+/* Sitges & Talairan */
+.about-place-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: clamp(18px, 2vw, 28px);
+}
+
+.about-place {
+  font-family: var(--font-secondary) !important;
+  font-size: clamp(52px, 6.4vw, 96px);
+  letter-spacing: -0.055em;
+  line-height: .9;
+  margin: 0;
+}
+
+.about-place--solid {
+  font-weight: 600;
+  opacity: .95;
+}
+
+.about-place--muted {
+  font-weight: 300;
+  opacity: .35;
+}
+
+/* Layout support */
 .about-cover {
   width: 100%;
   height: 100%;
@@ -675,17 +801,70 @@
   opacity: 1;
 }
 
+/* Mobile-only scroll crossfade intro (hidden on desktop) */
+.about-mobile-scroll { display: none; }
+
 @media (max-width: 900px) {
+  /* Desktop sticky column → hidden; mobile scroll block takes over */
   .about-page .project-detail__right {
+    display: none;
+  }
+
+  /* Remove the extra header offset — scroll block sits above the text */
+  .about-page .project-detail__left {
+    padding-top: 48px;
+  }
+
+  /* Fix 5: View Works button centered on mobile */
+  .about-page .project-detail__footer {
+    text-align: center;
+  }
+
+  /* Mobile scroll crossfade block */
+  .about-mobile-scroll {
+    display: block;
+    height: 280vh;
     position: relative;
-    height: 70vh;
-    order: -1;
+  }
+
+  .about-mobile-scroll__sticky {
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100svh - var(--header-h));
+    overflow: hidden;
+  }
+
+  .about-mobile-scroll__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  .about-mobile-scroll__img:first-child {
+    opacity: 1;
   }
 }
 
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  /* Collapse scroll block to a static image, no crossfade height needed */
+  .about-mobile-scroll {
+    height: auto;
+  }
+
+  .about-mobile-scroll__sticky {
+    position: relative;
+    top: auto;
+    height: 56vw;
+    min-height: 220px;
+    max-height: 70vh;
+  }
+}
 
 /* ---------------------------------------------------
-   OH, LAB! â€” coming soon
+   OH, LAB! — coming soon
 --------------------------------------------------- */
 .lab-page {
   padding-top: var(--header-h);
@@ -718,79 +897,265 @@
 }
 
 /* ---------------------------------------------------
-   OH, HELLO! â€“ contact
+   OH, HELLO! — weather reactive contact
 --------------------------------------------------- */
 .contact-page {
-  padding-top: var(--header-h);
+  --px: clamp(24px, 5vw, 80px);
+  position: relative;
   min-height: 100vh;
+  padding-top: var(--header-h);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  /* Removed overflow: hidden to allow position: sticky */
 }
 
+/* Background layers */
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  pointer-events: none;
+}
+
+.contact-half {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.contact-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Vertical Divider (Interrupted in the middle) */
+.contact-divider-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(243, 243, 243, 0.12);
+  z-index: 5;
+  pointer-events: none;
+  /* Mask out the center where the text is (Wider gap) */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 15%,
+    transparent 28%,
+    transparent 72%,
+    black 85%,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 15%,
+    transparent 28%,
+    transparent 72%,
+    black 85%,
+    black 100%
+  );
+}
+
+/* Foreground content */
 .contact-header {
-  padding: 72px 0 80px;
-  border-bottom: 1px solid rgba(243,243,243,.08);
-}
-
-.contact-header__inner {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  padding: 0 var(--px);
+  pointer-events: none;
+  margin-top: -8vh; /* slightly above center */
 }
 
 .contact-display {
-  margin: 12px 0 0;
+  margin: 12px auto 0;
   font-family: var(--font-primary);
-  font-size: clamp(38px, 6vw, 92px);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: clamp(48px, 8.5vw, 112px);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
   color: var(--fg);
+  max-width: 14ch;
+  pointer-events: auto;
 }
 
-.contact-body {
-  width: min(1120px, 92vw);
-  margin: 0 auto;
-  padding: 72px 0 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 52px;
+/* Weather labels (Sticky) */
+.weather-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  padding: 0 var(--px);
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.contact-email {
+.weather-label {
+  position: sticky;
+  top: calc(var(--header-h) + clamp(24px, 4vw, 48px));
   display: inline-block;
   font-family: var(--font-secondary);
-  font-size: clamp(18px, 2vw, 26px);
+  pointer-events: none;
+  min-width: 160px;
+}
+
+.weather-label--talairan {
+  float: right;
+  text-align: right;
+}
+
+.weather-label__name {
+  display: block;
+  font-size: clamp(20px, 2.4vw, 28px);
   font-weight: 500;
-  letter-spacing: -0.01em;
+  color: var(--fg);
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.weather-label__val {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.4;
+}
+
+.weather-label__phrase {
+  display: block;
+  font-family: var(--font-secondary);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--fg);
+  opacity: 0.4;
+  margin-top: 7px;
+}
+
+@media (max-width: 768px) {
+  .contact-divider-v { display: none; }
+
+  .weather-labels {
+    position: absolute;
+    top: calc(var(--header-h) + clamp(16px, 3vw, 24px));
+    left: 0;
+    right: 0;
+    bottom: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: auto;
+  }
+
+  .weather-label {
+    position: static;
+    top: auto;
+    display: block;
+    margin-top: 0;
+    min-width: 0;
+    max-width: calc(50% - 8px);
+  }
+
+  .weather-label--talairan {
+    float: none;
+    text-align: right;
+  }
+
+  .weather-label__name {
+    font-size: clamp(15px, 4vw, 20px);
+  }
+
+  .weather-label__phrase {
+    font-size: 13px;
+    /* Same max-width for both labels → consistent line breaks */
+    max-width: 22ch;
+  }
+}
+
+
+/* Contact Info Block */
+.contact-details {
+  position: relative;
+  z-index: 10;
+  margin-top: clamp(40px, 8vh, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  font-family: var(--font-secondary);
+}
+
+.contact-details__location {
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.6;
+  opacity: 0.6;
+  color: var(--fg);
+}
+
+.contact-details__email {
+  font-size: clamp(18px, 2vw, 24px);
   color: var(--fg);
   text-decoration: none;
-  border-bottom: 1px solid rgba(243,243,243,.18);
-  padding-bottom: 4px;
-  width: fit-content;
-  transition: border-color .2s ease, color .2s ease;
+  opacity: 0.85;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  border-bottom: 1px solid rgba(243, 243, 243, 0.1);
 }
 
-.contact-email:hover {
-  color: rgba(243,243,243,.88);
-  border-color: rgba(243,243,243,.45);
+.contact-details__email:hover {
+  color: var(--accent);
+  opacity: 1;
 }
 
-.contact-location {
-  font-size: 14px;
-  letter-spacing: .04em;
-}
-
-.contact-social {
+.contact-details__social {
   display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 8px;
 }
+
+.contact-details__social a {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--fg);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.contact-details__social a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .contact-details {
+    margin-top: 48px;
+  }
+}
+
+/* Reduced Motion specific */
+.contact-page.is-reduced-motion .contact-bg {
+  display: none;
+}
+
+.contact-page.is-reduced-motion .weather-label__name {
+  opacity: 1;
+}
+.contact-page.is-reduced-motion .weather-label__val {
+  opacity: 0.8;
+}
+
+
 
 /* ---------------------------------------------------
    RESPONSIVE
@@ -819,6 +1184,10 @@
 
   .project-detail__left {
     padding: calc(var(--header-h) + 48px) 28px 80px;
+  }
+
+  .project-detail__layout > .project-detail__footer {
+    padding: 0 28px 80px;
   }
 }
 
@@ -876,9 +1245,37 @@
     grid-template-columns: 56px 1fr;
   }
 
+  /* Keep desc in col 2; opacity handled by hover:none rule above */
   .studio-service-desc {
     grid-column: 2;
-    opacity: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Hide redundant top back-link; btn--pill at bottom handles navigation */
+  .project-detail__back { display: none; }
+
+  /* Reduce left-column padding — no large bottom gap needed, footer is separate */
+  .project-detail__left {
+    padding: calc(var(--header-h) + 40px) 6vw 24px;
+  }
+
+  /* Cover: portrait 3:4, full width minus page padding, object-fit cover */
+  .project-detail__right {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    margin: 0 6vw;
+  }
+
+  .project-detail__cover {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Footer button after the image */
+  .project-detail__layout > .project-detail__footer {
+    padding: 40px 6vw 64px;
+    text-align: center;
   }
 }
 
@@ -905,6 +1302,9 @@
   .project-detail__display {
     font-size: clamp(36px, 8vw, 56px);
   }
+  .project-detail__layout > .project-detail__footer {
+    padding: 0 20px 64px;
+  }
 }
 
 /* ---------------------------------------------------
@@ -923,7 +1323,6 @@
     clip-path: none !important;
   }
 
-  /* studio-about v2: images fully visible, no crossfade */
   .studio-scroll__right img {
     opacity: 1 !important;
   }

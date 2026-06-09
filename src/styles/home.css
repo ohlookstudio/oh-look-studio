@@ -203,6 +203,19 @@
 
 /* Mobile: disable horizontal scroll, stack vertically */
 @media (max-width: 767px) {
+  /* Hero: center the phrases block inside the pinned 100svh section */
+  .hero-lines {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .home-featured {
     height: auto;
     min-height: auto;
@@ -220,7 +233,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 52px;
+    gap: 40px;
     padding: 0 6vw;
   }
 
@@ -229,23 +242,23 @@
     position: relative;
     left: auto;
     top: auto;
-    width: auto;
+    width: 100%;
     height: auto;
   }
 
   .hf-card__link {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 72vw;
+    gap: 14px;
+    width: 100%;
     height: auto;
     position: static;
   }
 
   .hf-card--2 .hf-card__link,
   .hf-card--4 .hf-card__link {
-    width: 62vw;
-    align-self: flex-end;
+    width: 100%;
+    align-self: auto;
   }
 
   .hf-card__img-wrap {
@@ -253,7 +266,7 @@
     inset: auto;
     width: 100%;
     height: auto;
-    aspect-ratio: 351 / 478;
+    aspect-ratio: 3 / 4;
   }
 
   .hf-card__img {
@@ -276,7 +289,7 @@
 
   .hf-card--2 .hf-card__label,
   .hf-card--4 .hf-card__label {
-    text-align: right;
+    text-align: left;
   }
 
   .hf-card__title {
@@ -290,10 +303,10 @@
 
   .hf-card--2 .hf-card__cta,
   .hf-card--4 .hf-card__cta {
-    align-items: flex-end;
+    align-items: flex-start;
   }
 
-.btn--pill {
+  .btn--pill {
     height: 56px;
     padding: 0 26px;
     font-size: 14px;

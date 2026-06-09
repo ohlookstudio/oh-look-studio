@@ -27,8 +27,10 @@ function handleForwardFlip(e, a) {
   window.__flipScrollY = window.scrollY;
 
   const img = a.querySelector("img");
+  // Skip VTA if the image is hidden (e.g. desktop Works where mobile-img is display:none)
+  const imgVisible = img && img.getBoundingClientRect().width > 0;
 
-  if (!supportsVT || reduceMotion || !img) {
+  if (!supportsVT || reduceMotion || !imgVisible) {
     navigate(url.pathname);
     return;
   }
@@ -83,7 +85,10 @@ function handleReverseFlip(e, back) {
 
   window.__projectReferrer = null;
 
-  if (!supportsVT || reduceMotion || targetPath === "/works") {
+  // Works mobile (≤768px) has visible card images and supports VTA; desktop Works does not
+  const worksOnDesktop = targetPath === "/works" && window.innerWidth > 768;
+
+  if (!supportsVT || reduceMotion || worksOnDesktop) {
     navigate(targetPath);
     return;
   }
@@ -104,7 +109,8 @@ function handleReverseFlip(e, back) {
     await navigate(targetPath);
 
     const card = document.querySelector(`a[href="/projects/${slug}"] img`);
-    if (card) {
+    // Only morph if the card image is actually visible (mobile works cards, home cards)
+    if (card && card.getBoundingClientRect().width > 0) {
       card.style.viewTransitionName = "project-cover";
     }
   });

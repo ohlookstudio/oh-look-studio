@@ -37,7 +37,9 @@
       "Bash(npm root *)",
       "Bash(python3 *)",
       "Bash(playwright screenshot *)",
-      "Bash(pkill -f \"vite --port 5199\")"
+      "Bash(pkill -f \"vite --port 5199\")",
+      "Read(//opt/homebrew/lib/node_modules/playwright/**)",
+      "Read(//Users/milo/**)"
     ]
   }
 }

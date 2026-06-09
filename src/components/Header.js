@@ -1,4 +1,6 @@
 // src/components/Header.js
+import { SOCIAL } from '../data/social.js';
+
 export function Header() {
   return `
     <header id="siteHeader" class="site-header is-hidden">
@@ -52,9 +54,9 @@ export function Header() {
             </nav>
 
             <div class="mobile-nav__social" aria-label="Social links">
-              <a class="social-link" href="https://instagram.com/" target="_blank" rel="noreferrer">IG</a>
-              <a class="social-link" href="https://linkedin.com/" target="_blank" rel="noreferrer">IN</a>
-              <a class="social-link" href="https://behance.net/" target="_blank" rel="noreferrer">BE</a>
+              <a class="social-link" href="${SOCIAL.instagram}" target="_blank" rel="noopener noreferrer">IG</a>
+              <a class="social-link" href="${SOCIAL.linkedin}"  target="_blank" rel="noopener noreferrer">IN</a>
+              <a class="social-link" href="${SOCIAL.behance}"   target="_blank" rel="noopener noreferrer">BE</a>
             </div>
           </div>
         </aside>

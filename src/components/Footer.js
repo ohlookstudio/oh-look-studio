@@ -1,4 +1,6 @@
 // src/components/Footer.js
+import { SOCIAL } from '../data/social.js';
+
 export function Footer() {
   return `
     <footer class="site-footer" aria-label="Site footer">
@@ -19,9 +21,9 @@ export function Footer() {
               <a href="mailto:hello@ohlook.studio">hello@ohlook.studio</a>
             </div>
             <div class="site-footer__socials">
-              <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
-              <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://behance.net/" target="_blank" rel="noreferrer">Behance</a>
+              <a href="${SOCIAL.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="${SOCIAL.linkedin}"  target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="${SOCIAL.behance}"   target="_blank" rel="noopener noreferrer">Behance</a>
             </div>
           </div>
 

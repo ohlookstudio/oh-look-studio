@@ -174,12 +174,13 @@ export function mountFooterTextCanvas() {
     let fontSize = getDesiredFont();
     fontSize = fitFontSizeToWidth(fontSize);
 
-    const x = 0;
+    const x = isMobile() ? w / 2 : 0;
+    const align = isMobile() ? "center" : "left";
     const y = h * getYRatio();
 
     // sample mask
     sctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
-    sctx.textAlign = "left";
+    sctx.textAlign = align;
     sctx.textBaseline = "middle";
     sctx.fillStyle = "rgba(255,255,255,1)";
     sctx.fillText(TEXT, x, y);
@@ -213,7 +214,7 @@ export function mountFooterTextCanvas() {
     gctx.clearRect(0, 0, w, h);
     gctx.save();
     gctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
-    gctx.textAlign = "left";
+    gctx.textAlign = align;
     gctx.textBaseline = "middle";
 
     gctx.globalCompositeOperation = "source-over";

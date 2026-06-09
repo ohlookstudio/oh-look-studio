@@ -4,7 +4,9 @@
   --muted:rgba(243,243,243,.72);
 
   --accent:#A0C6AF;
+  --accent-rgb: 160, 198, 175;
   --accent-alt:#CB6868;
+  --accent-alt-rgb: 203, 104, 104;
 
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
   --font-secondary: "Space Grotesk", var(--font-ui);
@@ -921,11 +923,28 @@ a:visited{
 
   .site-footer__body{
     grid-template-columns: 1fr;
-    gap: 36px 0;
+    gap: 16px 0;
   }
 
   .site-footer__canvas{
     height: var(--footer-canvas-h);
+  }
+
+  .site-footer__contact{
+    align-items: center;
+  }
+
+  .site-footer__contactInfo{
+    text-align: center;
+  }
+
+  .site-footer__socials{
+    justify-content: center;
+  }
+
+  .site-footer__bottom{
+    justify-content: center;
+    gap: 16px;
   }
 }
 

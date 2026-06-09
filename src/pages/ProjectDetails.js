@@ -64,13 +64,9 @@ export async function ProjectDetails({ slug } = {}) {
             </p>
           </div>
 
-          <div class="project-detail__footer">
-            <a class="btn btn--pill" data-flip-back href="/">← Back</a>
-          </div>
-
         </div>
 
-        <!-- RIGHT — sticky cover -->
+        <!-- RIGHT — sticky cover (desktop) / portrait image (mobile) -->
         <div class="project-detail__right">
           <div class="project-detail__cover" id="projectCover">
             ${project.coverImage
@@ -81,6 +77,11 @@ export async function ProjectDetails({ slug } = {}) {
                       style="opacity:0;visibility:hidden">`
               : ''}
           </div>
+        </div>
+
+        <!-- FOOTER — after image on mobile, bottom-of-left on desktop via grid -->
+        <div class="project-detail__footer">
+          <a class="btn btn--pill" data-flip-back href="/">← Back</a>
         </div>
 
       </div>
