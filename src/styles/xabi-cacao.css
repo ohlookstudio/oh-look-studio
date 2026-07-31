@@ -1,0 +1,263 @@
+/* ===================================================
+   XABI CACAO TASTING — project case study
+   Scoped exclusively to .xabi-page.
+   Never modifies shared .project-detail__* rules.
+=================================================== */
+
+/* --- PAGE SHELL --- */
+.xabi-page {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+}
+
+/* --- ① HEADER BLOCK --- */
+.xabi-header {
+  padding: calc(var(--header-h) + 72px) 56px 0;
+}
+
+/* --- ② CASE STUDY: two-column grid (text + sticky crossfade) --- */
+.xabi-study {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+
+.xabi-study__text {
+  padding: 48px 56px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.xabi-study__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Crossfade image stack (right column, same pattern as About) */
+.xabi-cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--bg);
+}
+
+.xabi-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0;
+}
+
+.xabi-cover__img:first-child {
+  opacity: 1;
+}
+
+/* Scroll-trigger sections in the left column */
+.xabi-section {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 64px 0;
+}
+
+.xabi-section:first-child {
+  padding-top: 24px;
+  min-height: auto;
+}
+
+/* --- ③ MOBILE GALLERY: hidden on desktop --- */
+.xabi-mobile-gallery {
+  display: none;
+}
+
+/* --- ④ HORIZONTAL STRIP --- */
+.xabi-horizontal {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.xabi-horizontal__track {
+  display: flex;
+  gap: clamp(12px, 1.6vw, 24px);
+  padding: 0 56px;
+  will-change: transform;
+}
+
+.xabi-horizontal__slide {
+  flex-shrink: 0;
+  width: clamp(380px, 44vw, 640px);
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.xabi-horizontal__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.xabi-horizontal__empty {
+  padding: 80px 0;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  opacity: 0.35;
+}
+
+/* Dots: hidden on desktop */
+.xabi-horizontal__dots {
+  display: none;
+}
+
+/* --- ⑤ FOOTER --- */
+.xabi-footer {
+  padding: 40px 56px 80px;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+/* Tablet — collapse to single column */
+@media (max-width: 980px) {
+  .xabi-header {
+    padding: calc(var(--header-h) + 48px) 28px 0;
+  }
+
+  .xabi-study {
+    grid-template-columns: 1fr;
+  }
+
+  /* Desktop sticky column off — mobile gallery block takes over */
+  .xabi-study__sticky {
+    display: none;
+  }
+
+  .xabi-study__text {
+    padding: 48px 28px 0;
+  }
+
+  /* Mobile vertical crossfade block — shown between text and horizontal */
+  .xabi-mobile-gallery {
+    display: block;
+    height: 280vh; /* JS overrides based on actual image count */
+    position: relative;
+  }
+
+  .xabi-mobile-gallery__sticky {
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100svh - var(--header-h));
+    overflow: hidden;
+  }
+
+  .xabi-mobile-gallery__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  .xabi-mobile-gallery__img:first-child {
+    opacity: 1;
+  }
+
+  .xabi-footer {
+    padding: 40px 28px 80px;
+  }
+}
+
+/* Mobile — snap carousel for horizontal */
+@media (max-width: 767px) {
+  /* Top back-link hidden; pill button at bottom handles navigation */
+  .xabi-page .project-detail__back {
+    display: none;
+  }
+
+  .xabi-header {
+    padding: calc(var(--header-h) + 32px) 6vw 0;
+  }
+
+  .xabi-study__text {
+    padding: 40px 6vw 0;
+  }
+
+  /* Section min-height reduced — less scroll needed per section on mobile */
+  .xabi-section {
+    min-height: 30vh;
+    padding: 40px 0;
+  }
+
+  /* Horizontal: native CSS snap carousel */
+  .xabi-horizontal {
+    padding-bottom: 60px;
+  }
+
+  .xabi-horizontal__track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 6vw;
+    gap: 12px;
+  }
+
+  .xabi-horizontal__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .xabi-horizontal__slide {
+    width: 85vw; /* shows ~15vw hint of next slide */
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Dot indicators: shown on mobile */
+  .xabi-horizontal__dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .xabi-horizontal__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(243, 243, 243, 0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .xabi-horizontal__dot.is-active {
+    background: var(--fg);
+    transform: scale(1.3);
+  }
+
+  .xabi-footer {
+    padding: 40px 6vw 64px;
+    text-align: center;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .xabi-cover__img,
+  .xabi-mobile-gallery__img {
+    transition: none;
+  }
+}
