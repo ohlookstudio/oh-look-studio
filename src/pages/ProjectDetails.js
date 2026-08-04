@@ -7,20 +7,43 @@ import "../styles/xabi-cacao.css";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ─── XABI CACAO: Vite glob imports ─────────────────────────────────────
-   Empty folders → empty objects → empty arrays. No build errors.
-   When images are placed in the folders (01.jpg, 02.jpg …), Vite picks
-   them up automatically — no code changes needed.
+   Six globs (jpg/webm/mp4 × vertical/horizontal) merged into ordered
+   slide arrays by buildSlides(). No code changes needed when adding files.
 ───────────────────────────────────────────────────────────────────────── */
-const _rawV = import.meta.glob(
-  "../assets/img/projects/xabi-cacao/vertical/*.jpg",
-  { eager: true, import: "default" }
-);
-const _rawH = import.meta.glob(
-  "../assets/img/projects/xabi-cacao/horizontal/*.jpg",
-  { eager: true, import: "default" }
-);
-const xabiVertical   = Object.entries(_rawV).sort(([a], [b]) => a.localeCompare(b)).map(([, v]) => v);
-const xabiHorizontal = Object.entries(_rawH).sort(([a], [b]) => a.localeCompare(b)).map(([, v]) => v);
+const _vJpgs  = import.meta.glob("../assets/img/projects/xabi-cacao/vertical/*.jpg",    { eager: true, import: "default" });
+const _vWebms = import.meta.glob("../assets/img/projects/xabi-cacao/vertical/*.webm",   { eager: true, import: "default" });
+const _vMp4s  = import.meta.glob("../assets/img/projects/xabi-cacao/vertical/*.mp4",    { eager: true, import: "default" });
+const _hJpgs  = import.meta.glob("../assets/img/projects/xabi-cacao/horizontal/*.jpg",  { eager: true, import: "default" });
+const _hWebms = import.meta.glob("../assets/img/projects/xabi-cacao/horizontal/*.webm", { eager: true, import: "default" });
+const _hMp4s  = import.meta.glob("../assets/img/projects/xabi-cacao/horizontal/*.mp4",  { eager: true, import: "default" });
+
+function buildSlides(jpgs, webms, mp4s) {
+  const prefixOf = k => k.match(/\/(\d+)\./)?.[1];
+  const prefixes = [...new Set([
+    ...Object.keys(jpgs), ...Object.keys(webms), ...Object.keys(mp4s),
+  ].map(prefixOf).filter(Boolean))].sort();
+  return prefixes.map(prefix => {
+    const webmKey = Object.keys(webms).find(k => prefixOf(k) === prefix);
+    const mp4Key  = Object.keys(mp4s).find(k => prefixOf(k) === prefix);
+    const jpgKey  = Object.keys(jpgs).find(k => prefixOf(k) === prefix);
+    if (webmKey || mp4Key) return { type: "video", webm: webms[webmKey], mp4: mp4s[mp4Key] };
+    return { type: "img", src: jpgs[jpgKey] };
+  });
+}
+
+function renderSlide(slide, cls, alt, eager = false) {
+  const ca = cls ? ` class="${cls}"` : "";
+  if (slide.type === "video") {
+    return `<video${ca} autoplay loop muted playsinline>
+              ${slide.webm ? `<source src="${slide.webm}" type="video/webm">` : ""}
+              ${slide.mp4  ? `<source src="${slide.mp4}"  type="video/mp4">` : ""}
+            </video>`;
+  }
+  return `<img${ca} src="${slide.src}" alt="${alt}" loading="${eager ? "eager" : "lazy"}">`;
+}
+
+const xabiVertical   = buildSlides(_vJpgs, _vWebms, _vMp4s);
+const xabiHorizontal = buildSlides(_hJpgs, _hWebms, _hMp4s);
 
 /* ─── XABI CACAO: HTML renderer ─────────────────────────────────────── */
 function renderXabiLayout(project) {
@@ -57,33 +80,47 @@ function renderXabiLayout(project) {
         <div class="xabi-study__text">
           <div class="project-detail__divider"></div>
 
-          <!-- Intro — index 0, paired with the cover image on desktop -->
+          <!-- Section 0 — cover: hero lead + intro paragraph -->
           <div class="xabi-section" data-xabi-section="0">
-            <p class="project-detail__lead">${project.description}</p>
-            <!-- Phase 2: case study body text goes here -->
+            <p class="xabi-lead">An identity for the ritual of origin.</p>
+            <p class="xabi-prose">Chocolate is usually sold as indulgence. Xabi sells something rarer: origin. A tasting experience built around single-origin cacao, grown by named producers across Latin America, and the ritual of learning to read it — the way one learns to read a wine.</p>
           </div>
 
-          <!-- One trigger section per vertical image (indices 1…N) -->
-          ${xabiVertical.map((_, i) => `
-            <div class="xabi-section" data-xabi-section="${i + 1}">
-              <!-- Phase 2: text for image ${i + 1} -->
-            </div>
-          `).join("")}
+          <!-- Section 1 — vertical 01: body -->
+          <div class="xabi-section" data-xabi-section="1">
+            <p class="xabi-prose">The challenge wasn't to make chocolate look luxurious. It was to make origin feel alive, curious, generous — not solemn. Most fine-cacao branding leans dark, exclusive, almost intimidating. We went the other way: colour, energy, play. A visual language that opens the door instead of guarding it.</p>
+          </div>
+
+          <!-- Section 2 — vertical 02: editorial pull -->
+          <div class="xabi-section" data-xabi-section="2">
+            <p class="xabi-pull">Xabi sells something rarer: origin.</p>
+          </div>
+
+          <!-- Section 3 — vertical 03: body -->
+          <div class="xabi-section" data-xabi-section="3">
+            <p class="xabi-prose">The "X" mark breaks like a bar of chocolate — a small, honest gesture that carries the whole system. Around it, a palette as varied as the cacao origins themselves, and a structure built for tasting: each variety, each note, each terroir given its own voice.</p>
+          </div>
+
+          <!-- Section 4 — vertical 04: editorial pull + closing -->
+          <div class="xabi-section" data-xabi-section="4">
+            <p class="xabi-pull">Because the point was never the chocolate.</p>
+            <p class="xabi-prose">It was teaching people to taste where it comes from.</p>
+            <span class="project-detail__label">Role</span>
+            <p class="xabi-prose">Brand identity, art direction, photography and set design — including custom-built photographic scenes. A tasting brand designed to educate a curious palate.</p>
+          </div>
         </div>
 
         <!-- Desktop-only sticky column (hidden on mobile via CSS) -->
         <div class="xabi-study__sticky">
           <div class="xabi-cover" id="xabiCover">
             ${hasCover ? `
-              <img class="xabi-cover__img"
+              <img class="xabi-cover__slide"
                    src="${project.coverImage}"
                    alt="${project.title}"
                    loading="eager">` : ""}
-            ${xabiVertical.map((src, i) => `
-              <img class="xabi-cover__img"
-                   src="${src}"
-                   alt="${project.title} — image ${i + 1}"
-                   loading="lazy">`).join("")}
+            ${xabiVertical.map((slide, i) =>
+              renderSlide(slide, "xabi-cover__slide", `${project.title} — ${i + 1}`)
+            ).join("")}
           </div>
         </div>
 
@@ -95,15 +132,13 @@ function renderXabiLayout(project) {
       <div class="xabi-mobile-gallery js-xabi-mobile-gallery">
         <div class="xabi-mobile-gallery__sticky">
           ${hasCover && xabiVertical.length === 0 ? `
-            <img class="xabi-mobile-gallery__img"
+            <img class="xabi-mobile-gallery__slide"
                  src="${project.coverImage}"
                  alt="${project.title}"
                  loading="eager">` : ""}
-          ${xabiVertical.map((src, i) => `
-            <img class="xabi-mobile-gallery__img"
-                 src="${src}"
-                 alt="${project.title} — image ${i + 1}"
-                 loading="${i === 0 ? "eager" : "lazy"}">`).join("")}
+          ${xabiVertical.map((slide, i) =>
+            renderSlide(slide, "xabi-mobile-gallery__slide", `${project.title} — ${i + 1}`, i === 0)
+          ).join("")}
         </div>
       </div>
 
@@ -112,11 +147,9 @@ function renderXabiLayout(project) {
            Mobile:  CSS scroll-snap + dot indicators. -->
       <section class="xabi-horizontal js-xabi-horizontal">
         <div class="xabi-horizontal__track js-xabi-track">
-          ${xabiHorizontal.map((src, i) => `
+          ${xabiHorizontal.map((slide, i) => `
             <div class="xabi-horizontal__slide">
-              <img src="${src}"
-                   alt="${project.title} — horizontal ${i + 1}"
-                   loading="lazy">
+              ${renderSlide(slide, "", `${project.title} — horizontal ${i + 1}`)}
             </div>`).join("")}
           ${xabiHorizontal.length === 0 ? `
             <p class="xabi-horizontal__empty">— Horizontal photos coming soon —</p>
@@ -156,17 +189,15 @@ function initXabiCacao() {
   }
 
   // ── Desktop: scroll-driven crossfade (right sticky column) ──────────
-  // Same mechanism as About.js: each .xabi-section crossing 50% viewport
-  // triggers a GSAP opacity swap on the stacked images.
   if (!isMobile) {
     const sections = document.querySelectorAll(".xabi-section[data-xabi-section]");
-    const images   = document.querySelectorAll(".xabi-cover__img");
+    const slides   = document.querySelectorAll(".xabi-cover__slide");
 
-    if (sections.length && images.length > 1 && !reduce) {
+    if (sections.length && slides.length > 1 && !reduce) {
       function updateCover(index) {
-        images.forEach((img, i) => {
+        slides.forEach((el, i) => {
           tweens.push(
-            gsap.to(img, {
+            gsap.to(el, {
               opacity:   i === index ? 1 : 0,
               duration:  0.8,
               ease:      "power2.inOut",
@@ -187,26 +218,22 @@ function initXabiCacao() {
           })
         );
       });
-    } else if (images.length === 1 && !reduce) {
-      // Only the cover image: just fade it in
-      tweens.push(gsap.to(images[0], { opacity: 1, duration: 0.6, ease: "power2.out" }));
+    } else if (slides.length === 1 && !reduce) {
+      tweens.push(gsap.to(slides[0], { opacity: 1, duration: 0.6, ease: "power2.out" }));
     }
   }
 
   // ── Mobile: vertical crossfade scroll block ──────────────────────────
-  // Same mechanism as About.js mobile: a tall scroll block with a sticky
-  // inner container; progress maps to image index.
   if (isMobile && !reduce) {
     const mobileScroll = document.querySelector(".js-xabi-mobile-gallery");
-    const mobileImgs   = [...document.querySelectorAll(".xabi-mobile-gallery__img")];
+    const mobileSlides = [...document.querySelectorAll(".xabi-mobile-gallery__slide")];
 
-    if (mobileScroll && mobileImgs.length > 1) {
-      const n       = mobileImgs.length;
+    if (mobileScroll && mobileSlides.length > 1) {
+      const n       = mobileSlides.length;
       const headerH = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue("--header-h")
       ) || 78;
 
-      // Height proportional to image count (60vh per image transition)
       mobileScroll.style.height = `${n * 60}vh`;
 
       let currentIdx = 0;
@@ -219,9 +246,9 @@ function initXabiCacao() {
             const idx     = Math.min(Math.floor(self.progress * n), n - 1);
             if (idx !== currentIdx) {
               currentIdx = idx;
-              mobileImgs.forEach((img, j) => {
+              mobileSlides.forEach((el, j) => {
                 tweens.push(
-                  gsap.to(img, {
+                  gsap.to(el, {
                     opacity:   j === idx ? 1 : 0,
                     duration:  0.7,
                     ease:      "power2.inOut",
@@ -242,7 +269,6 @@ function initXabiCacao() {
 
   if (slides.length > 0) {
     if (!isMobile && !reduce) {
-      // Desktop: pin the section, scrub horizontal translate with vertical scroll
       const section     = document.querySelector(".js-xabi-horizontal");
       const totalScroll = () => track.scrollWidth - window.innerWidth;
 
@@ -261,7 +287,6 @@ function initXabiCacao() {
         })
       );
     } else if (isMobile && slides.length > 1) {
-      // Mobile: update dot indicators on native scroll; dots trigger scroll on click
       const dots = [...document.querySelectorAll(".xabi-horizontal__dot")];
       const gap  = 12;
 
@@ -408,12 +433,10 @@ ProjectDetails.init = function ({ slug } = {}) {
   const tweens = [];
 
   if (vtaMode === "forward" && supportsVT && !reduceMotion && coverImg) {
-    // VTA handles the spatial animation — make the cover visible for the "after" snapshot
     coverImg.style.opacity    = "";
     coverImg.style.visibility = "";
     coverImg.style.viewTransitionName = "project-cover";
   } else {
-    // Fallback: GSAP fade (no VTA or reduced motion)
     if (coverImg) {
       const dur = reduceMotion ? 0.3 : 0.6;
       tweens.push(
@@ -422,7 +445,6 @@ ProjectDetails.init = function ({ slug } = {}) {
     }
   }
 
-  // Left column entrance — always plays regardless of VTA
   if (left) {
     gsap.set(left, { opacity: 0, y: 14 });
     tweens.push(

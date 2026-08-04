@@ -6,7 +6,6 @@
 
 /* --- PAGE SHELL --- */
 .xabi-page {
-  background: var(--bg);
   color: var(--fg);
   min-height: 100vh;
 }
@@ -42,10 +41,9 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background: var(--bg);
 }
 
-.xabi-cover__img {
+.xabi-cover__slide {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -56,7 +54,7 @@
   opacity: 0;
 }
 
-.xabi-cover__img:first-child {
+.xabi-cover__slide:first-child {
   opacity: 1;
 }
 
@@ -74,6 +72,49 @@
   min-height: auto;
 }
 
+/* --- TEXT HIERARCHY --- */
+.xabi-lead {
+  font-family: var(--font-secondary);
+  font-size: clamp(26px, 3vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--fg);
+  max-width: 22ch;
+}
+
+.xabi-pull {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-size: clamp(38px, 4.4vw, 80px);
+  color: var(--fg);
+  margin: 0;
+}
+
+.xabi-prose {
+  font-family: var(--font-secondary);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 44ch;
+  color: var(--fg);
+  opacity: 0.72;
+}
+
+/* Legibility over particles — general */
+.xabi-section p {
+  text-shadow: 0 0 28px rgba(11, 11, 11, 0.95);
+}
+
+/* Pull quotes — stronger halo, larger glyphs need more coverage */
+.xabi-section .xabi-pull {
+  text-shadow:
+    0 0 48px rgba(11, 11, 11, 1),
+    0 0 96px rgba(11, 11, 11, 0.75);
+}
+
 /* --- ③ MOBILE GALLERY: hidden on desktop --- */
 .xabi-mobile-gallery {
   display: none;
@@ -83,11 +124,13 @@
 .xabi-horizontal {
   overflow: hidden;
   position: relative;
-  padding-bottom: 80px;
+  margin-top: clamp(32px, 4vw, 56px);
 }
 
 .xabi-horizontal__track {
   display: flex;
+  align-items: center;
+  height: 100vh;
   gap: clamp(12px, 1.6vw, 24px);
   padding: 0 56px;
   will-change: transform;
@@ -95,12 +138,13 @@
 
 .xabi-horizontal__slide {
   flex-shrink: 0;
-  width: clamp(380px, 44vw, 640px);
+  height: clamp(460px, 76vh, 760px);
   aspect-ratio: 3 / 2;
   overflow: hidden;
 }
 
-.xabi-horizontal__slide img {
+.xabi-horizontal__slide img,
+.xabi-horizontal__slide video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -131,6 +175,10 @@
 
 /* Tablet — collapse to single column */
 @media (max-width: 980px) {
+  .xabi-horizontal {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
   .xabi-header {
     padding: calc(var(--header-h) + 48px) 28px 0;
   }
@@ -162,7 +210,7 @@
     overflow: hidden;
   }
 
-  .xabi-mobile-gallery__img {
+  .xabi-mobile-gallery__slide {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -171,7 +219,7 @@
     opacity: 0;
   }
 
-  .xabi-mobile-gallery__img:first-child {
+  .xabi-mobile-gallery__slide:first-child {
     opacity: 1;
   }
 
@@ -213,6 +261,8 @@
     scrollbar-width: none;
     padding: 0 6vw;
     gap: 12px;
+    height: auto;
+    align-items: stretch;
   }
 
   .xabi-horizontal__track::-webkit-scrollbar {
@@ -221,6 +271,7 @@
 
   .xabi-horizontal__slide {
     width: 85vw; /* shows ~15vw hint of next slide */
+    height: auto;
     scroll-snap-align: start;
     flex-shrink: 0;
     aspect-ratio: 3 / 2;
@@ -256,8 +307,8 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .xabi-cover__img,
-  .xabi-mobile-gallery__img {
+  .xabi-cover__slide,
+  .xabi-mobile-gallery__slide {
     transition: none;
   }
 }

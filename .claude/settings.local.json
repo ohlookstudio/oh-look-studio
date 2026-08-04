@@ -39,7 +39,10 @@
       "Bash(playwright screenshot *)",
       "Bash(pkill -f \"vite --port 5199\")",
       "Read(//opt/homebrew/lib/node_modules/playwright/**)",
-      "Read(//Users/milo/**)"
+      "Read(//Users/milo/**)",
+      "Bash(ffprobe -v quiet -show_streams -select_streams v \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/src/assets/img/projects/xabi-cacao/horizontal/05.webm\")",
+      "Bash(ffprobe -v quiet -show_streams -select_streams v \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/src/assets/img/projects/xabi-cacao/horizontal/02.webm\")",
+      "Bash(ffprobe -v quiet -show_streams -select_streams v \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/src/assets/img/projects/xabi-cacao/horizontal/07.mp4\")"
     ]
   }
 }
