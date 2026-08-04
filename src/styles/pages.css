@@ -291,7 +291,7 @@
 .project-detail__tags  { opacity: .55; }
 
 .project-detail__services {
-  margin-top: 8px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 6px;

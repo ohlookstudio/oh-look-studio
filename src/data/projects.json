@@ -14,8 +14,8 @@
       "title": "Braun – Milan Design Week",
       "year": 2025,
       "description": "Motion as material, restraint as expression.",
-      "tags": ["Web", "Motion", "Interaction"],
-      "services": ["Creative dev", "Motion system", "UI design"],
+      "tags": ["Concept", "Web", "Interaction"],
+      "services": ["Concept", "Art direction", "Web design & interaction"],
       "coverImage": "/src/assets/img/projects/braun-milan-cover.jpg"
     },
     {
@@ -32,8 +32,8 @@
       "title": "Xabi Cacao Tasting",
       "year": 2024,
       "description": "Reframing taste through ritual and material.",
-      "tags": ["Branding", "Packaging"],
-      "services": ["Brand identity", "Packaging design"],
+      "tags": ["Branding", "Art direction", "Photography"],
+      "services": ["Brand identity", "Art direction", "Photography & set design"],
       "coverImage": "/src/assets/img/projects/xabi-cacao-cover.jpg"
     }
   ]

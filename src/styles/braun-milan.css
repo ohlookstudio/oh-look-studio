@@ -1,0 +1,304 @@
+/* ===================================================
+   BRAUN AT MILAN DESIGN WEEK — project case study
+   Scoped exclusively to .braun-page.
+   Never modifies shared .project-detail__* rules.
+=================================================== */
+
+/* --- PAGE SHELL --- */
+.braun-page {
+  color: var(--fg);
+  min-height: 100vh;
+}
+
+/* --- ① HEADER BLOCK --- */
+.braun-header {
+  padding: calc(var(--header-h) + 72px) 56px 0;
+}
+
+/* --- ② CASE STUDY: two-column grid (text + sticky crossfade) --- */
+.braun-study {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+
+.braun-study__text {
+  padding: 48px 56px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.braun-study__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Crossfade image stack (right column) */
+.braun-cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.braun-cover__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0;
+}
+
+.braun-cover__slide:first-child {
+  opacity: 1;
+}
+
+/* Scroll-trigger sections in the left column */
+.braun-section {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 64px 0;
+}
+
+.braun-section:first-child {
+  padding-top: 24px;
+  min-height: auto;
+}
+
+/* Legibility over particles */
+.braun-section p {
+  text-shadow: 0 0 28px rgba(11, 11, 11, 0.95);
+}
+
+/* --- TYPOGRAPHY --- */
+.braun-lead {
+  font-family: var(--font-secondary);
+  font-size: clamp(22px, 2.4vw, 38px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--fg);
+  max-width: 26ch;
+}
+
+.braun-pull {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  font-size: clamp(36px, 4.2vw, 76px);
+  color: var(--fg);
+  margin: 0;
+  text-shadow:
+    0 0 48px rgba(11, 11, 11, 1),
+    0 0 96px rgba(11, 11, 11, 0.75);
+}
+
+.braun-prose {
+  font-family: var(--font-secondary);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 44ch;
+  color: var(--fg);
+  opacity: 0.72;
+}
+
+/* --- ③ MOBILE GALLERY: hidden on desktop --- */
+.braun-mobile-gallery {
+  display: none;
+}
+
+/* --- ④ HORIZONTAL STRIP --- */
+.braun-horizontal {
+  overflow: hidden;
+  position: relative;
+  margin-top: clamp(32px, 4vw, 56px);
+}
+
+.braun-horizontal__track {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  gap: clamp(12px, 1.6vw, 24px);
+  padding: 0 56px;
+  will-change: transform;
+}
+
+.braun-horizontal__slide {
+  flex-shrink: 0;
+  height: clamp(460px, 76vh, 760px);
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.braun-horizontal__slide img,
+.braun-horizontal__slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.braun-horizontal__empty {
+  padding: 80px 0;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  opacity: 0.35;
+}
+
+/* Dots: hidden on desktop */
+.braun-horizontal__dots {
+  display: none;
+}
+
+/* --- ⑤ FOOTER --- */
+.braun-footer {
+  padding: 40px 56px 80px;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+/* Tablet — collapse to single column */
+@media (max-width: 980px) {
+  .braun-horizontal {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .braun-header {
+    padding: calc(var(--header-h) + 48px) 28px 0;
+  }
+
+  .braun-study {
+    grid-template-columns: 1fr;
+  }
+
+  .braun-study__sticky {
+    display: none;
+  }
+
+  .braun-study__text {
+    padding: 48px 28px 0;
+  }
+
+  .braun-mobile-gallery {
+    display: block;
+    height: 280vh;
+    position: relative;
+  }
+
+  .braun-mobile-gallery__sticky {
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100svh - var(--header-h));
+    overflow: hidden;
+  }
+
+  .braun-mobile-gallery__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  .braun-mobile-gallery__slide:first-child {
+    opacity: 1;
+  }
+
+  .braun-footer {
+    padding: 40px 28px 80px;
+  }
+}
+
+/* Mobile — snap carousel for horizontal */
+@media (max-width: 767px) {
+  .braun-page .project-detail__back {
+    display: none;
+  }
+
+  .braun-header {
+    padding: calc(var(--header-h) + 32px) 6vw 0;
+  }
+
+  .braun-study__text {
+    padding: 40px 6vw 0;
+  }
+
+  .braun-section {
+    min-height: 30vh;
+    padding: 40px 0;
+  }
+
+  .braun-horizontal {
+    padding-bottom: 60px;
+  }
+
+  .braun-horizontal__track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 6vw;
+    gap: 12px;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .braun-horizontal__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .braun-horizontal__slide {
+    width: 85vw;
+    height: auto;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 2;
+  }
+
+  .braun-horizontal__dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .braun-horizontal__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(243, 243, 243, 0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .braun-horizontal__dot.is-active {
+    background: var(--fg);
+    transform: scale(1.3);
+  }
+
+  .braun-footer {
+    padding: 40px 6vw 64px;
+    text-align: center;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .braun-cover__slide,
+  .braun-mobile-gallery__slide {
+    transition: none;
+  }
+}
