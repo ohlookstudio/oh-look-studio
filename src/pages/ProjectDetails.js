@@ -127,6 +127,7 @@ function renderXabiLayout(project) {
           <div class="xabi-cover" id="xabiCover">
             ${hasCover ? `
               <img class="xabi-cover__slide"
+                   data-project-cover
                    src="${project.coverImage}"
                    alt="${project.title}"
                    loading="eager">` : ""}
@@ -403,6 +404,7 @@ function renderBraunLayout(project) {
           <div class="braun-cover" id="braunCover">
             ${hasCover ? `
               <img class="braun-cover__slide"
+                   data-project-cover
                    src="${project.coverImage}"
                    alt="${project.title}"
                    loading="eager">` : ""}
@@ -684,6 +686,7 @@ export async function ProjectDetails({ slug } = {}) {
           <div class="project-detail__cover" id="projectCover">
             ${project.coverImage
               ? `<img class="project-detail__cover-img"
+                      data-project-cover
                       src="${project.coverImage}"
                       alt="${project.title}"
                       loading="eager"

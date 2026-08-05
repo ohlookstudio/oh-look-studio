@@ -2,6 +2,11 @@ import { Hero, mountHero } from "../hero/hero.js";
 import { mountFeaturedScroll } from "../animations/featuredScroll.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setMeta } from "../utils/seo.js";
+import projectsData from "../data/projects.json";
+
+// Edit this list to control which projects appear on the Home and in what order.
+// Order here is independent of the Works page order (projects.json array).
+const FEATURED_SLUGS = ["xabi-cacao", "braun-milan", "pals-gard", "staccio"];
 
 export function Home() {
   setMeta({ url: "/" });
@@ -20,97 +25,33 @@ export function Home() {
 
         <div class="hf-track" id="featuredTrack">
 
-          <!-- Project 01 — Pål's Gård (lower) -->
-          <article class="hf-card hf-card--1">
+          ${FEATURED_SLUGS.map((slug, i) => {
+            const p = projectsData.projects.find(proj => proj.slug === slug);
+            if (!p) return "";
+            const displayTitle = p.homeTitle ?? p.title;
+            return `
+          <article class="hf-card hf-card--${i + 1}">
             <a class="hf-card__link"
-               href="/projects/pals-gard"
+               href="/projects/${p.slug}"
                data-link
                data-project-link
-               aria-label="Open project: Pål's Gård">
+               aria-label="Open project: ${p.title}">
               <div class="hf-card__img-wrap fp-item__frame">
                 <img class="hf-card__img"
-                     src="/src/assets/img/projects/pals-gard-cover.jpg"
-                     alt="Pål's Gård"
+                     src="${p.coverImage}"
+                     alt="${p.title}"
                      loading="lazy">
               </div>
               <div class="hf-card__label">
-                <h3 class="hf-card__title">Pål's Gård</h3>
+                <h3 class="hf-card__title">${displayTitle}</h3>
                 <div class="hf-card__cta">
                   <span class="hf-card__see-more">See more</span>
                   <div class="hf-card__line"></div>
                 </div>
               </div>
             </a>
-          </article>
-
-          <!-- Project 02 — Braun (upper) -->
-          <article class="hf-card hf-card--2">
-            <a class="hf-card__link"
-               href="/projects/braun-milan"
-               data-link
-               data-project-link
-               aria-label="Open project: Braun – Milan Design Week">
-              <div class="hf-card__img-wrap fp-item__frame">
-                <img class="hf-card__img"
-                     src="/src/assets/img/projects/braun-milan-cover.jpg"
-                     alt="Braun – Milan Design Week"
-                     loading="lazy">
-              </div>
-              <div class="hf-card__label">
-                <h3 class="hf-card__title">Braun</h3>
-                <div class="hf-card__cta">
-                  <span class="hf-card__see-more">See more</span>
-                  <div class="hf-card__line"></div>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <!-- Project 03 — Staccio (lower) -->
-          <article class="hf-card hf-card--3">
-            <a class="hf-card__link"
-               href="/projects/staccio"
-               data-link
-               data-project-link
-               aria-label="Open project: Staccio">
-              <div class="hf-card__img-wrap fp-item__frame">
-                <img class="hf-card__img"
-                     src="/src/assets/img/projects/staccio-cover.jpg"
-                     alt="Staccio"
-                     loading="lazy">
-              </div>
-              <div class="hf-card__label">
-                <h3 class="hf-card__title">Staccio</h3>
-                <div class="hf-card__cta">
-                  <span class="hf-card__see-more">See more</span>
-                  <div class="hf-card__line"></div>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <!-- Project 04 — Xabi Cacao Tasting (upper, 2-line title) -->
-          <article class="hf-card hf-card--4">
-            <a class="hf-card__link"
-               href="/projects/xabi-cacao"
-               data-link
-               data-project-link
-               aria-label="Open project: Xabi Cacao Tasting">
-              <div class="hf-card__img-wrap fp-item__frame">
-                <img class="hf-card__img"
-                     src="/src/assets/img/projects/xabi-cacao-cover.jpg"
-                     alt="Xabi Cacao Tasting"
-                     loading="lazy">
-              </div>
-              <div class="hf-card__label">
-                <h3 class="hf-card__title">Xabi Cacao<br>Tasting</h3>
-                <div class="hf-card__cta">
-                  <span class="hf-card__see-more">See more</span>
-                  <div class="hf-card__line"></div>
-                </div>
-              </div>
-            </a>
-          </article>
+          </article>`;
+          }).join("")}
 
         </div>
       </section>

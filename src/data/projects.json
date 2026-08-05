@@ -1,13 +1,14 @@
 {
   "projects": [
     {
-      "slug": "pals-gard",
-      "title": "Pål's Gård",
-      "year": 2025,
-      "description": "A quiet luxury story carved in nature.",
-      "tags": ["Branding", "Editorial"],
-      "services": ["Brand identity", "Art direction"],
-      "coverImage": "/src/assets/img/projects/pals-gard-cover.jpg"
+      "slug": "xabi-cacao",
+      "title": "Xabi Cacao Tasting",
+      "homeTitle": "Xabi Cacao<br>Tasting",
+      "year": 2024,
+      "description": "Reframing taste through ritual and material.",
+      "tags": ["Branding", "Art direction", "Photography"],
+      "services": ["Brand identity", "Art direction", "Photography & set design"],
+      "coverImage": "/src/assets/img/projects/xabi-cacao-cover.jpg"
     },
     {
       "slug": "braun-milan",
@@ -19,22 +20,22 @@
       "coverImage": "/src/assets/img/projects/braun-milan-cover.jpg"
     },
     {
+      "slug": "pals-gard",
+      "title": "Pål's Gård",
+      "year": 2026,
+      "description": "A quiet luxury story carved in nature.",
+      "tags": ["Branding", "Editorial"],
+      "services": ["Brand identity", "Art direction"],
+      "coverImage": "/src/assets/img/projects/pals-gard-cover.jpg"
+    },
+    {
       "slug": "staccio",
       "title": "Staccio",
-      "year": 2024,
+      "year": 2026,
       "description": "The sieve. What remains after refinement.",
       "tags": ["Branding", "Identity"],
       "services": ["Brand identity", "Visual system"],
       "coverImage": "/src/assets/img/projects/staccio-cover.jpg"
-    },
-    {
-      "slug": "xabi-cacao",
-      "title": "Xabi Cacao Tasting",
-      "year": 2024,
-      "description": "Reframing taste through ritual and material.",
-      "tags": ["Branding", "Art direction", "Photography"],
-      "services": ["Brand identity", "Art direction", "Photography & set design"],
-      "coverImage": "/src/assets/img/projects/xabi-cacao-cover.jpg"
     }
   ]
 }

@@ -42,7 +42,7 @@ function handleForwardFlip(e, a) {
   const vt = document.startViewTransition(async () => {
     await navigate(url.pathname);
 
-    const cover = document.querySelector(".project-detail__cover-img");
+    const cover = document.querySelector("[data-project-cover]");
     if (cover) {
       cover.style.viewTransitionName = "project-cover";
     }
@@ -52,7 +52,7 @@ function handleForwardFlip(e, a) {
     .then(() => {
       img.style.viewTransitionName = "";
 
-      const cover = document.querySelector(".project-detail__cover-img");
+      const cover = document.querySelector("[data-project-cover]");
       if (cover) cover.style.viewTransitionName = "";
 
       window.__vtaActive = null;
@@ -93,7 +93,7 @@ function handleReverseFlip(e, back) {
     return;
   }
 
-  const coverImg = document.querySelector(".project-detail__cover-img");
+  const coverImg = document.querySelector("[data-project-cover]");
 
   if (!coverImg || !slug) {
     navigate(targetPath);
