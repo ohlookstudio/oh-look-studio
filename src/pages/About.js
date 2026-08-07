@@ -4,17 +4,27 @@ import { setMeta } from "../utils/seo.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const _aboutImgs = import.meta.glob(
-  "../assets/img/about/*.jpg",
-  { eager: true, import: "default" }
-);
-const images = Object.keys(_aboutImgs).sort().map(k => _aboutImgs[k]);
+const images = [
+  "/optimized/about/01.webp",
+  "/optimized/about/02.webp",
+  "/optimized/about/03.webp",
+  "/optimized/about/04.webp",
+  "/optimized/about/05.webp",
+];
+
+const ABOUT_ALTS = [
+  "Seafront lamp post against the Mediterranean at dusk, Sitges",
+  "Shadow of a person cast on a weathered metal door",
+  "Stone alley in Talairan, Corbières, southern France",
+  "Hand sketching with charcoal — the studio's process",
+  "Mediterranean sea seen from a wrought-iron balcony, Sitges",
+];
 
 export async function About() {
   setMeta({
-    title: "Oh, studio!",
-    description: "A way of løøking. Oh, løøk! Studio exists somewhere in between.",
-    url: "/about"
+    title:       "About",
+    description: "A studio built on paying attention. Brand identity and creative coding for products with origin, between the sea of Sitges and the stone of the Corbières.",
+    url:         "/about",
   });
 
   return `
@@ -26,7 +36,7 @@ export async function About() {
           ${images.map((img, i) => `
             <img class="about-mobile-scroll__img"
                  src="${img}"
-                 alt="Studio view ${i + 1}"
+                 alt="${ABOUT_ALTS[i] || `Studio photo ${i + 1}`}"
                  loading="${i === 0 ? 'eager' : 'lazy'}">`).join('')}
         </div>
       </div>
@@ -155,7 +165,7 @@ export async function About() {
             ${images.map((img, i) => `
               <img class="about-cover__img"
                    src="${img}"
-                   alt="Studio view ${i + 1}"
+                   alt="${ABOUT_ALTS[i] || `Studio photo ${i + 1}`}"
                    loading="${i === 0 ? 'eager' : 'lazy'}">
             `).join('')}
           </div>

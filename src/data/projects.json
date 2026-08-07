@@ -10,7 +10,7 @@
       "seoDescription": "Brand identity for a single-origin cacao tasting experience. An identity for the ritual of origin. Branding, art direction & photography.",
       "tags": ["Branding", "Art direction", "Photography"],
       "services": ["Brand identity", "Art direction", "Photography & set design"],
-      "coverImage": "/images/projects/xabi-cacao-cover.jpg"
+      "coverImage": "/optimized/projects/xabi-cacao-cover.webp"
     },
     {
       "slug": "braun-milan",
@@ -21,7 +21,7 @@
       "seoDescription": "A digital experience built on Dieter Rams' principles. Less, but better — applied to the screen. Concept, art direction & interaction.",
       "tags": ["Concept", "Web", "Interaction"],
       "services": ["Concept", "Art direction", "Web design & interaction"],
-      "coverImage": "/images/projects/braun-milan-cover.jpg"
+      "coverImage": "/optimized/projects/braun-milan-cover.webp"
     },
     {
       "slug": "pals-gard",
@@ -32,7 +32,7 @@
       "seoDescription": "Brand identity for a Norwegian farm. Origin, landscape and craft, translated into a visual system.",
       "tags": ["Branding", "Editorial"],
       "services": ["Brand identity", "Art direction"],
-      "coverImage": "/images/projects/pals-gard-cover.jpg"
+      "coverImage": "/optimized/projects/pals-gard-cover.webp"
     },
     {
       "slug": "staccio",
@@ -43,7 +43,7 @@
       "seoDescription": "Brand and menu design for an ancestral table in the Corbières. Terroir, stone and shared food.",
       "tags": ["Branding", "Identity"],
       "services": ["Brand identity", "Visual system"],
-      "coverImage": "/images/projects/staccio-cover.jpg"
+      "coverImage": "/optimized/projects/staccio-cover.webp"
     }
   ]
 }
