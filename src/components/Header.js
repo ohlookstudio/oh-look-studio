@@ -5,7 +5,7 @@ export function Header() {
   return `
     <header id="siteHeader" class="site-header is-hidden">
       <a class="brand" data-link href="/" aria-label="Oh, løøk! Home">
-        <img class="brand__logo" src="/src/assets/img/OhLook_MainLogo_White.svg" alt="Oh, løøk! Studio" />
+        <img class="brand__logo" src="/images/OhLook_MainLogo_White.svg" alt="Oh, løøk! Studio" />
       </a>
 
       <nav class="nav nav--desktop" aria-label="Primary navigation">
@@ -39,7 +39,7 @@ export function Header() {
             <div class="mobile-nav__brand" aria-hidden="true">
               <img
                 class="mobile-nav__brand-logo"
-                src="/src/assets/img/OhLook_MainLogo_White.svg"
+                src="/images/OhLook_MainLogo_White.svg"
                 alt=""
               />
               <div class="mobile-nav__kicker">OH, MENU!</div>
@@ -55,8 +55,8 @@ export function Header() {
 
             <div class="mobile-nav__social" aria-label="Social links">
               <a class="social-link" href="${SOCIAL.instagram}" target="_blank" rel="noopener noreferrer">IG</a>
-              <a class="social-link" href="${SOCIAL.linkedin}"  target="_blank" rel="noopener noreferrer">IN</a>
-              <a class="social-link" href="${SOCIAL.behance}"   target="_blank" rel="noopener noreferrer">BE</a>
+              <a class="social-link" href="${SOCIAL.linkedin}" target="_blank" rel="noopener noreferrer">IN</a>
+              <a class="social-link" href="${SOCIAL.behance}" target="_blank" rel="noopener noreferrer">BE</a>
             </div>
           </div>
         </aside>
