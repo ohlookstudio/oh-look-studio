@@ -1,5 +1,13 @@
 // src/pages/Privacy.js
+import { setMeta } from "../utils/seo.js";
+
 export default function Privacy() {
+  setMeta({
+    title: "Privacy",
+    description: "Privacy information for Oh, løøk! Studio and how personal data is handled.",
+    url: "/privacy",
+  });
+
   return `
     <main class="page section section--tall" aria-label="Privacy">
       <p class="kicker">Privacy</p>
