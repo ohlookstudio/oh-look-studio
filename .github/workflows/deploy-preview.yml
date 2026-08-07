@@ -1,0 +1,62 @@
+name: Deploy preview to OVH
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Check build output
+        run: test -f dist/index.html
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy to OVH preview via SFTP
+        env:
+          OVH_HOST: ${{ secrets.OVH_HOST }}
+          OVH_USERNAME: ${{ secrets.OVH_USERNAME }}
+          OVH_PASSWORD: ${{ secrets.OVH_PASSWORD }}
+          OVH_PORT: ${{ secrets.OVH_PORT }}
+          OVH_REMOTE_PATH: ${{ secrets.OVH_REMOTE_PATH }}
+        run: |
+          lftp -u "$OVH_USERNAME","$OVH_PASSWORD" \
+            "sftp://$OVH_HOST:$OVH_PORT" <<EOF
+          set sftp:auto-confirm yes
+          set net:max-retries 2
+          set net:timeout 20
+          mkdir -p "$OVH_REMOTE_PATH"
+          mirror --reverse \
+                 --delete \
+                 --verbose \
+                 ./dist/ \
+                 "$OVH_REMOTE_PATH/"
+          bye
+          EOF
