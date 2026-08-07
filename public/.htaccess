@@ -1,9 +1,21 @@
-# SPA fallback — todas las rutas sirven index.html si no son archivos reales
+# Route-specific SPA shells and real 404 responses
 Options -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [QSA,L]
+
+# Serve real files and directories unchanged.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Map slashless routes to their generated HTML files without redirecting.
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# Every other direct request is a genuine HTTP 404.
+RewriteRule ^ - [R=404,L]
 
 # MIME types para formatos modernos (OVH Apache puede no tenerlos por defecto)
 AddType image/webp                          .webp
@@ -21,8 +33,8 @@ AddType application/json                    .json
 # Cache largo para assets con hash de Vite (immutable), corto para index.html
 <IfModule mod_expires.c>
   ExpiresActive On
-  # index.html y .htaccess: sin caché (cambian en cada deploy)
-  <FilesMatch "^(index\.html|\.htaccess)$">
+  # Route HTML and .htaccess: no cache (they can change on every deploy)
+  <FilesMatch "(\.html|\.htaccess)$">
     ExpiresDefault "access plus 0 seconds"
     Header set Cache-Control "no-cache, no-store, must-revalidate"
   </FilesMatch>
