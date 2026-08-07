@@ -4,9 +4,9 @@ import gsap from "gsap";
 
 export function Works() {
   setMeta({
-    title: "Oh, works!",
-    description: "Selected perspectives — each one a distinct point of view.",
-    url: "/works"
+    title:       "Work",
+    description: "Selected branding, art direction and digital projects. Identities for products with roots — wine, cacao, design.",
+    url:         "/works",
   });
 
   const projects = projectsData.projects || [];

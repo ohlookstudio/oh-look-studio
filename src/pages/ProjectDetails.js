@@ -625,8 +625,8 @@ export async function ProjectDetails({ slug } = {}) {
   }
 
   setMeta({
-    title:       project.title,
-    description: project.description,
+    title:       project.seoTitle || project.title,
+    description: project.seoDescription || project.description,
     url:         `/projects/${project.slug}`,
     image:       project.coverImage,
   });

@@ -106,10 +106,10 @@ const mapWeatherToConfig = (current, zone) => {
 };
 
 export async function Contact() {
-  setMeta({ 
-    title: "Oh, hello!", 
+  setMeta({
+    title:       "Oh, hello!",
     description: "Let's build something that feels alive. Connecting Sitges and Talairan.",
-    url: "/hello" 
+    url:         "/contact",
   });
 
   return `

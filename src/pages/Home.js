@@ -9,7 +9,11 @@ import projectsData from "../data/projects.json";
 const FEATURED_SLUGS = ["xabi-cacao", "braun-milan", "pals-gard", "staccio"];
 
 export function Home() {
-  setMeta({ url: "/" });
+  setMeta({
+    rawTitle:    "Oh, løøk! Studio — Brand identity for products with roots",
+    description: "Independent branding studio for terroir products — wine, food, origin. Brand identity, art direction & creative coding. Between Sitges and the Corbières.",
+    url:         "/",
+  });
   return `
     <main class="home">
 

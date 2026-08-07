@@ -1,12 +1,12 @@
 const SITE_NAME = "Oh, løøk! Studio";
 const BASE_URL  = "https://ohlook.studio";
-const DEFAULT_DESC = "A graphic design studio based between Sitges & Talairan. Branding, identity and editorial design.";
-const DEFAULT_IMAGE = "/og-image.jpg";
+const DEFAULT_DESC = "Independent branding studio for terroir products — wine, food, origin. Brand identity, art direction & creative coding. Between Sitges and the Corbières.";
+const DEFAULT_IMAGE = `${BASE_URL}/og-image.jpg`;
 
-export function setMeta({ title, description, url, image } = {}) {
-  const fullTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
+export function setMeta({ title, rawTitle, description, url, image } = {}) {
+  const fullTitle = rawTitle || (title ? `${title} — ${SITE_NAME}` : SITE_NAME);
   const desc  = description || DEFAULT_DESC;
-  const img   = image || DEFAULT_IMAGE;
+  const img   = image ? (image.startsWith("http") ? image : `${BASE_URL}${image}`) : DEFAULT_IMAGE;
   const href  = url ? `${BASE_URL}${url}` : BASE_URL;
 
   document.title = fullTitle;
