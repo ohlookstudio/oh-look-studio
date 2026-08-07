@@ -6,36 +6,44 @@
       "homeTitle": "Xabi Cacao<br>Tasting",
       "year": 2024,
       "description": "Reframing taste through ritual and material.",
+      "seoTitle": "Xabi Cacao Tasting",
+      "seoDescription": "Brand identity for a single-origin cacao tasting experience. An identity for the ritual of origin. Branding, art direction & photography.",
       "tags": ["Branding", "Art direction", "Photography"],
       "services": ["Brand identity", "Art direction", "Photography & set design"],
-      "coverImage": "/src/assets/img/projects/xabi-cacao-cover.jpg"
+      "coverImage": "/images/projects/xabi-cacao-cover.jpg"
     },
     {
       "slug": "braun-milan",
       "title": "Braun – Milan Design Week",
       "year": 2025,
       "description": "Motion as material, restraint as expression.",
+      "seoTitle": "Braun at Milan Design Week",
+      "seoDescription": "A digital experience built on Dieter Rams' principles. Less, but better — applied to the screen. Concept, art direction & interaction.",
       "tags": ["Concept", "Web", "Interaction"],
       "services": ["Concept", "Art direction", "Web design & interaction"],
-      "coverImage": "/src/assets/img/projects/braun-milan-cover.jpg"
+      "coverImage": "/images/projects/braun-milan-cover.jpg"
     },
     {
       "slug": "pals-gard",
       "title": "Pål's Gård",
       "year": 2026,
       "description": "A quiet luxury story carved in nature.",
+      "seoTitle": "Pål's Gård",
+      "seoDescription": "Brand identity for a Norwegian farm. Origin, landscape and craft, translated into a visual system.",
       "tags": ["Branding", "Editorial"],
       "services": ["Brand identity", "Art direction"],
-      "coverImage": "/src/assets/img/projects/pals-gard-cover.jpg"
+      "coverImage": "/images/projects/pals-gard-cover.jpg"
     },
     {
       "slug": "staccio",
       "title": "Staccio",
       "year": 2026,
       "description": "The sieve. What remains after refinement.",
+      "seoTitle": "Staccio",
+      "seoDescription": "Brand and menu design for an ancestral table in the Corbières. Terroir, stone and shared food.",
       "tags": ["Branding", "Identity"],
       "services": ["Brand identity", "Visual system"],
-      "coverImage": "/src/assets/img/projects/staccio-cover.jpg"
+      "coverImage": "/images/projects/staccio-cover.jpg"
     }
   ]
 }
