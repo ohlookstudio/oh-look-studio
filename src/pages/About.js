@@ -2,14 +2,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setMeta } from "../utils/seo.js";
 
-// Import the 5 images for the crossfade
-import imgSitges   from "../assets/img/projects/studio-sitges.jpg";
-import imgTalairan from "../assets/img/projects/studio-talairan.jpg";
-import imgCafe     from "../assets/img/projects/studio-cafe.jpg";
-import imgShadow   from "../assets/img/projects/studio-shadow.jpg";
-import imgSketch   from "../assets/img/projects/studio-sketch.jpg";
-
 gsap.registerPlugin(ScrollTrigger);
+
+const _aboutImgs = import.meta.glob(
+  "../assets/img/about/*.jpg",
+  { eager: true, import: "default" }
+);
+const images = Object.keys(_aboutImgs).sort().map(k => _aboutImgs[k]);
 
 export async function About() {
   setMeta({
@@ -17,8 +16,6 @@ export async function About() {
     description: "A way of løøking. Oh, løøk! Studio exists somewhere in between.",
     url: "/about"
   });
-
-  const images = [imgSitges, imgTalairan, imgCafe, imgShadow, imgSketch];
 
   return `
     <main class="project-detail about-page">
