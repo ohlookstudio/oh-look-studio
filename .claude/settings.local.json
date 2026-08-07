@@ -44,7 +44,9 @@
       "Bash(ffprobe -v quiet -show_streams -select_streams v \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/src/assets/img/projects/xabi-cacao/horizontal/02.webm\")",
       "Bash(ffprobe -v quiet -show_streams -select_streams v \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/src/assets/img/projects/xabi-cacao/horizontal/07.mp4\")",
       "Skill(run)",
-      "Bash(wait)"
+      "Bash(wait)",
+      "Bash(cp \"/private/tmp/claude-501/-Users-milo-02-Oh-Look-Studio-01-Website-Web-Oh--L--k-Studio-copy-2/0a48bbdd-ad2b-490a-9677-59a2926687f0/scratchpad/reoptimize.mjs\" \"/Users/milo/02_Oh_Look_Studio/01_Website/Web_Oh, Løøk Studio copy 2/scripts/reoptimize.mjs\")",
+      "Bash(rm scripts/reoptimize.mjs)"
     ]
   }
 }
