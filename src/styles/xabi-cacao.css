@@ -259,7 +259,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 0 6vw;
+    padding: 0;
     gap: 12px;
     height: auto;
     align-items: stretch;
@@ -270,7 +270,7 @@
   }
 
   .xabi-horizontal__slide {
-    width: 85vw; /* shows ~15vw hint of next slide */
+    width: 100vw;
     height: auto;
     scroll-snap-align: start;
     flex-shrink: 0;
