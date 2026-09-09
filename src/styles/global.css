@@ -865,11 +865,148 @@ body.is-menu-open .mobile-nav__social{
   color: rgba(243,243,243,.45);
   text-decoration: none;
   transition: color .2s ease;
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
 .site-footer__privacy:hover{
   color: var(--fg);
 }
+
+.site-footer__legal{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ---------------------------------------------------
+   COOKIE CONSENT
+--------------------------------------------------- */
+#cookieConsent[hidden],
+#cookieConsentBanner[hidden],
+#cookiePreferences[hidden]{ display:none; }
+
+#cookieConsent{
+  position: relative;
+  z-index: 30000;
+}
+
+#cookieConsentBanner{
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 28px;
+  padding: 24px;
+  border: 1px solid var(--nav-pill-hover-border);
+  border-radius: 16px;
+  background: var(--bg);
+  box-shadow: 0 16px 60px var(--bg);
+}
+
+#cookieConsentKicker,
+#cookiePreferencesKicker{
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+#cookieConsent h2{
+  margin: 0 0 8px;
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+#cookieConsent p{
+  max-width: 68ch;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-secondary);
+  line-height: 1.5;
+}
+
+#cookieConsent a{ color: var(--fg); }
+
+#cookieConsentActions,
+#cookiePreferencesActions{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+#cookieConsent button{ cursor: pointer; }
+
+#cookieConsent [data-consent-action="accept"],
+#cookieConsent [data-consent-action="save"]{
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+#cookiePreferences{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+#cookiePreferencesBackdrop{
+  position: absolute;
+  inset: 0;
+  background: var(--menu-overlay);
+  backdrop-filter: blur(var(--menu-blur));
+  -webkit-backdrop-filter: blur(var(--menu-blur));
+}
+
+#cookiePreferencesPanel{
+  position: relative;
+  width: min(620px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow: auto;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--nav-pill-hover-border);
+  border-radius: 16px;
+  background: var(--bg);
+  outline: none;
+}
+
+#cookiePreferencesIntro{ margin-bottom: 28px !important; }
+
+#cookieCategories{
+  display: grid;
+  margin-bottom: 28px;
+  border-top: 1px solid var(--nav-pill-base-border);
+}
+
+#cookieCategories label{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--nav-pill-base-border);
+  font-family: var(--font-secondary);
+}
+
+#cookieCategories span{ display: grid; gap: 4px; }
+#cookieCategories strong{ font-weight: 500; }
+#cookieCategories small{ color: var(--muted); line-height: 1.4; }
+#cookieCategories input{ width: 22px; height: 22px; accent-color: var(--accent); }
+
+body.is-cookie-preferences-open{ overflow: hidden; }
 /* Fix: nunca morado en links visitados */
 a:visited{
   color: inherit;
@@ -946,6 +1083,13 @@ a:visited{
     justify-content: center;
     gap: 16px;
   }
+
+  #cookieConsentBanner{
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  #cookieConsentActions{ justify-content: flex-start; }
 }
 
 @media (max-width: 420px){
@@ -959,6 +1103,28 @@ a:visited{
 
   .site-footer__inner{
     padding: 0 20px;
+  }
+
+  .site-footer__bottom,
+  .site-footer__legal{
+    flex-direction: column;
+  }
+
+  #cookieConsentBanner{
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 20px;
+  }
+
+  #cookieConsentActions,
+  #cookiePreferencesActions{
+    display: grid;
+  }
+
+  #cookieConsentActions .nav__link,
+  #cookiePreferencesActions .nav__link{
+    width: 100%;
   }
 }
 
@@ -988,6 +1154,7 @@ a:visited{
     transition:none !important;
     animation:none !important;
   }
+  #cookieConsent *{ transition:none !important; }
   .nav__link.is-flicker{ filter:none; }
 }
 

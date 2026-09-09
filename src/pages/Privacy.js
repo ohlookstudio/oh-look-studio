@@ -14,8 +14,9 @@ export default function Privacy() {
       <h2>Privacy Policy</h2>
 
       <p>
-        This is a minimal privacy placeholder. For now, this site does not run ads,
-        does not sell data, and does not use tracking cookies.
+        This site uses necessary browser storage to remember your cookie choice. With your consent,
+        it also uses Google Analytics 4 to understand visits and improve the site. Google Analytics
+        is not loaded until you allow analytics cookies.
       </p>
 
       <p>
@@ -24,8 +25,11 @@ export default function Privacy() {
       </p>
 
       <p>
-        If anything changes (analytics, embeds, cookies), this page will be updated accordingly.
+        You can accept, reject, or later withdraw analytics consent. No marketing technology is
+        currently active, and this site does not sell personal data.
       </p>
+
+      <p><button class="nav__link" type="button" data-cookie-preferences>Change cookie preferences</button></p>
 
       <p style="margin-top: 22px;">
         <a class="nav__link" data-link href="/">Back to Home</a>

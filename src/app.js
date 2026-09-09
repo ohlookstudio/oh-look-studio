@@ -4,6 +4,7 @@ import { initMobileMenu } from "./components/menu.js";
 import { mountBgParticles } from "./hero/bgParticles.js";
 import { mountFooterTextCanvas } from "./components/footerTextCanvas.js";
 import { initFlipTransitions } from "./components/flipTransition.js";
+import { initCookieConsent } from "./components/cookieConsent.js";
 // initProjectTransitions (WebGL) intentionally disconnected — kept in ProjectTransition.js
 
 export function initApp() {
@@ -12,6 +13,9 @@ export function initApp() {
 
   // ✅ Monta Layout una sola vez
   app.innerHTML = Layout();
+
+  // Consent is mounted once and remains available across SPA navigations.
+  initCookieConsent();
 
   // ✅ header/menu
   initMobileMenu();

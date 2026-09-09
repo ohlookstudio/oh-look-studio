@@ -33,7 +33,10 @@ export function Footer() {
 
         <div class="site-footer__bottom">
           <span class="site-footer__copyright">© 2026 Oh, løøk! Studio</span>
-          <a class="site-footer__privacy" href="/privacy" data-link>Privacy</a>
+          <div class="site-footer__legal">
+            <button class="site-footer__privacy" type="button" data-cookie-preferences>Cookie preferences</button>
+            <a class="site-footer__privacy" href="/privacy" data-link>Privacy</a>
+          </div>
         </div>
 
       </div>
